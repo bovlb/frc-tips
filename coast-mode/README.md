@@ -1,0 +1,120 @@
+# Coast mode
+
+When a motor controller is told to stop a motor (say by setting power to zero), there are two different methods they use to do that: brake mode and coast mode.
+
+* **Coast mode** effectively disconnects the motor wires so that the motor can turn freely.  A spinning motor that is set to coast mode will slow down gradually as a result of friction.  A stationary motor in coast mode provides little resistant to movement.
+
+* **Brake mode** effectively connects the motor wires together so that the motor provides "back EMF" that resists motion.  A spinning motor in brake mode will slow down very quickly.  A stationary motor in brake mode will be hard to turn.
+
+So which do we want to use on an FRC robot?  The answer, in most cases, is brake mode.  A drive train in brake mode will stop quickly when commanded (say before hitting an obstacle).  This reduces wear and tear on your practice space and any unobservant humans present.  A motor-actuated elevator or climber will, in brake mode, lock and resist descent, meaning you may be able to get away without adding brakes.  A drive train stopped on a ramp will stay there even after being disabled.  Remember that end game points are often assessed some number of seconds after the end of the match.
+
+The one case where you want your robot to be in coast mode is when you are positioning your robot (while it is turned on, but disabled).  It's very hard to move an FRC robot in brake mode.  When you're practicisng your autonomous routines, you're going to be spending a lot of time repositioning your robot.
+
+In this case, it is tempting to say that the robot's drive train should be in brake mode while enabled, but go into coast mode when disabled.  You might get away with this, but one day you'll disable your robot when it is going at high speed, and then everyone will be unpleasantly surprised that it just keeps on going.  This has actually happened in some FRC competition matches, where a robot in motion at the end of the match keeps moving, collides with other robots, and either loses end game points for their alliance or gains fouls as a result.
+
+So what should we do?  The best compromise seems to be to enable coast mode only once the robot has been disabled for several seconds.  That gives it enough time to stop, allows enough time for post-match judging, but still makes it easy to move your robot.  Fortunately, with appropriate configuration, idle mode commands can be sent to your motors while the robot is disabled.
+
+## Method
+
+So how do we do this?  You need four things:
+* A drive subsystem method that sets the idle mode to either coast or brake
+* Calls to set brake mode in appropriate places
+* A runs-when-disabled command that sets coast mode
+* A trigger to call that command after several seconds of being disabled
+
+### Drive sybsystem
+
+The exact command required will vary depending on your drivetrain and the motor controllers.  Here I give code for Spark Max and Talon FX, assuming two motors on each side.
+
+```java
+/**
+ * Sets idle mode to be either brake mode or coast mode.
+ * 
+ * @param brake If true, sets brake mode, otherwise sets coast mode
+ */
+public void setBrakeMode(boolean brake) {
+    CANSparkMax.IdleMode mode = brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast;
+    m_leftLeader.setIdleMode(mode);
+    m_leftFollower.setIdleMode(mode);
+    m_rightLeader.setIdleMode(mode);
+    m_rightFollower.setIdleMode(mode);
+}
+```
+
+```java
+public void setBrakeMode(boolean brake) {
+    NeutralMode mode = brake ? NeutralMode.Brake : NeutralMode.Coast;
+    m_leftLeader.setNeutralMode(mode);
+    m_leftFollower.setNeutralMode(mode);
+    m_rightLeader.setNeutralMode(mode);
+    m_rightFollower.setNeutralMode(mode);
+}
+```
+
+### Set brake mode on init
+
+In `Robot.java`, in each of `autonomousInit`, `teleopInit`, and `testInit`, add the following line:
+```java
+m_robotContainer.m_driveSubsystem.setBrakeMode(true); // Enable brake mode
+```
+
+### Create coast mode command
+
+Create a new command something like:
+
+```java
+public class SetCoastModeCommand extends InstantCommand {
+    private final DriveSubsystem m_subsystem;
+
+    public SetCoastModeCommand(DriveSubsystem subsystem) {
+        m_subsystem = subsystem;
+        addRequirements(subsystem);
+    }
+
+    @Override
+    public void initialize() {
+        m_subsystem.setBrakeMode(false); // disable brake mode
+    }
+
+    @Override
+    public boolean runsWhenDisabled() {
+        return true;
+    }
+
+}
+```
+
+This is a subclass of `InstantCommand`, so it will initalize and then end.  We don't need it to do anything else.
+
+Notice that we override the `runsWhenDisabled` method to return `true` instead of the default `false`.  Normal commands are unscheduled when the robot is disabled.  This command is a rare exception.
+
+### Create trigger
+
+In `Robot,java`, at the end of `robotInit`, add the following code:
+
+```java
+new Trigger(this::isEnabled)
+    .negate()
+    .debounce(3)
+    .whenActive(new SetCoastModeCommand(m_robotContainer.m_driveSubsystem));
+```
+
+You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to make `RobotContainer.m_driveSubsystem` `public`.
+
+To explain what this code is doing:
+1. We create a `Trigger`.  This class is a more general version of a Joystick button.  It's going to wait for some event to take place, and then take some action.
+1. The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the `::` method reference operator. 
+1. We want to do something when the robot is disabled, bu there is no `isDisabled` method, so we have to use `isEnabled` and negate it.  This means the trigger will activate whenever the `isEnabled` method returns `false`.  Notice that methods like `negate` return a new `Trigger`, so they can be chained in a terse style.
+1. Next, we don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with beam break sensors.)  
+Choose your own time here.  It needs to be long enough that the robot will come to a stop, but not so long that you're standing around waiting for it.  It's also a good idea to look at the rulebook and see if the robot has to stay in position on a ramp for some number of seconds.
+1. Finally, we want the trigger to do something when it is activated. We use `whenActive` and pass it an instance of our command. 
+
+
+## References
+* [Oblarg's comment on Chief Delphi that started me on this path](https://www.chiefdelphi.com/t/making-carrying-loading-robots-onto-and-off-the-field-safer/413630/51)
+* [CANSparkMax Java doc](https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax)
+* [TalonFX Java doc](https://store.ctr-electronics.com/content/api/java/html/classcom_1_1ctre_1_1phoenix_1_1motorcontrol_1_1can_1_1_talon_f_x.html)
+* [WPILIB Convenience Features](https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html)
+* [Trigger Java doc](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/Trigger.html)
+* [Java 8 – Double Colon (::) Operator](https://javabydeveloper.com/java-8-double-colon-operator/)
+* [Binding Commands to Triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html?highlight=debounce)
