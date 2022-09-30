@@ -33,7 +33,7 @@ The exact command required will vary depending on your drivetrain and the motor 
  * @param brake If true, sets brake mode, otherwise sets coast mode
  */
 public void setBrakeMode(boolean brake) {
-    CANSparkMax.IdleMode mode = brake ? CANSparkMax.IdleMode.kBrake : CANSparkMax.IdleMode.kCoast;
+    IdleMode mode = brake ? IdleMode.kBrake : IdleMode.kCoast;
     m_leftLeader.setIdleMode(mode);
     m_leftFollower.setIdleMode(mode);
     m_rightLeader.setIdleMode(mode);
@@ -57,6 +57,8 @@ In `Robot.java`, in each of `autonomousInit`, `teleopInit`, and `testInit`, add 
 ```java
 m_robotContainer.m_driveSubsystem.setBrakeMode(true); // Enable brake mode
 ```
+
+You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to make `RobotContainer.m_driveSubsystem` `public`.
 
 ### Create coast mode command
 
@@ -98,7 +100,7 @@ new Trigger(this::isEnabled)
     .whenActive(new SetCoastModeCommand(m_robotContainer.m_driveSubsystem));
 ```
 
-You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to make `RobotContainer.m_driveSubsystem` `public`.
+Again, change it as neccessary depending on where your drive subsystem can be found.
 
 To explain what this code is doing:
 1. We create a `Trigger`.  This class is a more general version of a Joystick button.  It's going to wait for some event to take place, and then take some action.
@@ -111,9 +113,9 @@ Choose your own time here.  It needs to be long enough that the robot will come 
 
 ## References
 * [Oblarg's comment on Chief Delphi that started me on this path](https://www.chiefdelphi.com/t/making-carrying-loading-robots-onto-and-off-the-field-safer/413630/51)
+* [WPILIB Convenience Features](https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html)
+* [WPILIB Binding Commands to Triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html)
 * [CANSparkMax Java doc](https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax)
 * [TalonFX Java doc](https://store.ctr-electronics.com/content/api/java/html/classcom_1_1ctre_1_1phoenix_1_1motorcontrol_1_1can_1_1_talon_f_x.html)
-* [WPILIB Convenience Features](https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html)
 * [Trigger Java doc](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/Trigger.html)
 * [Java 8 – Double Colon (::) Operator](https://javabydeveloper.com/java-8-double-colon-operator/)
-* [Binding Commands to Triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html?highlight=debounce)
