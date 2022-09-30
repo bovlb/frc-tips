@@ -80,7 +80,6 @@ public class SetCoastModeCommand extends InstantCommand {
     public boolean runsWhenDisabled() {
         return true;
     }
-
 }
 ```
 
