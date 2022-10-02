@@ -1,10 +1,10 @@
 # Coast mode
 
-When a motor controller is told to stop a motor (say by setting power to zero), there are two different methods they use to do that: brake mode and coast mode.
+When a motor controller is told to setting a motor's power to zero, this is known as idle mode (also known as neutral mode).  There are two different flavors of idle mode: coast mode and brake mode.
 
 * **Coast mode** effectively disconnects the motor wires so that the motor can turn freely.  A spinning motor that is set to coast mode will slow down gradually as a result of friction.  A stationary motor in coast mode provides little resistant to movement.
 
-* **Brake mode** effectively connects the motor wires together so that the motor provides "back EMF" that resists motion.  A spinning motor in brake mode will slow down very quickly.  A stationary motor in brake mode will be hard to turn.
+* **Brake mode** effectively connects the motor wires together so that the motor provides "back EMF" that resists motion.  A spinning motor in brake mode will slow down very quickly when the power is set to zero.  A stationary motor in brake mode will be hard to turn.
 
 So which do we want to use on an FRC robot?  The answer, in most cases, is brake mode.  A drive train in brake mode will stop quickly when commanded (say before hitting an obstacle).  This reduces wear and tear on your practice space and any unobservant humans present.  A motor-actuated elevator or climber will, in brake mode, lock and resist descent, meaning you may be able to get away without adding brakes.  A drive train stopped on a ramp will stay there even after being disabled.  Remember that end game points are often assessed some number of seconds after the end of the match.
 
@@ -12,12 +12,12 @@ The main circumstance where you want your robot to be in coast mode is when you 
 
 In this case, it is tempting to say that the robot's drive train should be in brake mode while enabled, but go into coast mode when disabled.  You might get away with this, but one day you'll disable your robot when it is going at high speed, and then everyone will be unpleasantly surprised that it just keeps on going.  This has actually happened in some FRC competition matches, where a robot in motion at the end of the match keeps moving, collides with other robots, and either loses end game points for their alliance or gains fouls as a result.
 
-So what should we do?  The best compromise seems to be to enable coast mode only once the robot has been disabled for several seconds.  That gives it enough time to stop, allows enough time for post-match judging, but still makes it easy to move your robot.  Fortunately, with appropriate configuration, idle mode commands can be sent to your motors while the robot is disabled.
+So what should we do?  The best compromise seems to be to enable coast mode only once the robot has been disabled for several seconds, and keep it in brake mode at all other times.  That gives it enough time to stop, allows enough time for post-match judging, but still makes it easy to move your robot.  Fortunately, with appropriate configuration, idle mode commands can be sent to your motors while the robot is disabled.
 
 ## Method
 
-So how do we do this?  You need four things:
-* A drive subsystem method that sets the idle mode to either coast or brake
+So how do we do this?  You need to add four things:
+* A method in your drive subsystem that can set the idle mode to either coast or brake
 * Calls to set brake mode in appropriate places
 * A runs-when-disabled command that sets coast mode
 * A trigger to call that command after several seconds of being disabled
