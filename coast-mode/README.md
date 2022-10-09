@@ -26,6 +26,8 @@ So how do we do this?  You need to add four things:
 
 The exact command required will vary depending on your drivetrain and the motor controllers.  Here I give code for Spark Max and Talon FX, assuming two motors on each side.
 
+#### SparkMAX
+
 ```java
 /**
  * Sets idle mode to be either brake mode or coast mode.
@@ -40,7 +42,7 @@ public void setBrakeMode(boolean brake) {
     m_rightFollower.setIdleMode(mode);
 }
 ```
-
+#### Talon FX/SRX 
 ```java
 public void setBrakeMode(boolean brake) {
     NeutralMode mode = brake ? NeutralMode.Brake : NeutralMode.Coast;
@@ -85,13 +87,13 @@ public class SetCoastModeCommand extends InstantCommand {
 }
 ```
 
-This is a subclass of `InstantCommand`, so it will initalize and then end.  We don't need it to do anything else.
+This is a subclass of `InstantCommand`, so it will initalize and then end immedialtely.  We don't need it any other life cycle methods.
 
 Notice that we override the `runsWhenDisabled` method to return `true` instead of the default `false`.  Normal commands are unscheduled when the robot is disabled.  This command is a rare exception.
 
 ### Create trigger
 
-In `Robot,java`, at the end of `robotInit`, add the following code:
+In `Robot.java`, at the end of `robotInit`, add the following code:
 
 ```java
 new Trigger(this::isEnabled)
@@ -106,7 +108,7 @@ To explain what this code is doing:
 1. We create a `Trigger`.  This class is a more general version of a Joystick button.  It's going to wait for some event to take place, and then take some action.
 1. The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the `::` method reference operator. 
 1. We want to do something when the robot is disabled, bu there is no `isDisabled` method, so we have to use `isEnabled` and negate it.  This means the trigger will activate whenever the `isEnabled` method returns `false`.  Notice that methods like `negate` return a new `Trigger`, so they can be chained in a terse style.
-1. Next, we don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with beam break sensors.)  
+1. Next, we don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with noisy beam break sensors.)  
 Choose your own time here.  It needs to be long enough that the robot will come to a stop, but not so long that you're standing around waiting for it.  It's also a good idea to look at the rulebook and see if the robot has to stay in position on a ramp for some number of seconds.
 1. Finally, we want the trigger to do something when it is activated. We use `whenActive` and pass it an instance of our command. 
 
