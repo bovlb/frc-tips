@@ -19,7 +19,7 @@ Ramping is generally something we think about in the context of telemetric opera
 
 There are a number of different ways to implement ramps.  TODO
 
-## Slew Rate Limited
+## Slew Rate Limiter
 
 The easiest and simplest way to add ramps is using a class called `SlewRateLimiter`.  This can be applied directly to your control inputs (e.g. your joystick) inside your arcade drive command.
 
