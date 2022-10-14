@@ -1,5 +1,10 @@
 # Coast mode
 
+This document explains how to set neutral/idle mode so that the robot is safe in use, 
+but moveable when disabled.
+
+## Background
+
 When a motor controller is told to setting a motor's power to zero, this is known as idle mode (also known as neutral mode).  There are two different flavors of idle mode: coast mode and brake mode.
 
 * **Coast mode** effectively disconnects the motor wires so that the motor can turn freely.  A spinning motor that is set to coast mode will slow down gradually as a result of friction.  A stationary motor in coast mode provides little resistant to movement.
