@@ -2,11 +2,11 @@
 
 This document describes ways to stop your robot from falling over in teleoperated driving.
 
-> ⚠️ **Warning**
+> **Warning**
 > This is a work in progress and has not had extensive testing.
 
 
-An ideal FRC robot would have a centre of mass that is near the ground, and centred in the frame perimeter.  In practice, the various game requirements make this hard to achieve, and you often end up with a top-heavy robot with all the weight at one end.  The means that if you accelerate or decelerate too aggressively in the wrong direction, your robot could fall over.  Even if the robot doesn't actually fall over, just picking the wheels up could allow another robot to slide underneath.
+An ideal FRC robot would have a centre of mass that is near the ground, and centred in the frame perimeter.  In practice, the various game requirements make this hard to achieve, and you often end up with a top-heavy robot with all the weight at one end.  The means that if you accelerate or decelerate too aggressively in the wrong direction, your robot could fall over.  Even if the robot doesn't actually fall over, just picking the wheels up could be enough to allow another robot or a game piece to slide underneath.
 
 As with many aspects of robot programming, the answer lies in not always doing what the driver asks for.  When the driver slams the stick from full forwards to full reverse, we make the robot response lag very slightly.  Ramping is usually measured in terms of the minimum time the robot will take to go between neutral and full power.  Good values for this will range between about 0.1s and 0.5s depending on how top-heavy your robot is, and how much lag the driver will tolerate.  I recommend that you set the ramp time as high as your driver will permit (but no higher).
 
@@ -15,17 +15,15 @@ You might add the following to `Constants`:
 final static k_rampTimeSeconds = 0.25;
 ```
 
-Ramping is generally something we think about in the context of telemetric operation, especially for the drive train.  It can apply to other subsystems.  It can also apply to autonomous routines, but that has to be done with great care.
+Remping is generally used for the drive train, although it can sometimes apply to other subsystems.  It is also generally used only for telemetric operation; it can also apply to autonomous routines, but that is better handled by setting maximum acceleration in path planning.
 
-There are a number of different ways to implement ramps.  TODO
+There are a number of different ways to implement ramps.  [ TODO: Add more than one. ]
 
 ## Slew Rate Limiter
 
 The easiest and simplest way to add ramps is using a class called `SlewRateLimiter`.  This can be applied directly to your control inputs (e.g. your joystick) inside your arcade drive command.
 
-You probably have an arcarde drive command where the `execute` method 
-
-looks something like:
+You probably have an arcarde drive command where the `execute` method looks something like:
 
 ```java
 double forward = ...; // Probably from -Y on the joystick
@@ -45,15 +43,17 @@ To add ramping, add a new member variable in the `ArcadeDrive` command:
   SlewRateLimiter m_filter = new SlewRateLimiter(1.0 / Constants.k_rampTimeSecond);
 ```
 
-And in `execute`, change `forward` to be `m_filter.calculate(forward)`, e.g.:
+Note that SlewRateLimiter does not take a time; instead it takes a rate.  It's much easier to talk to the drivers about lag time, which we why we have to divide here.  Note that some other ramping techniques take a time directly.
+
+In `ArcadeDrive.execute`, where you were using `forward`, instead `m_filter.calculate(forward)`, e.g.:
 ```java
 m_subsystem.getDrivetrain().arcadeDrive(m_filter.calculate(forward), x, true);
 ```
 
-Note that we're only applying the ramp to the forwards/backwards axis.  
+Note that we're only applying the ramp to the forwards/backwards axis and not the turn.  
 Rapid turns alone are not usually enough to tip the robot.
 If you do decide to apply ramping to the turn control, remember to create a second `SlewRateLimiter`; 
-don't try to use the same stateful filter for two data streams.
+the filter has internal state, so don't try to use it for two data streams.
 
 ## References
 
