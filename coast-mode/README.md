@@ -72,6 +72,8 @@ You may need to change this code, depending on where your drive subsystem is cre
 Create a new command something like:
 
 ```java
+// Instant commands call initialisze and then end immediately.
+// They don't need any other life-cycle methods.
 public class SetCoastModeCommand extends InstantCommand {
     private final DriveSubsystem m_subsystem;
 
@@ -85,6 +87,7 @@ public class SetCoastModeCommand extends InstantCommand {
         m_subsystem.setBrakeMode(false); // disable brake mode
     }
 
+    // Allow this command to run when disabled
     @Override
     public boolean runsWhenDisabled() {
         return true;
@@ -101,6 +104,7 @@ Notice that we override the `runsWhenDisabled` method to return `true` instead o
 In `Robot.java`, at the end of `robotInit`, add the following code:
 
 ```java
+// Turn brake mode off shortly after the robot is disabled
 new Trigger(this::isEnabled)
     .negate()
     .debounce(3)
