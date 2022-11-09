@@ -26,28 +26,30 @@ The easiest and simplest way to add ramps is using a class called `SlewRateLimit
 You probably have an arcarde drive command where the `execute` method looks something like:
 
 ```java
+// Existing ArcardeDrive code
 double forward = ...; // Probably from -Y on the joystick
 double turn = ...; // Probably from X on the joystick
 
 // Do something with forward and turn
-// Probably ONE of the following:
+// Probably looks like ONE of the following:
 m_driveSubsystem.setPower(forward + turn, forward - turn);
-m_driveSubsystem.setSpeed((forward + turn) * k_maxSpeed, 
-    (forward - turn) * k_maxSpeed);
+m_driveSubsystem.setSpeed((forward + turn) * k_maxSpeed, (forward - turn) * k_maxSpeed);
 m_driveSubsystem.arcadeDrive(forward, turn);
 m_driveSubsystem.getDrivetrain().arcadeDrive(forward, turn, true);
 ```
 
 To add ramping, add a new member variable in the `ArcadeDrive` command:
 ```java
-  SlewRateLimiter m_filter = new SlewRateLimiter(1.0 / Constants.k_rampTimeSecond);
+// If the driver moves the joystick too fast, add a little lag
+SlewRateLimiter m_filter = new SlewRateLimiter(1.0 / Constants.k_rampTimeSecond);
 ```
 
 Note that SlewRateLimiter does not take a time; instead it takes a rate.  It's much easier to talk to the drivers about lag time, which we why we have to divide here.  Note that some other ramping techniques take a time directly.
 
-In `ArcadeDrive.execute`, where you were using `forward`, instead `m_filter.calculate(forward)`, e.g.:
+In `ArcadeDrive.execute`, where you were using `forward`, instead use `m_filter.calculate(forward)`, for example:
 ```java
-m_subsystem.getDrivetrain().arcadeDrive(m_filter.calculate(forward), x, true);
+// Apply ramping filter to forward control
+m_subsystem.getDrivetrain().arcadeDrive(m_filter.calculate(forward), turn, true);
 ```
 
 Note that we're only applying the ramp to the forwards/backwards axis and not the turn.  
