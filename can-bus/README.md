@@ -5,7 +5,7 @@
 
 ## What is your CAN bus utilization?
 
-The Driver Station and the DS Logs will show you your CAN bus utilization rate.  Often this is a fuzzy line that ranges up to 100%.  This doesn't necessarily mean that your CAN bus utilization is actually that high.  The real value can be seen by zooming in (in the DS Log Viewer)to find the common, stable value.  Typically it will be near the bottom of the fuzzy band.
+The Driver Station and the DS Logs will show you your CAN bus utilization rate.  Often this is a fuzzy line that ranges up to 100%.  This doesn't necessarily mean that your CAN bus utilization is actually that high.  The real value can be seen by zooming in (in the DS Log Viewer) to find the common, stable value.  Typically it will be near the bottom of the fuzzy band.
 
 How much is too high?  70% is fine.  If you're going much higher than that, you're likely to be experiencing lost packets and various errors. If not, you should look elsewhere for your problem.
 
@@ -17,7 +17,13 @@ There are four main ways to fix a high CAN utilization.  At a competition, they 
 
 ## Check your wiring
 
-TODO
+https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basics.html
+
+* Do the wiggle check
+* Check for bare metal or whiskers
+* Check termination
+* Check cables are twisted
+* Use [Phoenix Tuner](https://store.ctr-electronics.com/software/) and [Rev Hardware Client](https://docs.revrobotics.com/rev-hardware-client/) to check device visibility
 
 ## Adjusting frame rates
 
@@ -33,6 +39,7 @@ The motor safety watchdog is an important case.  It is recommended that you do n
 
 If a motor is under power/voltage control, or is using firmware PID control with no follower, then status frames can be less frequent.  
 
+**Warning** The following sections include example settings that are pretty much the maximum you might want to set.  You might want to set lower.
 
 ### REV Spark MAX 
 
@@ -50,9 +57,10 @@ follower.setPeriodicFrameRate(PeriodicFrame.kStatus0, 45);
 follower.setPeriodicFrameRate(PeriodicFrame.kStatus1, 500); 
 follower.setPeriodicFrameRate(PeriodicFrame.kStatus2, 500);
 ```
-### CTRE Phoenix (e.g. Talon, Pigeon, CANcoder)
 
-#### Motor controllers (Talon)
+### CTRE Phoenix (e.g. Talon/Falcon, Pigeon, CANcoder)
+
+#### Motor controllers (Talon/Falcon)
 
 Ten different types, but two important ones:
 * Type 1: Applied Motor Output, Fault Information, Limit Switch Information.  Default 10ms.
@@ -67,16 +75,22 @@ follower.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 500);
 
 ## Switch motors to PWM
 
-TODO
+https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html?highlight=PWM#pwm-cables
+
+TODO: INSERT CODE EXAMPLES
 
 ## Additional hardware
 ### CANivore
 
-Might help.  Introduces its own complexity.
+Might help.  Introduces its own complexity.  Doesn't work with sysid.
 
-## References
-* https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces#periodic-status-frames
-* https://docs.ctre-phoenix.com/en/stable/ch18_CommonAPI.html#setting-status-frame-periods
-* https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station-log-viewer.html
-* https://api.ctr-electronics.com/phoenix/release/java/com/ctre/phoenix/motorcontrol/can/BaseTalon.html#setStatusFramePeriod(com.ctre.phoenix.motorcontrol.StatusFrameEnhanced,int,int)
+TODO: LINK TO WIRING GUIDE
 
+TODO: INSERT CODE EXAMPLE
+
+## References and further reading
+* [Rev Spark MAX periodic sttus frames](https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces#periodic-status-frames)
+* [CTRE Setting status frame periods](https://docs.ctre-phoenix.com/en/stable/ch18_CommonAPI.html#setting-status-frame-periods)
+* [WPILIB Driver Station log viewer](https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station-log-viewer.html)
+* [`BaseTalon.setStatusFramePeriod`](https://api.ctr-electronics.com/phoenix/release/java/com/ctre/phoenix/motorcontrol/can/BaseTalon.html#setStatusFramePeriod(com.ctre.phoenix.motorcontrol.StatusFrameEnhanced,int,int))
+* [CD comment: three types of interaction with a CAN device](https://www.chiefdelphi.com/t/can-bus-freezes-on-code-initialization/419481/13?u=bovlb)
