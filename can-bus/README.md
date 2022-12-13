@@ -75,18 +75,31 @@ follower.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 500);
 
 ## Switch motors to PWM
 
-https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html?highlight=PWM#pwm-cables
+[WPILIB How to wire PWM cables](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/how-to-wire-a-robot.html?highlight=PWM#pwm-cables)
 
-TODO: INSERT CODE EXAMPLES
+```java
+  private final PWMSparkMax m_leftDrive = new PWMSparkMax(0);
+  private final PWMSparkMax m_rightDrive = new PWMSparkMax(1);
+```
+
+Pass to `DifferentialDrive` or call `.set()`.
+
+Similarly for `PWMTalonFX` (Falcon 500) and `PWMTalonSRX`.
+
+[WPILIB Using PWN Motor Controllers](https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/using-motor-controllers.html#using-pwm-motor-controllers)
 
 ## Additional hardware
 ### CANivore
 
 Might help.  Introduces its own complexity.  Doesn't work with sysid.
 
-TODO: LINK TO WIRING GUIDE
+[CTRE Canivore Hardware Manual](https://store.ctr-electronics.com/content/user-manual/CANivore%20User's%20Guide.pdf)
 
-TODO: INSERT CODE EXAMPLE
+[CTRE Bring Up: CANivore](https://docs.ctre-phoenix.com/en/stable/ch08a_BringUpCANivore.html)
+
+```java
+    TalonFX motor = new TalonFX(deviceNumber, canivoreName);
+```
 
 ## References and further reading
 * [Rev Spark MAX periodic sttus frames](https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces#periodic-status-frames)
