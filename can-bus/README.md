@@ -39,8 +39,6 @@ The motor safety watchdog is an important case.  It is recommended that you do n
 
 If a motor is under power/voltage control, or is using firmware PID control with no follower, then status frames can be less frequent.  
 
-**Warning** The following sections include example settings that are pretty much the maximum you might want to set.  You might want to set lower.
-
 ### REV Spark MAX 
 
 The Spark MAX has five different types of periodic status frame, but I believe a typical FRC setup will only use the first three.  
@@ -50,6 +48,7 @@ The Spark MAX has five different types of periodic status frame, but I believe a
 
 E.g.
 ```java
+// Maximum reasonable values
 leader.setPeriodicFrameRate(PeriodicFrame.kStatus0, 20); 
 leader.setPeriodicFrameRate(PeriodicFrame.kStatus1, 50); 
 leader.setPeriodicFrameRate(PeriodicFrame.kStatus2, 50); 
@@ -67,6 +66,7 @@ Ten different types, but two important ones:
 * Type 2: Selected Sensor Position, Selected Sensor Velocity, Brushed Supply Current Measurement, Sticky Fault Information.  Default 10ms.
 
 ```java
+// Maximum reasonable values
 leader.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 20);
 leader.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 50);
 follower.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 45);
