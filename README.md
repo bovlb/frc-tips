@@ -8,6 +8,7 @@ This project is a small collection of tips I've gathered to save redoing the sam
 
 * [CAN bus](can-bus/): What is my utilization?  How much is too much?  How do I fix it?
 * [Ramps](ramps/): How do I stop my robot falling over when they drive too fast?
-* [Coast mode](coast-mode/): How do I make my robot stop, stay stopped, but be easy to move.
+* [Coast mode](coast-mode/): How do I make my robot stop, stay stopped, but be easy to move?
+* [Burnout](burnout/): How do you stop your motors from burning out?
 
 I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.
