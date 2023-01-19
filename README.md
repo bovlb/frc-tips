@@ -1,3 +1,5 @@
+https://github.com/bovlb/frc-tips
+
 # FRC tips
 
 In the course of volunteering with an FRC team (and at various events), I see the same problems come around again and again.  Some of them have excellent resources already available to provide help; others take a little digging.

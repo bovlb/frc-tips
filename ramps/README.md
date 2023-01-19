@@ -1,10 +1,8 @@
+https://github.com/bovlb/frc-tips/tree/main/ramps
+
 # Ramps
 
 This document describes ways to stop your robot from falling over in teleoperated driving.
-
-> **Warning**
-> This is a work in progress and has not had extensive testing.
-
 
 An ideal FRC robot would have a centre of mass that is near the ground, and centred in the frame perimeter.  In practice, the various game requirements make this hard to achieve, and you often end up with a top-heavy robot with all the weight at one end.  The means that if you accelerate or decelerate too aggressively in the wrong direction, your robot could fall over.  Even if the robot doesn't actually fall over, just picking the wheels up could be enough to allow another robot or a game piece to slide underneath.
 

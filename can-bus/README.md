@@ -1,5 +1,4 @@
-> ** Warning **
-> Work in progress.  Don't trust this.
+https://github.com/bovlb/frc-tips/tree/main/can-bus
 
 # CAN bus
 
