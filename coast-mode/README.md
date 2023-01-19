@@ -125,7 +125,7 @@ Choose your own time here.  It needs to be long enough that the robot will come 
 
 
 ## References
-* [Oblarg's comment on Chief Delphi that started me on this path](https://www.chiefdelphi.com/t/making-carrying-loading-robots-onto-and-off-the-field-safer/413630/51)
+* [Oblarg's comment on Chief Delphi that started me on this path](https://www.chiefdelphi.com/t/making-carrying-loading-robots-onto-and-off-the-field-safer/413630/51?u=bovlb)
 * [WPILIB Convenience Features](https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html)
 * [WPILIB Binding Commands to Triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html)
 * [CANSparkMax Java doc](https://codedocs.revrobotics.com/java/com/revrobotics/cansparkmax)
