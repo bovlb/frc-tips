@@ -94,7 +94,7 @@ m_motor.setSmartCurrentLimit(
 
 ## Temperature Control
 
-Another possible approach is temperature control.  Some motor controllers will report the temperature of the motor and you can temporarily stop using a motor when it is too hot.  This technique is not widely applicable in the FRC context, but you might use it, say, if it takes constant power to hold an intake up and the consquences of letting the intake droop are fairly minor.
+Another possible approach is temperature control.  Some motor controllers will report the temperature of the motor and you can temporarily stop using a motor when it is too hot.  This technique is not widely applicable in the FRC context, but you might use it, say, if it takes continuous power to hold an intake up and the consequences of letting the intake droop are fairly minor.
 
 ### CAN SparkMAX
 
