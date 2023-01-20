@@ -31,7 +31,7 @@ Before applying current limiting, you should get an idea of what your typical cu
 
 In both cases, the first thing you will realise is that you need to know which motor is connected to which circuit.  Of course, all the wires on your PDB/PDH are already clearly labelled, but [a cool trick](https://www.chiefdelphi.com/t/favorite-tools-materials-and-techniques-for-frc-wiring/353212/72?u=bovlb) is to use the same CAN bus id as the circuit number.  If you do this, it means all of your circuit numbers are already documented in `Constants.java`. 
 
-For a drive train, a [useful trick](https://www.chiefdelphi.com/t/how-to-prevent-swerve-drive-motor-burnout/423820/7?u=bovlb) is put the robot on carpet touching a wall and gradually increase the power until the wheels start to slip.  Set the current limit to the peak current at the moment when the wheels start to slip.
+For a drive train, a [useful technique](https://www.chiefdelphi.com/t/how-to-prevent-swerve-drive-motor-burnout/423820/7?u=bovlb) is put the robot on a carpet, touching a wall and then gradually increase the power until the wheels start to slip.  Set the current limit to the peak current at the moment when the wheels start to slip.
 
 ## Current limiting
 
