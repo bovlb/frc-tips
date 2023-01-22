@@ -33,6 +33,10 @@ In both cases, the first thing you will realise is that you need to know which m
 
 For a drive train, a [useful technique](https://www.chiefdelphi.com/t/how-to-prevent-swerve-drive-motor-burnout/423820/7?u=bovlb) is put the robot on a carpet, touching a wall and then gradually increase the power until the wheels start to slip.  Set the current limit to the peak current at the moment when the wheels start to slip.
 
+> **Warning**
+> The specific current values in the example code below are only for illustration.
+> You should pick your own values.
+
 ## Current limiting
 
 How you limit the current depends on what sort of motor contoller you're dealing with.  When you set a limit, the controller will reduce the control inputs to keep the current at that level.  
@@ -48,7 +52,7 @@ These controllers allow you to set supply, peak, and continuous current limits. 
 m_motor.configSupplyCurrentLimit(40); // Amperes
 // Use these to prevent burnout 
 m_motor.configPeakCurrentLimit(35); // Amperes
-m_motor.configPeakCurrentDuration(200); // milliseconds
+m_motor.configPeakCurrentDuration(200); // Milliseconds
 m_motor.configContinuousCurrentLimit(25); // Amperes
 m_motor.enableCurrentLimit(true);
 ```
