@@ -42,7 +42,7 @@ To add ramping, add a new member variable in the `ArcadeDrive` command:
 SlewRateLimiter m_filter = new SlewRateLimiter(1.0 / Constants.k_rampTimeSecond);
 ```
 
-Note that SlewRateLimiter does not take a time; instead it takes a rate.  It's much easier to talk to the drivers about lag time, which we why we have to divide here.  Note that some other ramping techniques take a time directly.
+Note that SlewRateLimiter does not take a time; instead it takes a rate (units of change per second).  I have found that it's much easier to talk to the drivers about lag time, which is is why I use that as the defined constant.  Some other ramping techniques take a time directly instead of a rate.
 
 In `ArcadeDrive.execute`, where you were using `forward`, instead use `m_filter.calculate(forward)`, for example:
 ```java
@@ -51,9 +51,10 @@ m_subsystem.getDrivetrain().arcadeDrive(m_filter.calculate(forward), turn, true)
 ```
 
 Note that we're only applying the ramp to the forwards/backwards axis and not the turn.  
-Rapid turns alone are not usually enough to tip the robot.
-If you do decide to apply ramping to the turn control, remember to create a second `SlewRateLimiter`; 
-the filter has internal state, so don't try to use it for two data streams.
+Rapid turns alone are not usually enough to tip the robot.  If you find that the robot turns too rapidly, remember that it's common practice to limit the maximum permissible rate of turn.  This can be done simply by multiplying the turn value from the joystick by a constant like `0.5`.
+
+If you do decide to apply ramping to the turn control, you will need to create a second `SlewRateLimiter`; 
+the filter has internal state, so don't try to use one filter for two data streams.
 
 ## References
 
