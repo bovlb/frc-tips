@@ -44,10 +44,10 @@ SlewRateLimiter m_filter = new SlewRateLimiter(1.0 / Constants.k_rampTimeSecond)
 
 Note that SlewRateLimiter does not take a time; instead it takes a rate (units of change per second).  I have found that it's much easier to talk to the drivers about lag time, which is is why I use that as the defined constant.  Some other ramping techniques take a time directly instead of a rate.
 
-In `ArcadeDrive.execute`, where you were using `forward`, instead use `m_filter.calculate(forward)`, for example:
+In `ArcadeDrive.execute`, simply replace `forward` with `m_filter.calculate(forward)`, for example:
 ```java
 // Apply ramping filter to forward control
-m_subsystem.getDrivetrain().arcadeDrive(m_filter.calculate(forward), turn, true);
+forward = m_filter.calculate(forward);
 ```
 
 Note that we're only applying the ramp to the forwards/backwards axis and not the turn.  
