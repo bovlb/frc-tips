@@ -13,6 +13,15 @@ This project is a small collection of tips I've gathered to save redoing the sam
 
 I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.
 
+For Chrome users, see also my [suggested bookmarks](bookmarks.html).  
+1. Click on the link above
+1. Click on "Raw".
+1. Save it to Downloads
+1. Open [chrome://bookmarks/](chrome://bookmarks/)
+1. Open the ⋮ menu and select "Import bookmarks".  
+1. Find the downloaded `bookmarks.html` file in your Downloads folder.
+1. An "FRC" folder will appear under "Imported" which can be dragged into "Bookmarks Bar".
+
 Suggestions I have received for future notes:
 * How to reset and persist motor controllers
 * Some swerve bot gotchas - see [example swervebot](https://github.com/wpilibsuite/allwpilib/tree/main/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/swervebot)
