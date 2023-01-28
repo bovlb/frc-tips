@@ -10,17 +10,9 @@ This project is a small collection of tips I've gathered to save redoing the sam
 * [Ramps](ramps/): How do I stop my robot from falling over when they drive too fast?
 * [Coast mode](coast-mode/): How do I make my robot stop, stay stopped, and yet be easy to move?
 * [Burnout](burnout/): How do you stop your motors from burning out?
+* [Links](links/): What are some useful resources for FRC?
 
 I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.
-
-For Chrome users, see also my [suggested bookmarks](bookmarks.html).  
-1. Click on the link above
-1. Click on "Raw".
-1. Save it to Downloads
-1. Open [chrome://bookmarks/](chrome://bookmarks/)
-1. Open the ⋮ menu and select "Import bookmarks".  
-1. Find the downloaded `bookmarks.html` file in your Downloads folder.
-1. An "FRC" folder will appear under "Imported" which can be dragged into "Bookmarks Bar".
 
 Suggestions I have received for future notes:
 * How to reset and persist motor controllers
