@@ -7,17 +7,19 @@ https://github.com/bovlb/frc-tips/tree/main/links
 
 * [Season Materials](https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system)
 * [Charged Up Game Manual](https://firstfrc.blob.core.windows.net/frc2023/Manual/2023FRCGameManual.pdf)
+* [Discussion Fora](https://forums.firstinspires.org/forum/general-discussions/first-programs/first-robotics-competition)
 
 ## WPILIB
 
 * [FIRST Robotics Competition Control System](https://docs.wpilib.org/en/stable/index.html)
+* [WPILib Installation Guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
 * [Java docs](https://github.wpilib.org/allwpilib/docs/release/java/index.html)
 * [C++ docs](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html)
 * [Github](https://github.com/wpilibsuite/allwpilib) 
 
 ## CTRE (Cross The Road Electronics)
 
-For Victor, Talon, Falcon, Pigeon IMU, CAN Coder
+For Victor, Talon (including Falcon 500), Pigeon IMU, CAN Coder
 
 * [Java docs](https://api.ctr-electronics.com/phoenix/release/java/)
 * [C++ docs](https://api.ctr-electronics.com/phoenix/release/cpp/)
