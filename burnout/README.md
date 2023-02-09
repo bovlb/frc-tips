@@ -19,7 +19,10 @@ Here are some common scenarios when a motor might stall and therefore be at risk
 * The drive train receives contiunuous small signals that don't result in (much) movement
     * While this is usually too small to cause burnout in the typical timescale of an FRC match, it's a good idea to use [deadband](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/math/MathUtil.html#applyDeadband(double,double)) on joystick inputs
 
-While in many cases there are other possible solutions, there are some simple things we can do in software to limit this risk.  Primarily we can limit the current on motors.  If you look at the manufacturer websites, you can often find charts showing how long a motor will sustain a specific current before failing.  For example, the Falcon 500 will hit thermal protection after about 110 seconds at 50A, and 260 seconds at 40A.  Don't assume that because a motor is on a 40A circuit, its current will never exceed 40A.
+While in many cases there are other possible solutions, there are some simple things we can do in software to limit this risk.  Primarily we can limit the current on motors.  If you look at the manufacturer websites, you can often find charts showing how long a motor will sustain a specific current before failing.  For example, the Falcon 500 will hit thermal protection after about 110 seconds at 50A, and 260 seconds at 40A.  
+
+Don't assume that because a motor is on a 40A circuit, its current will never exceed 40A.  It often makes sense to use a current limit that is greater than the rating of the fuse/circuitbreaker installed on the circuit.
+
 
 ## Choosing a current limit
 
