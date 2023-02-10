@@ -33,7 +33,7 @@ If you’re interviewed about safety, resist the temptation to depict the team a
 
 Does this year's game or your team's robot design present any specific safety challenges?  Have you developed any interesting approaches to mitigate them?
 
-If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Some teams do very badly at this one.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat (not a yellow or orange baseball cap), or a custom-decorated high-visibility vest (not red or black).
+If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Some teams do very badly at this one.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat, or a custom-decorated high-visibility vest.  (Try to avoid selecting something that resembles a FIRST volunteer uniform, like an orange or yellow baseball cap, or a red or black vest.  There's no rule against it, but you never want to make a judge frown.)
 
 ## Special event activities
 
