@@ -19,17 +19,15 @@ You should have a clearly-labelled and well-organised safety binder in the pit. 
 
 ## General responsibilities at an event
 
-You will be expected to attend daily **Safety Captain meetings**, probably early each morning.  This is a good venue to speak up and raise any questions you may have, offer suggestions, raise general safety concerns, or offer praise.  
+You will be expected to attend daily **Safety Captain meetings**, probably early each morning.  This is a good venue to speak up and raise any questions you may have, offer suggestions, raise general safety concerns, or offer praise.  You may be asked to vote for a daily Safety Captain award.
 
 At an event, you are also supposed to be a **safety ambassador** for FIRST.  If you see an issue, you should draw it to someone’s attention.  (Be careful if you find yourself in the position of criticizing a specific team.  Remember you can involve one of your mentors.)  Direct people with injuries to the EMT desk at pit admin.  Offer (with any teammates you can gather) to take a turn on the entrance to give the volunteers there a break.
 
-Some specific things judges will look for in a **pit inspection**: First aid kit, battery spill kit, data sheets, daisy-chained power strips, loose hair or clothing, food, any unsafe practices.
+## Judged awards
 
-At an event, safety judges are also responsible for **event safety**, and they will notice if people are forgetting safety glasses, crowding their pit, playing football in the aisle, transporting a robot improperly (e.g. without human first), or lifting improperly (lift with the knees, not the back).  They will note your team number, even if they don’t say anything.
+[Since 2022](https://www.firstinspires.org/robotics/frc/blog/2021-judging-award-updates-for-the-2022-season), there is no longer a separate judged safety award.  Instead safety is a consideration for all judged awards.  This means that any judge may perform a pit safety inspection, interview the safety captain, or review your safety binder.
 
-## Safety Award
-
-The formality of **safety award interviews** varies considerably between events and from year to year.  Often they’re a quick conversation in the pit.  If you are taken for a formal interview, you will almost certainly be allowed to bring a teammate or mentor with you (but you should do most of the talking).  You may be asked if you want to give a short presentation; if you don’t have one prepared, don’t panic, just say “I’d rather just answer questions”. Bring along your safety binder.
+Some specific things judges will look for in a **pit inspection**: First aid kit, battery spill kit, data sheets, daisy-chained power strips, loose hair or clothing, food, any unsafe practices.  Judges may also notice if people are forgetting safety glasses, crowding their pit, playing football in the aisle, transporting a robot improperly (e.g. without human first), or lifting improperly (lift with the knees, not the back).  They will note your team number, even if they don’t say anything.
 
 If you’re interviewed about safety, resist the temptation to depict the team as having a perfect safety record.  No-one will believe this.  It’s better to be able to talk about how you **deal with the safety issues** that arise.  What does the team do after an injury or a near miss?  Is there a safety event log?  What have you had to change this season to improve safety?
 
@@ -39,9 +37,9 @@ If someone comes to your pit and asks a random team member where the Safety Capt
 
 A lot of teams have special things they do to demonstrate their commitment to safety.  Some examples:
 * Putting up safety posters in other team’s pits and handing out safety flyers.  By all means accept these, but I recommend caution in doing it yourself, unless you are truly going to do a good job of it, as it easily becomes just more trash.
-* Videos, websites, apps.  A lot of work but it does impress judges.
+* Videos, websites, apps.  A lot of work but it does impress judges.  If you have a monitor in your pit, you can use it to show safety videos.
 * Safety mascots
-* Handing out first aid kits or other safety equipment with team logo.
+* Handing out first aid kits or other safety equipment with your team's logo on them.
 
 ## Further reading
 
