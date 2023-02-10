@@ -27,17 +27,19 @@ At an event, you are also supposed to be a **safety ambassador** for FIRST.  If 
 
 [Since 2022](https://www.firstinspires.org/robotics/frc/blog/2021-judging-award-updates-for-the-2022-season), there is no longer a separate judged safety award.  Instead safety is a consideration for all judged awards.  This means that any judge may perform a pit safety inspection, interview the safety captain, or review your safety binder.
 
-Some specific things judges will look for in a **pit inspection**: First aid kit, battery spill kit, data sheets, daisy-chained power strips, loose hair or clothing, food, any unsafe practices.  Judges may also notice if people are forgetting safety glasses, crowding their pit, playing football in the aisle, transporting a robot improperly (e.g. without human first), or lifting improperly (lift with the knees, not the back).  They will note your team number, even if they don’t say anything.
+Some specific things judges will look for in a **pit inspection**: First aid kit, battery spill kit, data sheets, daisy-chained power strips, loose hair or clothing, food, any unsafe practices.  Judges and other volunteers may also notice if people on you team are forgetting safety glasses, crowding their pit, playing football in the aisle, transporting a robot improperly (e.g. without human first), or lifting improperly (lift with the knees, not the back). Even if they don’t say anything, they may note your team number and pass it along.  Don't make the mistake of thinking that actions outside of the judged interview can't lose your team its chance at a judged award.
 
 If you’re interviewed about safety, resist the temptation to depict the team as having a perfect safety record.  No-one will believe this.  It’s better to be able to talk about how you **deal with the safety issues** that arise.  What does the team do after an injury or a near miss?  Is there a safety event log?  What have you had to change this season to improve safety?
 
-If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Some teams do very badly at this one.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat (not yellow or orange), or a custom-decorated high-visibility vest (not red).
+Does this year's game or your team's robot design present any specific safety challenges?  Have you developed any interesting approaches to mitigate them?
+
+If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Some teams do very badly at this one.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat (not a yellow or orange baseball cap), or a custom-decorated high-visibility vest (not red or black).
 
 ## Special event activities
 
 A lot of teams have special things they do to demonstrate their commitment to safety.  Some examples:
 * Putting up safety posters in other team’s pits and handing out safety flyers.  By all means accept these, but I recommend caution in doing it yourself, unless you are truly going to do a good job of it, as it easily becomes just more trash.
-* Videos, websites, apps.  A lot of work but it does impress judges.  If you have a monitor in your pit, you can use it to show safety videos.
+* Videos, websites, apps.  A lot of work but it does impress judges.  If you have a monitor in your pit, you can use it to show safety videos, including [ones you didn't make](https://www.firstinspires.org/robotics/frc/safety).
 * Safety mascots
 * Handing out first aid kits or other safety equipment with your team's logo on them.
 
