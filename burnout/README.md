@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/burnout
+https://bovlb.github.io/frc-tips/burnout/
 
 # Burnout
 

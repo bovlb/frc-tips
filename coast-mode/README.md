@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/coast-mode
+https://bovlb.github.io/frc-tips/coast-mode/
 
 # Coast mode
 

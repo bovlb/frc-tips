@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/safety
+https://bovlb.github.io/frc-tips/safety/
 
 # Suggestions for FRC Safety Captains
 In 2020 I was a Safety Manager at a regional.  I participated in pit inspections, interviews, and judging for the safety award.  Here are some suggestions I have for any Safety Captain. These are particularly intended to be a good starting point for someone suddenly appointed as Safety Captain a few weeks before competition who doesn't know how to start.

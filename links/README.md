@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/links
+https://bovlb.github.io/frc-tips/links/
 
 
 # Some useful FRC links

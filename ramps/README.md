@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/ramps
+https://bovlb.github.io/frc-tips/ramps/
 
 # Ramps
 

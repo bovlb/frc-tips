@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips/tree/main/can-bus
+https://bovlb.github.io/frc-tips/can-bus/
 
 # CAN bus
 
