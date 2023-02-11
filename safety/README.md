@@ -3,14 +3,16 @@ https://bovlb.github.io/frc-tips/safety/
 # Suggestions for FRC Safety Captains
 In 2020 I was a Safety Manager at a regional.  I participated in pit inspections, interviews, and judging for the safety award.  Here are some suggestions I have for any Safety Captain. These are particularly intended to be a good starting point for someone suddenly appointed as Safety Captain a few weeks before competition who doesn't know how to start.
 
-A team’s safety does not come from one person alone.  There are things the safety captain can do individually, but real success will come from having a team culture of safety, where people know what they have to do to be safe, and feel comfortable reminding each other.  Your team should be appointing a Safety Captain before Kickoff; see if you can make that happen next year.
+A team’s safety does not come from one person alone.  There are things the safety captain can do individually, but real success will come from having a team culture of safety, where people know what they have to do to be safe, and feel comfortable reminding each other.  
+
+Your team should be appointing a Safety Captain before Kickoff; see if you can make that happen next year.  Does your team's website have a safety page?
 
 ## Binder
 You should have a clearly-labelled and well-organised safety binder in the pit.  This should contain: 
 * Relevant **FIRST manuals**, esepcially the Safety Manual and Event Rules.  You may be the only person on the team to read these, so make sure you pass along any relevant information.  Be prepared to demonstrate familiarity with these materials. 
-* **Data sheets** for hazardous chemicals (e.g. glue, lubricant, basically any bottles, tubes, or spray cans in the pit).  It’s fairly easy to find these online and print them out. Manuals for tools you brought to the event.  Again, almost every manual can be found online.
+* **Data sheets** for hazardous chemicals (e.g. glue, lubricant, basically any bottles, tubes, or spray cans in the pit).  It’s fairly easy to find these online and print them out. Manuals for tools you brought to the event.  Again, almost every manual can be found online.  Search on [msds.com](https://www.msds.com/).
 * **Team safety manuals** or training materials.  Basic first aid information. How to operate a fire extinguisher (PASS=Pull, aim, squeeze, sweep).  Safety guidelines for outreach events.
-* **Pit safety checklist**
+* **Pit safety checklist** List of equipment you should have.  List of things you should remember to do or not do.
 * **Event-specific information** such as the nearest emergency hospital
 * List of people on the team with **CPR/First Aid training**
 * List of people on the team **certified** to operate certain types of machinery
@@ -33,7 +35,7 @@ If you’re interviewed about safety, resist the temptation to depict the team a
 
 Does this year's game or your team's robot design present any specific safety challenges?  Have you developed any interesting approaches to mitigate them?
 
-If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Some teams do very badly at this one.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat, or a custom-decorated high-visibility vest.  (Try to avoid selecting something that resembles a FIRST volunteer uniform, like an orange or yellow baseball cap, or a red or black vest.  There's no rule against it, but you never want to make a judge frown.)
+If someone comes to your pit and asks a random team member where the Safety Captain is, what will they say?  (Several teams I spoke to had no idea what I was talking about.)  This should be covered as part of “judge talking”.  Also, you should have some **visible identification as Safety Captain**, like a button, a cape, a hat, or a custom-decorated high-visibility vest.  (Try to avoid selecting something that resembles a FIRST volunteer uniform, like an orange or yellow baseball cap, or a red or black vest.  There's no rule against it, but you never want to make a judge frown.)
 
 ## Special event activities
 
