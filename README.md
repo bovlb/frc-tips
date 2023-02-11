@@ -1,4 +1,4 @@
-https://github.com/bovlb/frc-tips
+https://bovlb.github.io/frc-tips/
 
 # FRC tips
 
