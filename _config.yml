@@ -2,4 +2,4 @@ remote_theme: pages-themes/hacker@v0.2.0
 plugins:
 - jekyll-remote-theme 
 title: BoVLB's FRC Tips
-description: Tips for FRC teams, primarily for Java programming
+description: Tips for FRC teams, primarily for Java programmers
