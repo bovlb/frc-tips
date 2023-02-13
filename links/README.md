@@ -8,6 +8,7 @@ https://bovlb.github.io/frc-tips/links/
 * [Season Materials](https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system)
 * [Charged Up Game Manual](https://firstfrc.blob.core.windows.net/frc2023/Manual/2023FRCGameManual.pdf)
 * [Discussion Fora](https://forums.firstinspires.org/forum/general-discussions/first-programs/first-robotics-competition)
+* [YouTube playlists](https://www.youtube.com/@FIRSTRoboticsCompetition/playlists)
 
 ## WPILIB
 
@@ -43,6 +44,6 @@ For Spark MAX
 
 ## Selected teams
 
-* **2102: Team Paradox**: [TBA](https://www.thebluealliance.com/team/2102), [website](https://www.team2102.org/), [Github](https://github.com/Paradox2102), [programming tutorials](http://programming.team2102.org/)
+* **2102: Team Paradox**: [TBA](https://www.thebluealliance.com/team/2102), [website](https://www.team2102.org/), [Github](https://github.com/Paradox2102), [programming tutorials](http://programming.team2102.org/), [PID demo](https://github.com/Paradox2102/pid_demo2)
 
 TODO: Add more ...
