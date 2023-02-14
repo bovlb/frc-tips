@@ -3,3 +3,4 @@ plugins:
 - jekyll-remote-theme 
 title: BoVLB's FRC Tips
 description: Tips for FRC teams, primarily for Java programmers
+google_analytics: G-0987DWH1NE
