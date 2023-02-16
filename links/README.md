@@ -16,6 +16,7 @@ https://bovlb.github.io/frc-tips/links/
 * [WPILib Installation Guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
 * [Java docs](https://github.wpilib.org/allwpilib/docs/release/java/index.html)
 * [C++ docs](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html)
+* [Python docs](https://robotpy.readthedocs.io/projects/wpilib/en/stable/api.html)
 * [Github](https://github.com/wpilibsuite/allwpilib) 
 
 ## CTRE (Cross The Road Electronics)
