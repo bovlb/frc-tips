@@ -40,7 +40,7 @@ If someone comes to your pit and asks a random team member where the Safety Capt
 ## Special event activities
 
 A lot of teams have special things they do to demonstrate their commitment to safety.  Some examples:
-* Putting up safety posters in other team’s pits and handing out safety flyers.  This should be done with caution.  If another team wants to put posters and flyers in your pit, then by all means accept these as it shows good saefty spirit.  Don't do this yourself unless you are truly going to do a good job of it, as it easily becomes just more trash (with your teams name on it).   
+* Putting up safety posters in other team’s pits and handing out safety flyers.  This should be done with caution.  If another team wants to put posters and flyers in your pit, then by all means accept these as it shows good safety spirit.  Don't do this yourself unless you are truly going to do a good job of it, as it easily becomes just more trash (with your team's name on it).   
 * Videos, websites, apps.  This is a lot of work but it does impress judges.  If you have a monitor in your pit, you can use it to show safety videos, including [ones you didn't make](https://www.firstinspires.org/robotics/frc/safety).
 * [Safety mascots](./Spyder_mascot.png)
 * Handing out first aid kits or other safety equipment with your team's logo on them.
