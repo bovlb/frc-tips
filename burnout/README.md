@@ -36,6 +36,8 @@ In both cases, the first thing you will realise is that you need to know which m
 
 For a drive train, a [useful technique](https://www.chiefdelphi.com/t/how-to-prevent-swerve-drive-motor-burnout/423820/7?u=bovlb) is put the robot on a carpet, touching a wall and then gradually increase the power until the wheels start to slip.  Set the current limit to the peak current at the moment when the wheels start to slip.
 
+I haven't tried it myself, but the [ILITE Drive Train Simulator](https://github.com/flybotix/drivetrainsim) is supposed to give some useful information about currents.
+
 > **Warning**
 > The specific current values in the example code below are only for illustration.
 > You should pick your own values.
