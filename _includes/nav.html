@@ -2,7 +2,10 @@
 <nav>
     <ul>
         {% for entry in site.data.nav %}
-        <li><a {% if page.url contains entry.url %}class="current"{% endif %} href="{{ entry.url | relative_url }}">{{ entry.title }}</a></li>
+        <li><a 
+            {% if page.url contains entry.url %}class="current"{% endif %}
+            href="{{ entry.url | relative_url }}"
+            title="{{ entry.description }}">{{ entry.title }}</a></li>
         {% endfor %}
     </ul>
 </nav>

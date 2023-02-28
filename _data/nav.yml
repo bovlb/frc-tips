@@ -1,12 +1,18 @@
-- title: Burnout and current limits
+- title: Burnout
+  description: How to use current limits to avoid burning out motors 
   url: burnout/
 - title: CAN bus
+  description: Determining and improving CAN bus utilization
   url: can-bus/
-- title: Coast mode and brake mode
+- title: Coast mode
+  description: How to use brake mode and still move your robot by hand
   url: coast-mode/
-- title: Ramps and not falling over
+- title: Ramps
+  description: How to avoid having your robot fall over
   url: ramps/
 - title: Safety Captain
+  description: Help!  I just got appointed Safety Captain.  Now what do I do?
   url: safety/
-- title: Useful links
+- title: Links
+  description: Various useful web pages
   url: links/

@@ -1,11 +1,13 @@
 nav ul {
     list-style: none; 
     display: inline-flex;
+    width: 100%;
 }
 
 nav ul li {
     display: block; 
     text-align: center;
+    padding: 16pt;
 }
 
 nav ul li a {
