@@ -1,0 +1,18 @@
+nav ul {
+    list-style: none; 
+    display: inline-flex;
+}
+
+nav ul li {
+    display: block; 
+    text-align: center;
+}
+
+nav ul li a {
+    color: white; 
+    text-decoration: none; 
+}
+
+nav ul li a.current {
+    color: #b5e853;
+}
