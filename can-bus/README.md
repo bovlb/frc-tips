@@ -20,8 +20,8 @@ https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basic
 
 * Do the wiggle check
 * Check for bare metal or whiskers
-* Check termination
-* Check cables are twisted
+* Check that the PDP is last in chain and has termination set
+* Ensure the green and yellow cables are twisted together everywhere
 * Use [Phoenix Tuner](https://store.ctr-electronics.com/software/) and [Rev Hardware Client](https://docs.revrobotics.com/rev-hardware-client/) to check device visibility
 
 ## Adjusting frame rates

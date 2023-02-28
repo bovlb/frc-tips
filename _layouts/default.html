@@ -14,7 +14,7 @@
 
   <body>
 
-    <header>
+    <header class="no-print">
       <div class="container">
         <a id="a-title" href="{{ '/' | relative_url }}">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
@@ -36,7 +36,7 @@
         {{ content }}
       </section>
     </div>
-    <footer>
+    <footer class="no-print">
         <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
     </footer>
   </body>

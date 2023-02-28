@@ -18,3 +18,11 @@ nav ul li a {
 nav ul li a.current {
     color: #b5e853;
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
