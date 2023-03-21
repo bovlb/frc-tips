@@ -3,7 +3,7 @@ https://bovlb.github.io/frc-tips/commands/
  A programmer needs to be familiar with the various command-related tricks available in WPILIB.  I've divided them here into six groups:
 * Command groups: Classes that take one or more commands and execute them all.
 * Commands for use in groups: Commands that are useful when using command groups.
-* Runnable wrappers: Classes that turn runnables (e.g. lambda expressions) into commands
+* Runnable wrappers: Classes that turn runnables into commands
 * Command decorators: Methods provided by all commands to connect or change them.
 * Running commands: How to run a command 
 * Esoteric commands: Commands that are used only in specialized circumstances
@@ -17,9 +17,9 @@ The scheduler will only run one command lifecycle method (`initialize`, `isFinis
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or using `addCommands`.
 
 * `SequentialCommandGroup`: Runs the sub-commands in sequence.
-* `ParallelCommandGroup`: Runs the sub-commands in parallel.  Is finished when all sub-commands are finished.
-* `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Is finished when the first command in the list is finished.
-* `ParallelRaceGroup`: Runs the sub-commands in parallel.  Is finished when any sub-command is finished.
+* `ParallelCommandGroup`: Runs the sub-commands in parallel.  Finishes when the slowest sub-command is finished
+* `ParallelRaceGroup`: Runs the sub-commands in parallel.  Finishes when the fastest sub-command is finished.
+* `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Finishes when the first command in the list is finished.
 
 # Commands used in groups
 
@@ -34,7 +34,7 @@ The following commands are useful to build command groups.  Some of them take co
 
 # Runnable wrappers
 
-Here are some wrappers that turn runnables (e.g. lambda expressions) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
+Here are some wrappers that turn runnables (e.g. lambda expressions: TODO explain) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
 * `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.
 * `RunCommand`: The given runnable is used as the `execute` method, there is no `initialize` or `end`, and `isFinished` returns `false`.  Often used with a decorator that adds an `isFinished` condition.
 * `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`m and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
