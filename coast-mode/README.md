@@ -23,11 +23,10 @@ So what should we do?  The best compromise seems to be to enable coast mode only
 
 ## Method
 
-So how do we do this?  You need to add four things:
-* A method in your drive subsystem that can set the idle mode to either coast or brake
-* Calls to set brake mode in appropriate places
-* A runs-when-disabled command that sets coast mode
-* A trigger to call that command after several seconds of being disabled
+So how do we do this?  You need to do three things:
+* Create a method in your drive subsystem that can set the idle mode to either coast or brake
+* Set brake mode in appropriate places
+* Set coast after several seconds of being disabled
 
 ### Drive sybsystem
 
@@ -62,44 +61,12 @@ public void setBrakeMode(boolean brake) {
 
 ### Set brake mode on init
 
-In `Robot.java`, in each of `autonomousInit`, `teleopInit`, and `testInit`, add the following line:
+In `Robot.java`, in both `autonomousInit` and `teleopInit`, add the following line:
 ```java
 m_robotContainer.m_driveSubsystem.setBrakeMode(true); // Enable brake mode
 ```
 
-You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to make `RobotContainer.m_driveSubsystem` `public`.
-
-### Create coast mode command
-
-Create a new command something like:
-
-```java
-// Instant commands call initialisze and then end immediately.
-// They don't need any other life-cycle methods.
-public class SetCoastModeCommand extends InstantCommand {
-    private final DriveSubsystem m_subsystem;
-
-    public SetCoastModeCommand(DriveSubsystem subsystem) {
-        m_subsystem = subsystem;
-        addRequirements(subsystem); 
-    }
-
-    @Override
-    public void initialize() {
-        m_subsystem.setBrakeMode(false); // disable brake mode
-    }
-
-    // Allow this command to run when disabled
-    @Override
-    public boolean runsWhenDisabled() {
-        return true;
-    }
-}
-```
-
-This is a subclass of `InstantCommand`, so it will initalize and then end immedialtely.  We don't need it any other life cycle methods.
-
-Notice that we override the `runsWhenDisabled` method to return `true` instead of the default `false`.  Normal commands are unscheduled when the robot is disabled.  This command is a rare exception.
+You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to change `RobotContainer.m_driveSubsystem` to be `public`.
 
 ### Create trigger
 
@@ -107,22 +74,22 @@ In `Robot.java`, at the end of `robotInit`, add the following code:
 
 ```java
 // Turn brake mode off shortly after the robot is disabled
-new Trigger(this::isEnabled)
-    .negate()
-    .debounce(3)
-    .whenActive(new SetCoastModeCommand(m_robotContainer.m_driveSubsystem));
+
+new Trigger(this::isEnabled) // Create a trigger that is active when the robot is enabled
+    .negate() // Negate the trigger, so it is active when the robot is disabled
+    .debounce(3) // Delay action until robot has been disabled for a certain time
+    .whenActive( // Finally take action
+        new InstantCommand( // Instant command will execute our "initialize" method and finish immediately
+            () -> m_robotContainer.m_driveSubsystem.setBrakeMode(false)) // Enable coast mode in drive train
+            .ignoringDisable(true)); // This command can run when the robot is disabled
 ```
 
-Again, change it as neccessary depending on where your drive subsystem can be found.
-
-To explain what this code is doing:
-1. We create a `Trigger`.  This class is a more general version of a Joystick button.  It's going to wait for some event to take place, and then take some action.
-1. The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the (seldom-used) `::` method reference operator. 
-1. We want to do something when the robot is disabled, but there is no `isDisabled` method, so we have to use `isEnabled` and negate it.  This means the trigger will activate whenever the `isEnabled` method returns `false`.  Notice that methods like `negate` return a new `Trigger`, so they can be chained in a terse style.
-1. Next, we don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with noisy beam break sensors.)  
+Notes: 
+* The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the (seldom-used) `::` method reference operator. 
+* We want to do something when the robot is disabled, but there is no `isDisabled` method, so we have to use `isEnabled` and negate it.  This means the trigger will activate whenever the `isEnabled` method returns `false`.  Notice that methods like `negate` return a new `Trigger`, so they can be chained in a terse style.
+* We don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with noisy beam break sensors.)  
 Choose your own time here.  It needs to be long enough that the robot will come to a stop, but not so long that you're standing around waiting for it.  It's also a good idea to look at the rulebook and see if the robot has to stay in position on a ramp for some number of seconds.
-1. Finally, we want the trigger to do something when it is activated. We use `whenActive` and pass it an instance of our command. 
-
+* Change the call to `setBrakeMode` as neccessary, depending on where your drive subsystem can be found.
 
 ## References
 * [Oblarg's comment on Chief Delphi that started me on this path](https://www.chiefdelphi.com/t/making-carrying-loading-robots-onto-and-off-the-field-safer/413630/51?u=bovlb)
