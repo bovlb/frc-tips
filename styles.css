@@ -25,4 +25,6 @@ nav ul li a.current {
     {
         display: none !important;
     }
+
+    body { color:black; }
 }
