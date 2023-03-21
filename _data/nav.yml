@@ -13,6 +13,9 @@
 - title: Safety Captain
   description: Help!  I just got appointed Safety Captain.  Now what do I do?
   url: safety/
+- title: Commands
+  description: Short guide to WPILIB commands
+  url: commands/
 - title: Links
   description: Various useful web pages
   url: links/
