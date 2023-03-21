@@ -80,7 +80,8 @@ new Trigger(this::isEnabled) // Create a trigger that is active when the robot i
     .debounce(3) // Delay action until robot has been disabled for a certain time
     .whenActive( // Finally take action
         new InstantCommand( // Instant command will execute our "initialize" method and finish immediately
-            () -> m_robotContainer.m_driveSubsystem.setBrakeMode(false)) // Enable coast mode in drive train
+            () -> m_robotContainer.m_driveSubsystem.setBrakeMode(false), // Enable coast mode in drive train
+            m_robotContainer.m_driveSubsystem) // command requires subsystem
             .ignoringDisable(true)); // This command can run when the robot is disabled
 ```
 
