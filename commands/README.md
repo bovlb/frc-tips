@@ -1,5 +1,37 @@
 https://bovlb.github.io/frc-tips/commands/
 
+# Commands
+
+Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks. 
+
+In addition to the usual constructor, commands have four lifecycle methods: `initialize`, `execute`, `isFinished`, and `end`.  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
+
+**Note**: These methods (as well as subsystem `periodic` methods and any `Trigger`s you have created) all run in a single shared thread, which is expected to run fifty times a second.  This means that they all share a total time budget of 20ms.  It is important that these commands execute quickly, so avoid using any long-running loops, sleeps, or timeouts.
+
+### `void initialize()`
+* Called once whenever a command is scheduled (including default commands).
+* Use this to do anything your command needs to do once, such as running motors at constant speed, or initializing variables.  It's a good idea to print a log message in this command.
+* Default implementation does nothing.
+
+### `void execute()`
+* Called every cycle for scheduled commands, in alternation with `isFinished`.
+* Use this to do anything your command needs to do dynamically, like responding to joysticks or sensors, and updating internal state.  You can also use this to update SmartDashboard (although that is usually better done in subsystem `periodic`)
+* Default implementation does nothing.
+
+### `boolean isFinished()`
+* Called every cycle for scheduled commands, in alternation with `execute`. 
+* Use this to tell the scheduler when your command is complete.  
+* Default implementation in `Command` returns `false`, so a command will run forever unless interrupted or canceled, but may be overridden (say in `InstantCommand`).
+
+### `void end(boolean interrupted)`
+* Called when a command is descheduled, which means that `isFinished` has returned `true`, or that the command has been interrupted or cancelled.  It's a good idea to print a log message in this command.
+* Use this to tidy up after the command.  The typical usage is to stop motors.
+* Default implementation does nothing.
+
+**Note**: Generally commands exist in order to do something with a subsystem, like run motors.  It's very important that you never have two commands trying to control the same motor.  WPILIB's solution to this is call "subsystem requirements".  Generally you will pass the subsystems into the command's constructor (along with any other configuration) to be stored for later use.  In the constructor, you should also call `addRequirements(...)` with any subsystems used by the command.  In some complex cases, you may use a subsystem without requiring it, say because you are only reading sensor data and setting any motor speeds.
+
+## Tricks
+
  A programmer needs to be familiar with the various command-related tricks available in WPILIB.  I've divided them here into six groups:
 * Command groups: Classes that take one or more commands and execute them all.
 * Commands for use in groups: Commands that are useful when using command groups.
@@ -12,16 +44,16 @@ These might seem a little complex and daunting, but the good news is that if you
 
 The scheduler will only run one command lifecycle method (`initialize`, `isFinished`, `execute`, `end`) or subsystem `periodic` at a time, so if you stay within this framework you don't have to worry about being thread-safe.
 
-# Command groups
+## Command groups
 
-These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or using `addCommands`.
+These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
 
 * `SequentialCommandGroup`: Runs the sub-commands in sequence.
 * `ParallelCommandGroup`: Runs the sub-commands in parallel.  Is finished when all sub-commands are finished.
 * `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Is finished when the first command in the list is finished.
 * `ParallelRaceGroup`: Runs the sub-commands in parallel.  Is finished when any sub-command is finished.
 
-# Commands used in groups
+## Commands used in groups
 
 The following commands are useful to build command groups.  Some of them take commands as arguments, and their subsystem requirements are inherited.
 
@@ -32,7 +64,7 @@ The following commands are useful to build command groups.  Some of them take co
 * `WaitCommand`: Insert a delay for a specific time. 
 * `WaitUntilCommand`: Insert a delay untill some condition is met.
 
-# Runnable wrappers
+## Runnable wrappers
 
 Here are some wrappers that turn runnables (e.g. lambda expressions) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
 * `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.
@@ -40,7 +72,7 @@ Here are some wrappers that turn runnables (e.g. lambda expressions) into comman
 * `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`m and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
 * `FunctionalCommand`: Allows you you set all four life-cycle methods.  Not used if one of the above will suffice.
 
-# Command decorators
+## Command decorators
 
 These are methods that are provided by all `Command`s and allow you to create new commands that modify the underlying command in some way, or implicitly create command groups.  These can be used as an alternative way to write command groups, but are also used when creating commands on-the-fly in `RobotContainer`.
 
@@ -58,21 +90,26 @@ These are methods that are provided by all `Command`s and allow you to create ne
 
 (I have omitted a few of the more esoteric decorators for brevity.)
 
-# Running commands
+## Running commands
 
 There are generally three ways to run a command:
 * Bind it to a trigger, usually a joystick button
 * Run it by default
 * Run it in autonomous mode
 
-## Triggers
+### Triggers
 
+TODO
 
+### Default commands
 
-## Default commands
-## Autonomous commands
+TODO
 
-# Esoteric commands
+### Autonomous commands
+
+TODO
+
+## Esoteric commands
 
 These commands are used only in very specific circumstances.
 
@@ -86,7 +123,8 @@ These commands are used only in very specific circumstances.
 * `SwerveControllerCommand`
 * `TrapezoidProfileCommand`
 
- # See also
+## See also
+
  * [Binding Commands to Triggers](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html)
  * [Command Compositions](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html)
  * [Command interface](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/Command.html)
