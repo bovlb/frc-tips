@@ -9,11 +9,13 @@ https://bovlb.github.io/frc-tips/links/
 * [Charged Up Game Manual](https://firstfrc.blob.core.windows.net/frc2023/Manual/2023FRCGameManual.pdf)
 * [Discussion Fora](https://forums.firstinspires.org/forum/general-discussions/first-programs/first-robotics-competition)
 * [YouTube playlists](https://www.youtube.com/@FIRSTRoboticsCompetition/playlists)
+* [Portal for Incident Reporting](https://www.pavesuite.com/FIRST/PublicPortal/HomePage)
 
 ## WPILIB
 
 * [FIRST Robotics Competition Control System](https://docs.wpilib.org/en/stable/index.html)
-* [WPILib Installation Guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+  * [WPILib Installation Guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+  * [Status Lights](https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/status-lights-ref.html)
 * [Java docs](https://github.wpilib.org/allwpilib/docs/release/java/index.html)
 * [C++ docs](https://github.wpilib.org/allwpilib/docs/release/cpp/index.html)
 * [Python docs](https://robotpy.readthedocs.io/projects/wpilib/en/stable/api.html)
