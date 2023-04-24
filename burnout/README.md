@@ -101,6 +101,12 @@ m_motor.setSmartCurrentLimit(
 
 `CANSparkMax` also provides `setSecondaryCurrentLimit` which works somewhat differently, but you probably don't want to touch that for an FRC robot.
 
+### Victor SPX
+
+The Victor SPX does not provide any current limiting feature.
+
+TODO: Add code snippet on how to limit current based on PDB/PDH reporting.
+
 ## Temperature Control
 
 Another possible approach is temperature control.  Some motor controllers will report the temperature of the motor and you can temporarily stop using a motor when it is too hot.  This technique is not widely applicable in the FRC context, but you might use it, say, if it takes continuous power to hold an intake up and the consequences of letting the intake droop are fairly minor.
