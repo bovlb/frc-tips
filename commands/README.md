@@ -66,7 +66,7 @@ The following commands are useful to build command groups.  Some of them take co
 
 ## Runnable wrappers
 
-Here are some wrappers that turn runnables (e.g. lambda expressions: TODO explain) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
+Here are some wrappers that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
 * `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.
 * `RunCommand`: The given runnable is used as the `execute` method, there is no `initialize` or `end`, and `isFinished` returns `false`.  Often used with a decorator that adds an `isFinished` condition.
 * `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`m and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
@@ -99,7 +99,34 @@ There are generally three ways to run a command:
 
 ### Triggers
 
-TODO
+Triggers are objects that run some command when some event takes place, like a button being pressed.  The easiest way to create a trigger is by using a `CommandJoystick` or `CommandXboxController`.  Trigger objects don't need to be stored.
+
+```java
+CommandJoystick joystick = new CommandJoystick(0);
+
+joystick.button(1).toggleOnTrue(new MyCommand(...))
+```
+
+It is also possible to create triggers from any Boolean supplier:
+```java
+new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
+```
+
+Some trigger methods should be passed a command to run:
+* `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.
+* `onTrue`: Starts the command when the trigger becomes true, e.g. the button is pressed.
+* `toggleOnFalse`: Starts or stops the command when the trigger becomes false.  Seldom used.
+* `toggleOnTrue`: Starts or stops the command when the trigger becomes true.  For example, press a button and the intake starts running; it keeps running until the button is pressed a second time.
+* `whileFalse`: Starts the command when the trigger becomes false, and stops it when the trigger becomes true.
+* `whileTrue`: Starts the command when the trigger becomes true, and stops it when the trigger becomes true.  For example, the robot feeds balls into the shooter while the button is pressed, and stops when it is released.
+
+Some trigger methods create new triggers:
+* `and`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when both triggers are true.
+* `debounce`: Creates a new trigger than only activates when the underlying trigger has been true for some period of time.  This is useful for physical sensors and buttons that may be jittery.
+* `negate`: Creates a new trigger that is only true when the underlying trigger is false. 
+* `or`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when either trigger is true.
+
+Of these, you will probably use `whileTrue`, `toggleOnTrue`, and `debounce` most often.
 
 ### Default commands
 
