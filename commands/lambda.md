@@ -1,3 +1,5 @@
+https://bovlb.github.io/frc-tips/commands/lambda.html
+
 # Lambda Functions
 
 Normally, when you write a function in Java, you do in the context of some class.  Such functions are called "methods" and must be called either on an instance object or (more rarely) on the class itself.
@@ -16,6 +18,11 @@ Just like in a normal method, the value expression is not evaluated until it the
 It is also possible to turn any method into a function using the `::` method reference operator.
 
 ```java
+class MySubsystem ... {
+    ...
+    boolean getLimitSwitch() { ... }
+}
+
 // Get an anonoymous function reference with the same arguments and return type.
 // Use this as a boolean supplier without having to know about the subsystem.
 subsystem::getLimitSwitch
@@ -55,7 +62,7 @@ class ArcadeDrive extends Command {
 }
 ```
 
-Suppliers are a good way to isolate dependencies.  In the code above, `speed` and `turn` probably come from a joystick, but this code doesn't need to know anything about joysticks.
+Suppliers are a good way to isolate dependencies.  In the code above, `speed` and `turn` probably come from a joystick, but this code doesn't need to know anything about joysticks.  This means that you can change to a different type of joystick or even bring in semi-autonomous "driver assist".
 
 ## Runnables
 
