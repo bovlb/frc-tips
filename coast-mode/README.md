@@ -2,7 +2,7 @@ https://bovlb.github.io/frc-tips/coast-mode/
 
 # Coast mode
 
-This document explains how to set neutral/idle mode so that the robot is safe in use, 
+This document explains how to set neutral/idle mode so that the robot is safe in use,
 but moveable when disabled.
 
 ## Background
@@ -37,7 +37,7 @@ The exact command required will vary depending on your drivetrain and the motor 
 ```java
 /**
  * Sets idle mode to be either brake mode or coast mode.
- * 
+ *
  * @param brake If true, sets brake mode, otherwise sets coast mode
  */
 public void setBrakeMode(boolean brake) {
@@ -78,17 +78,17 @@ In `Robot.java`, at the end of `robotInit`, add the following code:
 new Trigger(this::isEnabled) // Create a trigger that is active when the robot is enabled
     .negate() // Negate the trigger, so it is active when the robot is disabled
     .debounce(3) // Delay action until robot has been disabled for a certain time
-    .whenActive( // Finally take action
+    .onTrue( // Finally take action
         new InstantCommand( // Instant command will execute our "initialize" method and finish immediately
             () -> m_robotContainer.m_driveSubsystem.setBrakeMode(false), // Enable coast mode in drive train
             m_robotContainer.m_driveSubsystem) // command requires subsystem
             .ignoringDisable(true)); // This command can run when the robot is disabled
 ```
 
-Notes: 
-* The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the (seldom-used) `::` method reference operator. 
+Notes:
+* The `Trigger` can be constructed with a `BooleanSupplier`.  Here `Robot` has a method `isEnabled` which takes no arguments and returns a `boolean`.  Such methods can be treated as a `BooleanSupplier`.  The syntax is a little tricky here because we're trying to pass in a class method in the context of this particular instance of `Robot`.  We do this using the `this` implicit method variable and the (seldom-used) `::` method reference operator.
 * We want to do something when the robot is disabled, but there is no `isDisabled` method, so we have to use `isEnabled` and negate it.  This means the trigger will activate whenever the `isEnabled` method returns `false`.  Notice that methods like `negate` return a new `Trigger`, so they can be chained in a terse style.
-* We don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with noisy beam break sensors.)  
+* We don't want to activate this trigger immediately the robot is disabled, but several seconds afterwards.  The `debounce` creates a new trigger that does not activate until its input trigger has been consistently active for some number of seconds.  (If this is new to you, think about using [Debouncer](https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/filter/Debouncer.html#%3Cinit%3E(double)) the next time you have trouble with noisy beam break sensors.)
 Choose your own time here.  It needs to be long enough that the robot will come to a stop, but not so long that you're standing around waiting for it.  It's also a good idea to look at the rulebook and see if the robot has to stay in position on a ramp for some number of seconds.
 * Change the call to `setBrakeMode` as neccessary, depending on where your drive subsystem can be found.
 
