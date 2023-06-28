@@ -2,9 +2,11 @@ https://bovlb.github.io/frc-tips/commands/
 
 # Commands
 
-Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks. 
+Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
 
 In addition to the usual constructor, commands have four lifecycle methods: `initialize`, `execute`, `isFinished`, and `end`.  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
+
+<img style="float: right;" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
 
 **Note**: These methods (as well as subsystem `periodic` methods and any `Trigger`s you have created) all run in a single shared thread, which is expected to run fifty times a second.  This means that they all share a total time budget of 20ms.  It is important that these commands execute quickly, so avoid using any long-running loops, sleeps, or timeouts.
 
@@ -19,8 +21,8 @@ In addition to the usual constructor, commands have four lifecycle methods: `ini
 * Default implementation does nothing.
 
 ### `boolean isFinished()`
-* Called every cycle for scheduled commands, in alternation with `execute`. 
-* Use this to tell the scheduler when your command is complete.  
+* Called every cycle for scheduled commands, in alternation with `execute`.
+* Use this to tell the scheduler when your command is complete.
 * Default implementation in `Command` returns `false`, so a command will run forever unless interrupted or canceled, but may be overridden (say in `InstantCommand`).
 
 ### `void end(boolean interrupted)`
@@ -37,14 +39,14 @@ In addition to the usual constructor, commands have four lifecycle methods: `ini
 * Commands for use in groups: Commands that are useful when using command groups.
 * Runnable wrappers: Classes that turn runnables into commands
 * Command decorators: Methods provided by all commands to connect or change them.
-* Running commands: How to run a command 
+* Running commands: How to run a command
 * Esoteric commands: Commands that are used only in specialized circumstances
 
 These might seem a little complex and daunting, but the good news is that if you use them effectively your code will become simpler and easier to read.  There are many subtle gotchas about combining commands, and these help you to navigate them safely.
 
 The scheduler will only run one command lifecycle method (`initialize`, `isFinished`, `execute`, `end`) or subsystem `periodic` at a time, so if you stay within this framework you don't have to worry about being thread-safe.
 
-## Command groups
+### Command groups
 
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
 
@@ -53,7 +55,7 @@ These classes group togather one or more commands and execute them all in some o
 * `ParallelRaceGroup`: Runs the sub-commands in parallel.  Finishes when the fastest sub-command is finished.
 * `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Finishes when the first command in the list is finished.
 
-## Commands used in groups
+### Commands used in groups
 
 The following commands are useful to build command groups.  Some of them take commands as arguments, and their subsystem requirements are inherited.
 
@@ -61,18 +63,18 @@ The following commands are useful to build command groups.  Some of them take co
 * `SelectCommand`: Takes a mapping from keys to commands, and a key selector.  At `initialize`, the key selector is executed and then one of the sub-commands is run.
 * `ProxyCommand`: This behaves exactly like the underlying command except that subsystem requirements are not inherited.
 * `RepeatCommand`: Run the sub-command until it is finished, and then start it running again.
-* `WaitCommand`: Insert a delay for a specific time. 
+* `WaitCommand`: Insert a delay for a specific time.
 * `WaitUntilCommand`: Insert a delay untill some condition is met.
 
-## Runnable wrappers
+### Runnable wrappers
 
-Here are some wrappers that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly. 
+Here are some wrappers that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly.
 * `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.
 * `RunCommand`: The given runnable is used as the `execute` method, there is no `initialize` or `end`, and `isFinished` returns `false`.  Often used with a decorator that adds an `isFinished` condition.
 * `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`m and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
 * `FunctionalCommand`: Allows you you set all four life-cycle methods.  Not used if one of the above will suffice.
 
-## Command decorators
+### Command decorators
 
 These are methods that are provided by all `Command`s and allow you to create new commands that modify the underlying command in some way, or implicitly create command groups.  These can be used as an alternative way to write command groups, but are also used when creating commands on-the-fly in `RobotContainer`.
 
@@ -89,6 +91,20 @@ These are methods that are provided by all `Command`s and allow you to create ne
 * `withTimeout`: Adds a timer-based `isFinished` condition (cf `WaitCommand`)
 
 (I have omitted a few of the more esoteric decorators for brevity.)
+
+### Esoteric commands
+
+These commands are used only in very specific circumstances.
+
+* `NotifierCommand`:
+* `PIDCommand`/`ProfiledPIDCommand`
+* `RamseteCommand`
+* `ScheduleCommand`
+* `ProxyScheduleCommand`
+* `WrapperCommand`
+* `MecanumControllerCommand`
+* `SwerveControllerCommand`
+* `TrapezoidProfileCommand`
 
 ## Running commands
 
@@ -123,32 +139,30 @@ Some trigger methods should be passed a command to run:
 Some trigger methods create new triggers:
 * `and`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when both triggers are true.
 * `debounce`: Creates a new trigger than only activates when the underlying trigger has been true for some period of time.  This is useful for physical sensors and buttons that may be jittery.
-* `negate`: Creates a new trigger that is only true when the underlying trigger is false. 
+* `negate`: Creates a new trigger that is only true when the underlying trigger is false.
 * `or`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when either trigger is true.
 
 Of these, you will probably use `whileTrue`, `toggleOnTrue`, and `debounce` most often.
 
 ### Default commands
 
-TODO
+Sometimes you want a command to run all the time on some subsystem, unless you have something more specific to run.  This is the "default command" for that subsystem.
+
+The most commonly encountered example of a default command is the "Arcade Drive" command, which connects a joystick to the drive subsystem.  This will run all of the time, except when you engage some autonomous driving routine.
+
+To set the default command for a subsystem, simply call `setDefaultCommand()`.  Each subsystem can only have (at most) one default command.  When using default commands, it is important that all commands using that subsystem have their requirements set correctly.
+
+```java
+// in RobotContainer.java, in configureBindings()
+m_driveSubsystem.setDefaultCommand(
+    new ArcadeDriveCommand(m_driveSubsystem,
+        () -> m_joystick1.getX(), // double supplier for turn
+        () -> m_joystick1.getY()); // double supplier for speed
+```
 
 ### Autonomous commands
 
 TODO
-
-## Esoteric commands
-
-These commands are used only in very specific circumstances.
-
-* `NotifierCommand`: 
-* `PIDCommand`/`ProfiledPIDCommand` 
-* `RamseteCommand`
-* `ScheduleCommand`
-* `ProxyScheduleCommand`
-* `WrapperCommand`
-* `MecanumControllerCommand`
-* `SwerveControllerCommand`
-* `TrapezoidProfileCommand`
 
 ## See also
 
