@@ -150,7 +150,7 @@ Sometimes you want a command to run all the time on some subsystem, unless you h
 
 The most commonly encountered example of a default command is the "Arcade Drive" command, which connects a joystick to the drive subsystem.  This will run all of the time, except when you engage some autonomous driving routine.
 
-To set the default command for a subsystem, simply call `setDefaultCommand()`.  Each subsystem can only have (at most) one default command.  When using default commands, it is important that all commands using that subsystem have their requirements set correctly.
+To set the default command for a subsystem, simply call `setDefaultCommand()`.  Each subsystem can only have (at most) one default command.  When using default commands, it is important that all commands using that subsystem have their requirements set correctly; this ensures that the scheduler will deschedule the default command when they are scheduled.
 
 ```java
 // in RobotContainer.java, in configureBindings()
