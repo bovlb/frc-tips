@@ -25,3 +25,4 @@ Suggestions I have received for future notes:
 * How should I configure and use IP addresses? (see [IP Configurations](https://docs.wpilib.org/en/stable/docs/networking/networking-introduction/ip-configurations.html))  How should I wire the Ethernet on the robot?
 * Current limits and voltage compensation
 * How to debug "No robot code"
+* Example code that uses all commands stuff
