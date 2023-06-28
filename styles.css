@@ -1,18 +1,18 @@
 nav ul {
-    list-style: none; 
+    list-style: none;
     display: inline-flex;
     width: 100%;
 }
 
 nav ul li {
-    display: block; 
+    display: block;
     text-align: center;
     padding: 16pt;
 }
 
 nav ul li a {
-    color: white; 
-    text-decoration: none; 
+    color: white;
+    text-decoration: none;
 }
 
 nav ul li a.current {
@@ -20,11 +20,20 @@ nav ul li a.current {
 }
 
 @media print
-{    
+{
     .no-print, .no-print *
     {
         display: none !important;
     }
 
     body { color:black; }
+}
+
+.jumplink {
+    text-decoration: none;
+    display: none;
+}
+
+H2:hover .jumplink, H3:hover .jumplink, H4:hover .jumplink, H5:hover .jumplink, H6:hover .jumplink {
+    display: inline;
 }

@@ -33,7 +33,7 @@
 
     <div class="container">
       <section id="main_content">
-        {{ content }}
+        {% include anchor_headings.html html=content anchorBody="🔗" h_min=2 beforeHeading=false anchorClass="jumplink" %}
       </section>
     </div>
     <footer class="no-print">
