@@ -123,8 +123,8 @@ new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
 <img style="float: right; width: 50%;" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
 
 Some trigger methods should be passed a command to run:
-* `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.  Usually the command will have its own `isFinished` condition.
-* `onTrue`: Starts the command when the trigger becomes true, e.g. the button is pressed.  Usually the command will have its own `isFinished` condition.
+* `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.  Usually the command will have its own `isFinished` condition.  Often used for instant commands.
+* `onTrue`: Starts the command when the trigger becomes true, e.g. the button is pressed.  Usually the command will have its own `isFinished` condition.  Often used for instant commands.
 * `toggleOnFalse`: Starts or stops the command when the trigger becomes false.  Seldom used.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 * `toggleOnTrue`: Starts or stops the command when the trigger becomes true.  For example, press a button and the intake starts running; it keeps running until the button is pressed a second time.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 * `whileFalse`: Starts the command when the trigger becomes false, and stops it when the trigger becomes true.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
