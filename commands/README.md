@@ -4,11 +4,9 @@ https://bovlb.github.io/frc-tips/commands/
 
 Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
 
-<img style="float: right;" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
+<img style="float: right; width: 50%;" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
 
-In addition to the usual constructor, commands have four lifecycle methods: `initialize`, `execute`, `isFinished`, and `end`.  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
-
-**Note**: These methods (as well as subsystem `periodic` methods and any `Trigger`s you have created) all run in a single shared thread, which is expected to run fifty times a second.  This means that they all share a total time budget of 20ms.  It is important that these commands execute quickly, so avoid using any long-running loops, sleeps, or timeouts.
+In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
 
 ### `void initialize()`
 * Called once whenever a command is scheduled (including default commands).
@@ -30,81 +28,75 @@ In addition to the usual constructor, commands have four lifecycle methods: `ini
 * Use this to tidy up after the command.  The typical usage is to stop motors.
 * Default implementation does nothing.
 
-**Note**: Generally commands exist in order to do something with a subsystem, like run motors.  It's very important that you never have two commands trying to control the same motor.  WPILIB's solution to this is call "subsystem requirements".  Generally you will pass the subsystems into the command's constructor (along with any other configuration) to be stored for later use.  In the constructor, you should also call `addRequirements(...)` with any subsystems used by the command.  In some complex cases, you may use a subsystem without requiring it, say because you are only reading sensor data and setting any motor speeds.
+These methods (as well as subsystem `periodic` methods and any `Trigger`s you have created) all run in a single shared thread, which is expected to run fifty times a second.  This means that they all share a total time budget of 20ms.  It is important that these commands execute quickly, so avoid using any long-running loops, sleeps, or timeouts.  The scheduler will only run one command lifecycle method (`initialize`, `isFinished`, `execute`, `end`) or subsystem `periodic` at a time, so if you stay within this framework you don't have to worry about being thread-safe.
 
-## Tricks
+Generally commands exist in order to do something with a subsystem, like run motors.  It's very important that you never have two commands trying to control the same motor.  WPILIB's solution to this is called "subsystem requirements".  Generally you will pass the subsystems into the command's constructor (along with any other configuration) to be stored for later use.  In the constructor, you should also call `addRequirements(...)` with any subsystems used by the command.  In some complex cases, you may use a subsystem without requiring it, say because you are only reading sensor data and setting any motor speeds.
 
  A programmer needs to be familiar with the various command-related tricks available in WPILIB.  I've divided them here into six groups:
-* Command groups: Classes that take one or more commands and execute them all.
-* Commands for use in groups: Commands that are useful when using command groups.
-* Runnable wrappers: Classes that turn runnables into commands
-* Command decorators: Methods provided by all commands to connect or change them.
-* Running commands: How to run a command
-* Esoteric commands: Commands that are used only in specialized circumstances
+* [Command groups](#command-groups): Classes that take one or more commands and execute them all.
+* [Commands for use in groups](#commands-used-in-groups): Commands that are useful when using command groups.
+* [Runnable wrappers](#runnable-wrappers): Classes that turn runnables into commands
+* [Command decorators](#command-decorators): Methods provided by all commands to connect or change them.
+* [Running commands](#running-commands): How to run a command
+* [Esoteric commands](#esoteric-commands): Commands that are used only in specialized circumstances
 
 These might seem a little complex and daunting, but the good news is that if you use them effectively your code will become simpler and easier to read.  There are many subtle gotchas about combining commands, and these help you to navigate them safely.
 
-The scheduler will only run one command lifecycle method (`initialize`, `isFinished`, `execute`, `end`) or subsystem `periodic` at a time, so if you stay within this framework you don't have to worry about being thread-safe.
+## Command groups
 
-### Command groups
+<img style="float: right; width: 50%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
 
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
 
-* `SequentialCommandGroup`: Runs the sub-commands in sequence.
-* `ParallelCommandGroup`: Runs the sub-commands in parallel.  Finishes when the slowest sub-command is finished
-* `ParallelRaceGroup`: Runs the sub-commands in parallel.  Finishes when the fastest sub-command is finished.
-* `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Finishes when the first command in the list is finished.
+* `SequentialCommandGroup`: Runs the sub-commands in sequence. See also `andThen` and `beforeStarting`.
+* `ParallelCommandGroup`: Runs the sub-commands in parallel.  Finishes when the slowest sub-command is finished.  See also the decorator `alongWith`.
+* `ParallelRaceGroup`: Runs the sub-commands in parallel.  Finishes when the fastest sub-command is finished.  See also the decorator `raceWith`.
+* `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Finishes when the first command in the list is finished.  See also the decorator `deadlineWith`.
 
-### Commands used in groups
+## Commands used in groups
 
 The following commands are useful to build command groups.  Some of them take commands as arguments, and their subsystem requirements are inherited.
 
-* `ConditionalCommand`: Given a condition (evaluated in `initialize`), runs one of two sub-commands.
+* `ConditionalCommand`: Given a condition (evaluated in `initialize`), runs one of two sub-commands.  See also the decorator `unless`.
 * `SelectCommand`: Takes a mapping from keys to commands, and a key selector.  At `initialize`, the key selector is executed and then one of the sub-commands is run.
-* `ProxyCommand`: This behaves exactly like the underlying command except that subsystem requirements are not inherited.
-* `RepeatCommand`: Run the sub-command until it is finished, and then start it running again.
+* `ProxyCommand`: This behaves exactly like the underlying command except that subsystem requirements are not inherited.  See also the decorator `asProxy`.
+* `RepeatCommand`: Run the sub-command until it is finished, and then start it running again.  See also the decorator `repeatedly`.
 * `WaitCommand`: Insert a delay for a specific time.
-* `WaitUntilCommand`: Insert a delay untill some condition is met.
+* `WaitUntilCommand`: Insert a delay until some condition is met.
 
-### Runnable wrappers
+## Runnable wrappers
 
 Here are some wrappers that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly.
-* `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.
+
+* `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.  You will also sometimes inherit from `InstantCommand` instead of `BaseCommand`.
 * `RunCommand`: The given runnable is used as the `execute` method, there is no `initialize` or `end`, and `isFinished` returns `false`.  Often used with a decorator that adds an `isFinished` condition.
-* `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`m and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
+* `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`, and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
 * `FunctionalCommand`: Allows you you set all four life-cycle methods.  Not used if one of the above will suffice.
 
-### Command decorators
+| Wrapper | `initialize` | `execute` | `end` | `isFinished`  |
+| --- | --- | --- | --- | --- |
+| `InstantCommand` | arg 1 | empty | empty | `true` |
+| `RunCommand` | empty | arg 1 | empty | `false` |
+| `StartEndCommand` | arg 1 | empty | arg 2 | `false` |
+| `FunctionalCommand` | arg 1 | arg 2 | arg 3 | arg 4 |
+
+## Command decorators
 
 These are methods that are provided by all `Command`s and allow you to create new commands that modify the underlying command in some way, or implicitly create command groups.  These can be used as an alternative way to write command groups, but are also used when creating commands on-the-fly in `RobotContainer`.
 
 * `alongWith`: Runs the base command and the sub-command(s) in parallel ending when they are all finished (cf `ParallelCommandGroup`)
-* `andThen`: Runs the base command and then the sub-commands or runnable (cd `SequentialCommandGroup`)
-* `asProxy`: Blocks inheritance of subsystem requirements (cf `ProxyCommand`)
-* `beforeStarting​`: Runs the sub-commands or runnable and then the base command (cf `SequentialCommandGroup`)
-* `deadlineWith​`: Runs the base command and sub-commands in parallel, ending when the base command is finised (cf `ParallelDeadlineGroup`)
-* `finallyDo`: Adds an (additional) `end` method to a command
-* `raceWith`: Runs the base command and sub-commands in parallel, ending when end of them are finished (cf `ParallelRaceGroup`)
-* `repeatedly`: Runs the base command repeatedly (cf `RepeatCommand`)
-* `unless​`: Runs the command only if the supplied boolean is `true` (cf `ConditionalCommand`)
-* `until`: Overrides the `isFinished` method.
-* `withTimeout`: Adds a timer-based `isFinished` condition (cf `WaitCommand`)
+* `andThen`: Runs the base command and then the sub-command(s) or runnable.  See also the class `SequentialCommandGroup`.
+* `asProxy`: Blocks inheritance of subsystem requirements.  See also the class `ProxyCommand`.
+* `beforeStarting​`: Runs the sub-commands or runnable and then the base command.  See also the class `SequentialCommandGroup`.
+* `deadlineWith​`: Runs the base command and sub-commands in parallel, ending when the base command is finished.  See also the class `ParallelDeadlineGroup`.
+* `finallyDo`: Adds an (additional) `end` method to a command.
+* `raceWith`: Runs the base command and sub-commands in parallel, ending when any of them are finished.  See also the class `ParallelRaceGroup`.
+* `repeatedly`: Runs the base command repeatedly.  See also the class `RepeatCommand`.
+* `unless​`: Runs the command only if the supplied `BooleanSupplier` is `false`.  See also the class `ConditionalCommand`.
+* `until`: Overrides the `isFinished` method with a `BooleanSupplier`.
+* `withTimeout`: Adds a timer-based `isFinished` condition.
 
 (I have omitted a few of the more esoteric decorators for brevity.)
-
-### Esoteric commands
-
-These commands are used only in very specific circumstances.
-
-* `NotifierCommand`:
-* `PIDCommand`/`ProfiledPIDCommand`
-* `RamseteCommand`
-* `ScheduleCommand`
-* `ProxyScheduleCommand`
-* `WrapperCommand`
-* `MecanumControllerCommand`
-* `SwerveControllerCommand`
-* `TrapezoidProfileCommand`
 
 ## Running commands
 
@@ -128,13 +120,15 @@ It is also possible to create triggers from any Boolean supplier:
 new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
 ```
 
+<img style="float: right; width: 50%;" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
+
 Some trigger methods should be passed a command to run:
-* `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.
-* `onTrue`: Starts the command when the trigger becomes true, e.g. the button is pressed.
-* `toggleOnFalse`: Starts or stops the command when the trigger becomes false.  Seldom used.
-* `toggleOnTrue`: Starts or stops the command when the trigger becomes true.  For example, press a button and the intake starts running; it keeps running until the button is pressed a second time.
-* `whileFalse`: Starts the command when the trigger becomes false, and stops it when the trigger becomes true.
-* `whileTrue`: Starts the command when the trigger becomes true, and stops it when the trigger becomes true.  For example, the robot feeds balls into the shooter while the button is pressed, and stops when it is released.
+* `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.  Usually the command will have its own `isFinished` condition.
+* `onTrue`: Starts the command when the trigger becomes true, e.g. the button is pressed.  Usually the command will have its own `isFinished` condition.
+* `toggleOnFalse`: Starts or stops the command when the trigger becomes false.  Seldom used.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
+* `toggleOnTrue`: Starts or stops the command when the trigger becomes true.  For example, press a button and the intake starts running; it keeps running until the button is pressed a second time.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
+* `whileFalse`: Starts the command when the trigger becomes false, and stops it when the trigger becomes true.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
+* `whileTrue`: Starts the command when the trigger becomes true, and stops it when the trigger becomes true.  For example, the robot feeds balls into the shooter while the button is pressed, and stops when it is released.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 
 Some trigger methods create new triggers:
 * `and`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when both triggers are true.
@@ -142,7 +136,7 @@ Some trigger methods create new triggers:
 * `negate`: Creates a new trigger that is only true when the underlying trigger is false.
 * `or`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when either trigger is true.
 
-Of these, you will probably use `whileTrue`, `toggleOnTrue`, and `debounce` most often.
+Of these, you will probably use `onTrue` (for instant commmands), `whileTrue` (to run while pressed), `toggleOnTrue` (to turn on or off when pressed), and `debounce` (to smooth noisy signals) most often.
 
 ### Default commands
 
@@ -163,6 +157,20 @@ m_driveSubsystem.setDefaultCommand(
 ### Autonomous commands
 
 TODO
+
+## Esoteric commands
+
+These commands are used only in very specific circumstances.
+
+* `NotifierCommand`
+* `PIDCommand`/`ProfiledPIDCommand`
+* `RamseteCommand`
+* `ScheduleCommand`
+* `ProxyScheduleCommand`
+* `WrapperCommand`
+* `MecanumControllerCommand`
+* `SwerveControllerCommand`
+* `TrapezoidProfileCommand`
 
 ## See also
 
