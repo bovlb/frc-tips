@@ -2,11 +2,11 @@
 
 Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
 
+In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
+
 <figure style="float: right; width: 50%;"><img style="width: 100%" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
 <figcaption>The scheduler calls the four lifecycle methods of a command.  This starts with <tt>initialize</tt> when the command is first scheduled, then <tt>execute</tt> and <tt>isFinished</tt> are called in alternation.  Finally <tt>end</tt> is called either when <tt>isFinished</tt> returns trure, or when the command is interrupted.</figcaption>
 </figure>
-
-In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
 
 ### `void initialize()`
 * Called once whenever a command is scheduled (including default commands).
@@ -46,15 +46,29 @@ These might seem a little complex and daunting, but the good news is that if you
 
 <figure  style="float: right; width: 50%;" >
 <img style="width: 100%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
-<figcaption>The <tt>SequentialCommandGroup</tt> runs each command in turn, allowing each to finish.  The <tt>ParallelCommandGroup</tt> runs the commands in parallel, allowing them all to finish.  The <tt>ParallelRaceGroup</tt> interrupts other commands once the fastest command finishes.  The <tt>ParallelDeadlineGroup</tt> interrupts any remaining commands once the special first command is finished.</figcaption>
+<figcaption><tt>SequentialCommandGroup</tt> runs each command in turn until the last finishs.  <tt>ParallelCommandGroup</tt> runs the commands in parallel, until they all finish.  <tt>ParallelRaceGroup</tt> runs until the fastest command finishes.  <tt>ParallelDeadlineGroup</tt> runs until the first command finishes.</figcaption>
 </figure>
 
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
 
-* `SequentialCommandGroup`: Runs the sub-commands in sequence. See also `andThen` and `beforeStarting`.
-* `ParallelCommandGroup`: Runs the sub-commands in parallel.  Finishes when the slowest sub-command is finished.  See also the decorator `alongWith`.
-* `ParallelRaceGroup`: Runs the sub-commands in parallel.  Finishes when the fastest sub-command is finished.  See also the decorator `raceWith`.
-* `ParallelDeadlineGroup`: Runs the sub-commands in parallel.  Finishes when the first command in the list is finished.  See also the decorator `deadlineWith`.
+### `SequentialCommandGroup`
+* Runs the sub-commands in sequence.
+* See also `andThen` and `beforeStarting`.
+
+### `ParallelCommandGroup`
+* Runs the sub-commands in parallel.
+* Finishes when the slowest sub-command is finished.
+* See also the decorator `alongWith`.
+
+### `ParallelRaceGroup`
+* Runs the sub-commands in parallel.
+* Finishes when the fastest sub-command is finished.
+* See also the decorator `raceWith`.
+
+### `ParallelDeadlineGroup`
+* Runs the sub-commands in parallel.
+* Finishes when the first command in the list is finished.
+* See also the decorator `deadlineWith`.
 
 ## Commands used in groups
 

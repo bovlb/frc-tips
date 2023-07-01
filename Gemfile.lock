@@ -254,6 +254,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  jekyll-titles-from-headings (~> 0.5.3)
   webrick (>= 1.7.0)
 
 BUNDLED WITH

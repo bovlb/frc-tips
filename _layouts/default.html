@@ -5,7 +5,6 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="stylesheet" href="{{site.baseurl}}/styles.css"/>
     <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relative_url }}">
     {% include head-custom.html %}
@@ -15,8 +14,9 @@
 
   <body>
     <header class="print-only">
+      <img style="float: right; width: 25%;" src="{{ base }}/qr/qr-{{page.url | slugify}}.png" />
+      This page is part of BoVLB's FRC Tips.
       Find this page online at https://bovlb.github.io/frc-tips{{page.url}}
-   <img style="float: right; width: 25%;" src="{{ base }}/qr/qr-{{page.url | slugify}}.png" />
     </header>
 
     <header class="no-print">

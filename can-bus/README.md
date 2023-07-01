@@ -100,7 +100,7 @@ Might help.  Introduces its own complexity.  Doesn't work with sysid.
 ```
 
 ## References and further reading
-* [Rev Spark MAX periodic sttus frames](https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces#periodic-status-frames)
+* [Rev Spark MAX periodic status frames](https://docs.revrobotics.com/sparkmax/operating-modes/control-interfaces#periodic-status-frames)
 * [CTRE Setting status frame periods](https://docs.ctre-phoenix.com/en/stable/ch18_CommonAPI.html#setting-status-frame-periods)
 * [WPILIB Driver Station log viewer](https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station-log-viewer.html)
 * [`BaseTalon.setStatusFramePeriod`](https://api.ctr-electronics.com/phoenix/release/java/com/ctre/phoenix/motorcontrol/can/BaseTalon.html#setStatusFramePeriod(com.ctre.phoenix.motorcontrol.StatusFrameEnhanced,int,int))
