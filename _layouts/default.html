@@ -1,3 +1,4 @@
+{% include base.html %}
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -13,6 +14,10 @@
   </head>
 
   <body>
+    <header class="print-only">
+      Find this page online at https://bovlb.github.io/frc-tips{{page.url}}
+   <img style="float: right; width: 25%;" src="{{ base }}/qr/qr-{{page.url | slugify}}.png" />
+    </header>
 
     <header class="no-print">
       <div class="container">
@@ -38,6 +43,9 @@
     </div>
     <footer class="no-print">
         <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-    </footer>
+      </footer>
   </body>
 </html>
+<!--
+qr/qr-{{ page.url | slugify }}.png https://bovlb.github.io/frc-tips{{ page.url }} {{page.title}}
+-->

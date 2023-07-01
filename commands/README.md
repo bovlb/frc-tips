@@ -1,10 +1,10 @@
-https://bovlb.github.io/frc-tips/commands/
-
 # Commands
 
 Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
 
-<img style="float: right; width: 50%;" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
+<figure style="float: right; width: 50%;"><img style="width: 100%" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
+<figcaption>The scheduler calls the four lifecycle methods of a command.  This starts with <tt>initialize</tt> when the command is first scheduled, then <tt>execute</tt> and <tt>isFinished</tt> are called in alternation.  Finally <tt>end</tt> is called either when <tt>isFinished</tt> returns trure, or when the command is interrupted.</figcaption>
+</figure>
 
 In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
 
@@ -44,7 +44,10 @@ These might seem a little complex and daunting, but the good news is that if you
 
 ## Command groups
 
-<img style="float: right; width: 50%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
+<figure  style="float: right; width: 50%;" >
+<img style="width: 100%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
+<figcaption>The <tt>SequentialCommandGroup</tt> runs each command in turn, allowing each to finish.  The <tt>ParallelCommandGroup</tt> runs the commands in parallel, allowing them all to finish.  The <tt>ParallelRaceGroup</tt> interrupts other commands once the fastest command finishes.  The <tt>ParallelDeadlineGroup</tt> interrupts any remaining commands once the special first command is finished.</figcaption>
+</figure>
 
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
 
@@ -120,7 +123,10 @@ It is also possible to create triggers from any Boolean supplier:
 new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
 ```
 
-<img style="float: right; width: 50%;" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
+<figure style="float: right; width: 50%;">
+<img  style="width: 100%" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
+<figcaption><tt>onTrue</tt> starts when a button is pressed and usually ends on its own.  <tt>whileTrue</tt> wtarts when the button is pressed and runs until it is released.  <tt>toggleOnTrue</tt> turns on or off in alternation every time the button is pressed.  <tt>onFalse</tt>, <tt>whileFalse</tt>, and <tt>toggleOnFalse</tt> do the same, but when the button is released.</figcaption>
+</figure>
 
 Some trigger methods should be passed a command to run:
 * `onFalse`: Starts the command when the trigger becomes false, e.g. the button is released.  Usually the command will have its own `isFinished` condition.  Often used for instant commands.

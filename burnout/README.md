@@ -1,5 +1,3 @@
-https://bovlb.github.io/frc-tips/burnout/
-
 # Burnout
 
 We put motors on our robots because we want to transform electricity into motion.  Unfortunately, because of internal inefficiencies and forces/torques that resist motion, much of that electrical energy is instead transformed into heat (and some noise).  If a motor becomes too hot, it will fail, usually by burning off the thin enamel coating on the winding wires.  This is often referred to as "letting out the magic smoke".
@@ -19,7 +17,7 @@ Here are some common scenarios when a motor might stall and therefore be at risk
 * The drive train receives contiunuous small signals that don't result in (much) movement
     * While this is usually too small to cause burnout in the typical timescale of an FRC match, it's a good idea to use [deadband](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/math/MathUtil.html#applyDeadband(double,double)) on joystick inputs
 
-While in many cases there are other possible solutions, there are some simple things we can do in software to limit this risk.  Primarily we can limit the current on motors.  If you look at the manufacturer websites, you can often find charts showing how long a motor will sustain a specific current before failing.  For example, the Falcon 500 will hit thermal protection after about 110 seconds at 50A, and 260 seconds at 40A.  
+While in many cases there are other possible solutions, there are some simple things we can do in software to limit this risk.  Primarily we can limit the current on motors.  If you look at the manufacturer websites, you can often find charts showing how long a motor will sustain a specific current before failing.  For example, the Falcon 500 will hit thermal protection after about 110 seconds at 50A, and 260 seconds at 40A.
 
 Don't assume that because a motor is on a 40A circuit, its current will never exceed 40A.  It often makes sense to use a current limit that is greater than the rating of the fuse/circuitbreaker installed on the circuit.
 
@@ -27,12 +25,12 @@ Don't assume that because a motor is on a 40A circuit, its current will never ex
 ## Choosing a current limit
 
 Before applying current limiting, you should get an idea of what your typical current draw is so that your limits don't affect normal usage.  You can monitor current draw by motors in several ways:
-* Looking at the PDP/PDH in SmartDashboard/Shuffleboard.  
+* Looking at the PDP/PDH in SmartDashboard/Shuffleboard.
     * `SmartDashboard.putData(new PowerDistribution());`
 * Looking at your [Driver Station logs](https://docs.wpilib.org/en/stable/docs/software/driverstation/driver-station-log-viewer.html)
 
 
-In both cases, the first thing you will realise is that you need to know which motor is connected to which circuit.  Of course, all the wires on your PDB/PDH are already clearly labelled, but [a cool trick](https://www.chiefdelphi.com/t/favorite-tools-materials-and-techniques-for-frc-wiring/353212/72?u=bovlb) is to use the same CAN bus id as the circuit number.  If you do this, it means all of your circuit numbers are already documented in `Constants.java`. 
+In both cases, the first thing you will realise is that you need to know which motor is connected to which circuit.  Of course, all the wires on your PDB/PDH are already clearly labelled, but [a cool trick](https://www.chiefdelphi.com/t/favorite-tools-materials-and-techniques-for-frc-wiring/353212/72?u=bovlb) is to use the same CAN bus id as the circuit number.  If you do this, it means all of your circuit numbers are already documented in `Constants.java`.
 
 For a drive train, a [useful technique](https://www.chiefdelphi.com/t/how-to-prevent-swerve-drive-motor-burnout/423820/7?u=bovlb) is put the robot on a carpet, touching a wall and then gradually increase the power until the wheels start to slip.  Set the current limit to the peak current at the moment when the wheels start to slip.
 
@@ -44,18 +42,18 @@ I haven't tried it myself, but the [ILITE Drive Train Simulator](https://github.
 
 ## Current limiting
 
-How you limit the current depends on what sort of motor contoller you're dealing with.  When you set a limit, the controller will reduce the control inputs to keep the current at that level.  
+How you limit the current depends on what sort of motor contoller you're dealing with.  When you set a limit, the controller will reduce the control inputs to keep the current at that level.
 
 As always, this sort of intervention makes the robot not do what the driver asks for, so should be applied with caution.  If drivers find that current limiting makes it harder to drive the robot then relax (increase) the limits rather than just removing them.
 
-### TalonSRX 
+### TalonSRX
 
 These controllers allow you to set supply, peak, and continuous current limits.  The supply limit is primarly used to prevent breakers from tripping.  The peak limit is engaged whenever the current tries to exceed that level.  The continuous limit is engaged if the current tries to exceed that level for more than a certain time.  See the [documentation](https://store.ctr-electronics.com/content/api/java/html/classcom_1_1ctre_1_1phoenix_1_1motorcontrol_1_1can_1_1_talon_s_r_x.html) for more details.
 
 ```java
 // Use this to stop breakers from tripping
 m_motor.configSupplyCurrentLimit(40); // Amperes
-// Use these to prevent burnout 
+// Use these to prevent burnout
 m_motor.configPeakCurrentLimit(35); // Amperes
 m_motor.configPeakCurrentDuration(200); // Milliseconds
 m_motor.configContinuousCurrentLimit(25); // Amperes

@@ -1,5 +1,3 @@
-https://bovlb.github.io/frc-tips/commands/lambda.html
-
 # Lambda Functions
 
 Normally, when you write a function in Java, you do in the context of some class.  Such functions are called "methods" and must be called either on an instance object or (more rarely) on the class itself.

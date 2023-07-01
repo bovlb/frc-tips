@@ -1,5 +1,3 @@
-https://bovlb.github.io/frc-tips/coast-mode/
-
 # Coast mode
 
 This document explains how to set neutral/idle mode so that the robot is safe in use,

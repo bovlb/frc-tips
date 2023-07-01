@@ -29,6 +29,17 @@ nav ul li a.current {
     body { color:black; }
 }
 
+@media screen
+{
+    .print-only {
+        display: none !important;
+    }
+}
+
+FOOTER {
+    margin-top: 1em;
+}
+
 .jumplink {
     text-decoration: none;
     display: none;
@@ -36,4 +47,18 @@ nav ul li a.current {
 
 H2:hover .jumplink, H3:hover .jumplink, H4:hover .jumplink, H5:hover .jumplink, H6:hover .jumplink {
     display: inline;
+}
+
+FIGCAPTION {
+    font-size: smaller;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+IMG {
+    page-break-after: avoid;
+}
+
+FIGURE {
+    -webkit-column-break-inside: avoid;
 }

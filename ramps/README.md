@@ -1,5 +1,3 @@
-https://bovlb.github.io/frc-tips/ramps/
-
 # Ramps
 
 This document describes ways to stop your robot from falling over in teleoperated driving.
@@ -50,10 +48,10 @@ In `ArcadeDrive.execute`, simply replace `forward` with `m_filter.calculate(forw
 forward = m_filter.calculate(forward);
 ```
 
-Note that we're only applying the ramp to the forwards/backwards axis and not the turn.  
+Note that we're only applying the ramp to the forwards/backwards axis and not the turn.
 Rapid turns alone are not usually enough to tip the robot.  If you find that the robot turns too rapidly, remember that it's common practice to limit the maximum permissible rate of turn.  This can be done simply by multiplying the turn value from the joystick by a constant like `0.5`.
 
-If you do decide to apply ramping to the turn control, you will need to create a second `SlewRateLimiter`; 
+If you do decide to apply ramping to the turn control, you will need to create a second `SlewRateLimiter`;
 the filter has internal state, so don't try to use one filter for two data streams.
 
 ## References

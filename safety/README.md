@@ -1,15 +1,13 @@
-https://bovlb.github.io/frc-tips/safety/
-
 # Suggestions for FRC Safety Captains
 In 2020 I was a Safety Manager at a regional.  I participated in pit inspections, interviews, and judging for the safety award.  Here are some suggestions I have for any Safety Captain. These are particularly intended to be a good starting point for someone suddenly appointed as Safety Captain a few weeks before competition who doesn't know how to start.
 
-A team’s safety does not come from one person alone.  There are things the safety captain can do individually, but real success will come from having a team culture of safety, where people know what they have to do to be safe, and feel comfortable reminding each other.  
+A team’s safety does not come from one person alone.  There are things the safety captain can do individually, but real success will come from having a team culture of safety, where people know what they have to do to be safe, and feel comfortable reminding each other.
 
 Your team should be appointing a Safety Captain before Kickoff; see if you can make that happen next year.  Does your team's website have a safety page?
 
 ## Binder
-You should have a clearly-labelled and well-organised safety binder in the pit.  This should contain: 
-* Relevant **FIRST manuals**, esepcially the Safety Manual and Event Rules.  You may be the only person on the team to read these, so make sure you pass along any relevant information.  Be prepared to demonstrate familiarity with these materials. 
+You should have a clearly-labelled and well-organised safety binder in the pit.  This should contain:
+* Relevant **FIRST manuals**, esepcially the Safety Manual and Event Rules.  You may be the only person on the team to read these, so make sure you pass along any relevant information.  Be prepared to demonstrate familiarity with these materials.
 * **Data sheets** for hazardous chemicals (e.g. glue, lubricant, basically any bottles, tubes, or spray cans in the pit).  It’s fairly easy to find these online and print them out. Manuals for tools you brought to the event.  Again, almost every manual can be found online.  Search on [msds.com](https://www.msds.com/).
 * **Team safety manuals** or training materials.  Basic first aid information. How to operate a fire extinguisher (PASS=Pull, aim, squeeze, sweep).  Safety guidelines for outreach events.
 * **Pit safety checklist** List of equipment you should have.  List of things you should remember to do or not do.
@@ -40,7 +38,7 @@ If someone comes to your pit and asks a random team member where the Safety Capt
 ## Special event activities
 
 A lot of teams have special things they do to demonstrate their commitment to safety.  Some examples:
-* Putting up safety posters in other team’s pits and handing out safety flyers.  This should be done with caution.  If another team wants to put posters and flyers in your pit, then by all means accept these as it shows good safety spirit.  Don't do this yourself unless you are truly going to do a good job of it, as it easily becomes just more trash (with your team's name on it).   
+* Putting up safety posters in other team’s pits and handing out safety flyers.  This should be done with caution.  If another team wants to put posters and flyers in your pit, then by all means accept these as it shows good safety spirit.  Don't do this yourself unless you are truly going to do a good job of it, as it easily becomes just more trash (with your team's name on it).
 * Videos, websites, apps.  This is a lot of work but it does impress judges.  If you have a monitor in your pit, you can use it to show safety videos, including [ones you didn't make](https://www.firstinspires.org/robotics/frc/safety).
 * [Safety mascots](./Spyder_mascot.png)
 * Handing out first aid kits or other safety equipment with your team's logo on them.

@@ -1,5 +1,3 @@
-https://bovlb.github.io/frc-tips/can-bus/
-
 # CAN bus
 
 ## What is your CAN bus utilization?
@@ -23,6 +21,7 @@ https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basic
 * Check that the PDP is last in chain and has termination set
 * Ensure the green and yellow cables are twisted together everywhere
 * Use [Phoenix Tuner](https://store.ctr-electronics.com/software/) and [Rev Hardware Client](https://docs.revrobotics.com/rev-hardware-client/) to check device visibility
+* Turn the robot off, disconnect both ends, and test each wire for continuity using a multimeter.
 
 ## Adjusting frame rates
 
@@ -36,11 +35,11 @@ Motor controllers will typically have multiple types of status frame that can be
 
 The motor safety watchdog is an important case.  It is recommended that you do not set such frames over 45ms.  This means that you can drop the occasional frame without triggering it.
 
-If a motor is under power/voltage control, or is using firmware PID control with no follower, then status frames can be less frequent.  
+If a motor is under power/voltage control, or is using firmware PID control with no follower, then status frames can be less frequent.
 
-### REV Spark MAX 
+### REV Spark MAX
 
-The Spark MAX has five different types of periodic status frame, but I believe a typical FRC setup will only use the first three.  
+The Spark MAX has five different types of periodic status frame, but I believe a typical FRC setup will only use the first three.
 * Type 0 is "Applied ... Output" and faults.  Default 10ms.  I believe this is the one used for the watchdog, so it should not be more than 45ms.  I could be wrong, but I think is also what the follower relies on from the leader.
 * Type 1 is velocity, temperature, voltage, and current.  Default 20ms.
 * Type 2 is position.  Default 20ms.
@@ -48,11 +47,11 @@ The Spark MAX has five different types of periodic status frame, but I believe a
 E.g.
 ```java
 // Maximum reasonable values
-leader.setPeriodicFrameRate(PeriodicFrame.kStatus0, 20); 
-leader.setPeriodicFrameRate(PeriodicFrame.kStatus1, 50); 
-leader.setPeriodicFrameRate(PeriodicFrame.kStatus2, 50); 
-follower.setPeriodicFrameRate(PeriodicFrame.kStatus0, 45); 
-follower.setPeriodicFrameRate(PeriodicFrame.kStatus1, 500); 
+leader.setPeriodicFrameRate(PeriodicFrame.kStatus0, 20);
+leader.setPeriodicFrameRate(PeriodicFrame.kStatus1, 50);
+leader.setPeriodicFrameRate(PeriodicFrame.kStatus2, 50);
+follower.setPeriodicFrameRate(PeriodicFrame.kStatus0, 45);
+follower.setPeriodicFrameRate(PeriodicFrame.kStatus1, 500);
 follower.setPeriodicFrameRate(PeriodicFrame.kStatus2, 500);
 ```
 
