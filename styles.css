@@ -445,8 +445,9 @@ FIGCAPTION {
     margin-right: 1em;
 }
 
-IMG {
+IMG, H2, H3 {
     page-break-after: avoid;
+    break-after: avoid;
 }
 
 FIGURE {
