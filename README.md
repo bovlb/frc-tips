@@ -9,7 +9,7 @@ This project is a small collection of tips I've gathered to save redoing the sam
 * [Coast mode](coast-mode/): How do I make my robot stop, stay stopped, and yet be easy to move?
 * [Burnout](burnout/): How do you stop your motors from burning out?
 * [Safety Captain](safety/): Help!  I just got appointed Safety Captain.  What do I do now?
-* [Commands](commands/): Short guide to WPILIB commands, including [lambda functions](commands/lambda.md)
+* [Commands](commands/): Short guide to WPILIB commands, including [lambda functions](commands/lambda.md), and [CommandScheduler](commands/commandscheduler.md)
 * [Links](links/): What are some useful resources for FRC?
 
 I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.

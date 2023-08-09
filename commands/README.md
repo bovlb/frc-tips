@@ -1,8 +1,8 @@
 # Commands
 
-Although you can avoid it in some system cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
+Although you can avoid it in some simple cases, doing anything complex with your FRC robot will involve creating commands.  These respond to joysticks and buttons, run your autoonomous routines, and do other maintenance tasks.
 
-In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the scheduler (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
+In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the [command scheduler](commandscheduler.md) (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
 
 <figure style="float: right; width: 50%;"><img style="width: 100%" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
 <figcaption>The scheduler calls the four lifecycle methods of a command.  This starts with <tt>initialize</tt> when the command is first scheduled, then <tt>execute</tt> and <tt>isFinished</tt> are called in alternation.  Finally <tt>end</tt> is called either when <tt>isFinished</tt> returns trure, or when the command is interrupted.</figcaption>
@@ -46,7 +46,7 @@ These might seem a little complex and daunting, but the good news is that if you
 
 <figure  style="float: right; width: 50%;" >
 <img style="width: 100%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
-<figcaption><tt>SequentialCommandGroup</tt> runs each command in turn until the last finishs.  <tt>ParallelCommandGroup</tt> runs the commands in parallel, until they all finish.  <tt>ParallelRaceGroup</tt> runs until the fastest command finishes.  <tt>ParallelDeadlineGroup</tt> runs until the first command finishes.</figcaption>
+<figcaption><tt>SequentialCommandGroup</tt> runs each command in turn until the last finishes.  <tt>ParallelCommandGroup</tt> runs the commands in parallel, until they all finish.  <tt>ParallelRaceGroup</tt> runs until the fastest command finishes.  <tt>ParallelDeadlineGroup</tt> runs until the first command finishes.</figcaption>
 </figure>
 
 These classes group togather one or more commands and execute them all in some order.  They inherit the subsystem requirements of all of their sub-commands.  The sub-commands can be specified either in the constructor, or by subclassing and using `addCommands`.
@@ -76,7 +76,7 @@ The following commands are useful to build command groups.  Some of them take co
 
 * `ConditionalCommand`: Given a condition (evaluated in `initialize`), runs one of two sub-commands.  See also the decorator `unless`.
 * `SelectCommand`: Takes a mapping from keys to commands, and a key selector.  At `initialize`, the key selector is executed and then one of the sub-commands is run.
-* `ProxyCommand`: This behaves exactly like the underlying command except that subsystem requirements are not inherited.  See also the decorator `asProxy`.
+* `ProxyCommand`: This behaves exactly like the underlying command except that subsystem requirements are not shared between the child and parent commands.  See also the decorator `asProxy`.  **Warning**: `ProxyCommand` works by scheduling the command independently and waiting for it to complete.  A consequence of this is that any scheduled commands with overlapping requirements will be interrupted.  If this includes the command group that is using `ProxyCommand`, then the proxy command will also be canceled.
 * `RepeatCommand`: Run the sub-command until it is finished, and then start it running again.  See also the decorator `repeatedly`.
 * `WaitCommand`: Insert a delay for a specific time.
 * `WaitUntilCommand`: Insert a delay until some condition is met.
@@ -139,7 +139,7 @@ new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
 
 <figure style="float: right; width: 50%;">
 <img  style="width: 100%" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
-<figcaption><tt>onTrue</tt> starts when a button is pressed and usually ends on its own.  <tt>whileTrue</tt> wtarts when the button is pressed and runs until it is released.  <tt>toggleOnTrue</tt> turns on or off in alternation every time the button is pressed.  <tt>onFalse</tt>, <tt>whileFalse</tt>, and <tt>toggleOnFalse</tt> do the same, but when the button is released.</figcaption>
+<figcaption><tt>onTrue</tt> starts when a button is pressed and usually ends on its own.  <tt>whileTrue</tt> starts when the button is pressed and runs until it is released.  <tt>toggleOnTrue</tt> turns on or off in alternation every time the button is pressed.  <tt>onFalse</tt>, <tt>whileFalse</tt>, and <tt>toggleOnFalse</tt> do the same, but when the button is released.</figcaption>
 </figure>
 
 Some trigger methods should be passed a command to run:
