@@ -14,7 +14,7 @@ There are four main ways to fix a high CAN utilization.  At a competition, they 
 
 ## Check your wiring
 
-https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basics.html
+See [CAN wiring basics](https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/can-wiring-basics.html)
 
 * Do the wiggle check
 * Check for bare metal or whiskers
