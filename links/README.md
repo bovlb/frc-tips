@@ -3,7 +3,7 @@
 ## FIRST
 
 * [Season Materials](https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system)
-* [Charged Up Game Manual](https://firstfrc.blob.core.windows.net/frc2023/Manual/2023FRCGameManual.pdf)
+* [Crescendo Game Manual](https://firstfrc.blob.core.windows.net/frc2024/Manual/2024GameManual.pdf)
 * [Discussion Fora](https://forums.firstinspires.org/forum/general-discussions/first-programs/first-robotics-competition)
 * [YouTube playlists](https://www.youtube.com/@FIRSTRoboticsCompetition/playlists)
 * [Portal for Incident Reporting](https://www.pavesuite.com/FIRST/PublicPortal/HomePage)
@@ -24,7 +24,7 @@ For Victor, Talon (including Falcon 500), Pigeon IMU, CAN Coder
 
 * [Java docs](https://api.ctr-electronics.com/phoenix/release/java/)
 * [C++ docs](https://api.ctr-electronics.com/phoenix/release/cpp/)
-* [2023 Phoenix Vendor Library JSON](https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix5-frc2023-latest.json)
+* Vendor Library JSON: [2023 Phoenix5](https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix5-frc2023-latest.json), [2024 Phoenix 5 beta](https://maven.ctr-electronics.com/release/com/ctre/phoenix/Phoenix5-frc2024-beta-latest.json), [2024 Phoenix 6 beta](https://maven.ctr-electronics.com/release/com/ctre/phoenix6/latest/Phoenix6-frc2024-beta-latest.json)
 * [Software & Downloads](https://store.ctr-electronics.com/software/): Including Phoenix Tuner and Firmware download
 
 ## REV Robotics
@@ -35,7 +35,7 @@ For Spark MAX
 * [C++ docs](https://docs.revrobotics.com/sparkmax/software-resources/spark-max-api-information#c-api)
 * [REV Hardware Client](https://docs.revrobotics.com/rev-hardware-client/)
 * [REV Software Resources](https://www.revrobotics.com/software/)
-* [2023 REVLib Vendor Library JSON](https://software-metadata.revrobotics.com/REVLib-2023.json)
+* Vendor Library JSON: [2023 REVLib](https://software-metadata.revrobotics.com/REVLib-2023.json), [2024 REVLib](https://software-metadata.revrobotics.com/REVLib-2024.json)
 
 ## Other
 
