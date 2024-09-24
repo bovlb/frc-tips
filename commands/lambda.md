@@ -78,3 +78,26 @@ It can also be passed to many trigger methods (along with a required subsystem).
 // This expression can be used as a Runnable
 () -> { /* do stuff here */ }
 ```
+
+## Consumers
+
+A `Consumer` is similar to a supplier but in reverse.
+With a `Supplier`, the receiver gets to decide when and how often it is called.
+With a `Consumer`, the sender makes those decisions. Instead of having a `get` or `getAs<TYPE>` method, a `Consumer` has an `accept` method.
+
+`Consumer`s are not much used in FRC programmer, but they might be useful in a case where it's important that each value be processed exactly once.
+An example of this might be camera frames, or information derived from that such as robot location, or game piece location.
+
+```java
+public record VisionMeasurement(Pose2d pose, double timestamp, Matrix<N3,​N1> stddevs) {}
+
+public final Consumer<VisionMeasurement> visionMeasurementConsumer = (vm) -> { 
+    m_poseEstimator.addVisionMeasurement(vm.pose(), vm.timestamp(), vm.stddevs()); 
+};
+```
+
+## Callables
+
+A `Callable` is very like `Runnable`, except that it has a `call()` method that returns a value of some type.
+(There is also a technical difference in exception handling.)
+These are not much used in FRC programming.

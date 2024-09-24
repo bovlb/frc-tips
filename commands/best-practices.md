@@ -63,7 +63,7 @@ public Command startShooting() {
 }
 ```
 
-{% include tip.html content="If you don't understand why we're using `() -> {` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html)." %}
+{% include tip.html content="If you don't understand why we're using `() -> { ... }` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html)." %}
 
 If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
 This supplier should be providing outside information, not implementation specifics.
@@ -76,13 +76,16 @@ should not receive a specific pivot angle, but instead should be given a distanc
 ```java
 public Command setAiming(DoubleSupplier distance) {
     return new setAngle(() -> {
-        double distance = distance.getAsDouble();  // distance to speaker in metres
+        // distance to speaker in metres
+        double distance = distance.getAsDouble();  
         // m_angles is an InterpolatingDoubleTreeMap
         double angle = m_angles.get(distance);
         return angle;
     }).withName("Aiming");
 }
 ```
+
+{% include tip.html content="In the code above, we're using `() -> { ... return angle; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html)." %}
 
 Internally, commands can be created in a number of ways, but the `Commands` class provides useful methods like `run` and `runOnce`.  Use `run` for commands that need to keep running continuously, either because they don't do exactly the same thing on each iterations, or becase they need to block out a default command.  (Triggers provide some useful alternatives to default commands.)  Use `runOnce` for a command that runs and then immediately ends; this is useful for changing a setpoint or setting a mode.
 
@@ -241,8 +244,6 @@ m_drive.setDefaultCommand(
     ));
 ```
 
-{% include tip.html content="In the code above, we're using `() -> { ... return x; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html)." %}
-
 Avoid having complex default commands that make elaborate decisions.
 Instead put that complexity into triggers and bind the appropriate commands.
 
@@ -282,7 +283,7 @@ A good example of an exception is pose estimation.  Commonly we will have some s
 This doesn't really fit in with the best practices outlined above.
 My current recommendation is to put the `PoseEstimator` inside the drive subsystem, and then expose two public fields:
 * A `pose` supplier that yields a `Pode2d`.  This can be injected where required.
-* A `visionMeasurement` consumer that accepts a `record`.  This can be injected into the vision systems.
+* A `visionMeasurement` consumer that accepts a `record`.  This can be injected into the vision systems.  See [Consumers](lambda.html#consumers).
 
 ## Performance
 
