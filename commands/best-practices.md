@@ -49,10 +49,6 @@ This allows you to use `setName` to give each one an appropriate label for debug
 
 Ideally these commands should express their purpose in terms of the problem domain (e.g. startShooting, intakeGamepiece), not how they are implemented.
 
-If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`.
-This supplier should be providing outside information, not implementation specifics.
-For example, an aiming system should not receive a specific pivot angle, but instead should be given a distance to target.
-
 ```java
 // Shared internal implementation
 private Command setState(ShooterMode mode) {
@@ -64,6 +60,27 @@ private Command setState(ShooterMode mode) {
 // Public command factory
 public Command startShooting() {
     return setState(ShooterMode.SHOOTING).withName("Start Shooting");
+}
+```
+
+{% include tip.html content="If you don't understand why we're using `() -> {` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html)." %}
+
+If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
+This supplier should be providing outside information, not implementation specifics.
+We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
+We prefer to pass a `Supplier` rather than injecting a `Subsystem` because we don't want to tie the implementations together; we should assume the minimum possible about where the information comes from.
+
+For example, an aiming system neets to pivot the shooter to a specific angle in order to launch a game piece into a target.  The correct angle to use is determined empirically as a function of the distance from the target.  In this case, the command
+should not receive a specific pivot angle, but instead should be given a distance to target.  The relationship between distance and angle is an internal implementation detail of the aiming system.  The distance to the target is an appropriate problem-space concept for communication.
+
+```java
+public Command setAiming(DoubleSupplier distance) {
+    return new setAngle(() -> {
+        double distance = distance.getAsDouble();  // distance to speaker in metres
+        // m_angles is an InterpolatingDoubleTreeMap
+        double angle = m_angles.get(distance);
+        return angle;
+    }).withName("Aiming");
 }
 ```
 
@@ -113,6 +130,9 @@ private boolean isReady() {
 public final Trigger isReady = new Trigger(this::isReady)
     .debounce(k_isReadyDelay, Debouncer.DebounceType.kFalling);
 ```
+
+{% include tip.html content="When you see `() -> <boolean expression>`, we're creating a `BooleanSupplier` using a [Lambda function](lambda.html)." %}
+
 
 Apart from the `Trigger`s, a subsystem should not expose any other information.
 If the subsystem has modes, each mode can be a separate trigger.
@@ -220,6 +240,8 @@ m_drive.setDefaultCommand(
         adjustJoystick(m_gamepad::getRightX, true)  // rot
     ));
 ```
+
+{% include tip.html content="In the code above, we're using `() -> { ... return x; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html)." %}
 
 Avoid having complex default commands that make elaborate decisions.
 Instead put that complexity into triggers and bind the appropriate commands.

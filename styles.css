@@ -130,6 +130,13 @@ body {
     /* font-family: Gerogia, Bookman, "Times New Roman", Times, serif; */
 }
 
+.alert-success {
+    background-color: #303000;
+    border: thin solid #d6e9c6;
+    /* color: #3c763d; */
+    padding: 15px;
+}
+
 /* General & 'Reset' Stuff */
 .container {
     width: 90%;
