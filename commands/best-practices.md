@@ -40,11 +40,10 @@ These commands should do small, well-defined tasks like changing a setpoint or s
 Think of them as basic building blocks to be plugged together.
 The implementation of these commands is entirely within the subsystem module, so they have access to all of the subsystem internals.
 
-These commands should share implementation whenever possible.
-
 Take care in choosing which commands to implement and what to name them.
 Remember that the core idea here is to isolate client code from knowing anything about subsystem implementation, including any specific values for position or speed.
 If a subsystem has a number of positions, modes, or speeds then you will want to create a separate command for each one.
+Internally, you may want to use `enum` to name and configure the different setpoints.
 This allows you to use `setName` to give each one an appropriate label for debugging.  
 
 Ideally these commands should express their purpose in terms of the problem domain (e.g. startShooting, intakeGamepiece), not how they are implemented.
@@ -65,13 +64,33 @@ public Command startShooting() {
 
 {% include tip.html content="If you don't understand why we're using `() -> { ... }` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html#runnables)." %}
 
+These commands should share implementation whenever possible.
+In this way, all the commands that control a setpoint can also run the control loop.
+
+```java
+// Internal command factory used by all the public command factories
+private Command setAngle(DoubleSupplier angle) {
+    return Commands.run(() -> {
+        m_setpoint = angle.getAsDouble();
+        // Use m_setpoint to control the pivot angle here
+        m_feedback = m_feedbackController.calculate(m_position, m_setpoint);
+        m_feedforward = m_feedforwardController.calculate(m_position, m_setpoint);
+        m_power = MathUtil.clamp(feedforward + feedback, -1.0, 1.0);
+        m_motor.setPower(m_power);
+    }, this);
+}
+```
+
 If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
 This supplier should be providing outside information, not implementation specifics.
 We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
 We prefer to pass a `Supplier` rather than injecting a `Subsystem` because we don't want to tie the implementations together; we should assume the minimum possible about where the information comes from.
 
-For example, an aiming system neets to pivot the shooter to a specific angle in order to launch a game piece into a target.  The correct angle to use is determined empirically as a function of the distance from the target.  In this case, the command
-should not receive a specific pivot angle, but instead should be given a distance to target.  The relationship between distance and angle is an internal implementation detail of the aiming system.  The distance to the target is an appropriate problem-space concept for communication.
+For example, an aiming system needs to pivot the shooter to a specific angle in order to launch a game piece into a target.
+The correct angle to use is determined empirically as a function of the distance from the target.
+In this case, the command should not receive a specific pivot angle, but instead should be given a distance to target.
+The relationship between distance and angle is an internal implementation detail of the aiming system.
+The distance to the target is an appropriate problem-space concept for communication.
 
 ```java
 public Command setAiming(DoubleSupplier distance) {
