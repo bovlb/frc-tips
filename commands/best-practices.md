@@ -81,7 +81,7 @@ private Command setAngle(DoubleSupplier angle) {
 }
 ```
 
-If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
+If a command needs configuration or other information from elsewhere, then either the factory or the Subsystem constructor should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
 This supplier should be providing outside information, not implementation specifics.
 We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
 We prefer to pass a `Supplier` rather than injecting a `Subsystem` because we don't want to tie the implementations together; we should assume the minimum possible about where the information comes from.
