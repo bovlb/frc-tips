@@ -16,6 +16,16 @@
 - title: Commands
   description: Short guide to WPILIB commands
   url: commands/
+  children:
+  - title: Command Scheduler
+    description: How to use the command scheduler
+    url: commandscheduler.html
+  - title: Lambda Functions
+    description: How to use lambda functions
+    url: lambda.html
+  - title: Best Practices
+    description: Best practices for using commands
+    url: best-practices.html
 - title: Links
   description: Various useful web pages
   url: links/

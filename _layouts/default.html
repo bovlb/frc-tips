@@ -13,37 +13,49 @@
   </head>
 
   <body>
-    <header class="print-only">
-      <img style="float: right; width: 25%;" src="{{ base }}/qr/qr-{{page.url | slugify}}.png" />
-      This page is part of BoVLB's FRC Tips.
-      Find this page online at https://bovlb.github.io/frc-tips{{page.url}}
-    </header>
-
-    <header class="no-print">
-      <div class="container">
+  <header class="no-print">
+      <div class="container" id="banner">
+        <section id="title">
         <a id="a-title" href="{{ '/' | relative_url }}">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
         </a>
+      </section>
+      <section id="tagline">
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-
+      </section>
+        <section id="search">
+          {% include search.html %}
+        </section>
         <section id="downloads">
           {% if site.show_downloads %}
             <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
             <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
           {% endif %}
         </section>
-        {% include nav.html %}
       </div>
     </header>
 
     <div class="container">
+      <section id="toc" class="side-nav no-print">
+        <h3>On This Page</h3>
+        {% include toc.html html=content class=toc id=toc h_min=2 %}
+      </section>
       <section id="main_content">
-        {% include anchor_headings.html html=content anchorBody="🔗" h_min=2 beforeHeading=false anchorClass="jumplink" %}
+        <section class="print-only">
+          <img style="float: right; width: 25%;" src="{{ base }}/qr/qr-{{page.url | slugify}}.png" />
+          This page is part of BoVLB's FRC Tips.
+          Find this page online at https://bovlb.github.io/frc-tips{{page.url}}
+        </section>
+            {% include anchor_headings.html html=content anchorBody="🔗" h_min=2 beforeHeading=false anchorClass="jumplink" %}
+      </section>
+      <section id="sitemap" class="side-nav no-print nav">
+        {% include nav.html %}
       </section>
     </div>
     <footer class="no-print">
         <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
       </footer>
+  
   </body>
 </html>
 <!--

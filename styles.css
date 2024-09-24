@@ -119,20 +119,24 @@
 body {
     margin: 0;
     padding: 0;
-    background: #151515 url("../images/bkg.png") 0 0;
+    /* background: #151515 url("../images/bkg.png") 0 0; */
+    background: #151515 ;
     @media screen {
         color: #eaeaea;
     }
     font-size: 16px;
     line-height: 1.5;
     font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+    /* font-family: Gerogia, Bookman, "Times New Roman", Times, serif; */
 }
 
 /* General & 'Reset' Stuff */
 .container {
     width: 90%;
-    max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    border: 1em;
 }
 
 section {
@@ -183,10 +187,10 @@ header h1 {
     }
 }
 
-header h1:before {
+/* header h1:before {
     content: "./ ";
     font-size: 24px;
-}
+} */
 
 header h2 {
     font-size: 18px;
@@ -198,6 +202,13 @@ header h2 {
     display: inline-block;
     text-align: center;
     margin: 0;
+}
+
+#banner { 
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    vertical-align: middle;
 }
 
 /* Main Content
@@ -230,6 +241,9 @@ h6 {
     }
 }
 
+#main-content {
+    max-width: 1000px;
+}
 #main_content h1 {
     font-size: 30px;
 }
@@ -265,7 +279,7 @@ dt {
 }
 
 ul li {
-    list-style-image: url("../images/bullet.png");
+    /* list-style-image: url("../images/bullet.png"); */
 }
 
 blockquote {
@@ -352,7 +366,7 @@ hr {
 
 .btn-github .icon {
     opacity: 0.6;
-    background: url("../images/blacktocat.png") 0 0 no-repeat;
+    /* background: url("../images/blacktocat.png") 0 0 no-repeat; */
 }
 
 /* Links a, a:hover, a:visited
@@ -386,24 +400,24 @@ a {
 
 
 
-nav ul {
-    list-style: none;
-    display: inline-flex;
-    width: 100%;
+.nav ul {
+    list-style: ">";
+    /* display: inline-flex; */
+    /* width: 100%; */
 }
 
-nav ul li {
-    display: block;
-    text-align: center;
-    padding: 16pt;
+.nav ul li {
+    /* display: block; */
+    /* text-align: center; */
+    /* padding: 16pt; */
 }
 
-nav ul li a {
+.nav ul li a {
     color: white;
     text-decoration: none;
 }
 
-nav ul li a.current {
+.nav ul li a.current {
     color: #b5e853;
 }
 
@@ -458,4 +472,29 @@ pre {
     white-space: pre-wrap;
     break-inside: avoid;
     border: thin solid #666666;
+}
+
+.side-nav {
+    position: sticky;
+    left: 0; 
+    top: 0;
+    width: 200px;
+    height: 100%;
+    overflow:auto;
+    padding-right: 3em;
+}
+
+.side-nav A { 
+    color: white;
+    text-decoration: none;
+}
+
+.side-nav UL { 
+    margin-left: 0; 
+    padding-left: 2em; 
+    list-style-type: "> "; 
+}
+
+.side-nav LI {
+    padding-bottom: 0.5em;
 }

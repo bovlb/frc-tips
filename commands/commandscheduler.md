@@ -31,6 +31,6 @@ There are a number of ways to invoke the `CommandScheduler`:
 ## See also
 * https://docs.wpilib.org/en/stable/docs/software/commandbased/command-scheduler.html
 
-<figure style="width: 100%;"><img style="width: 100%" src="commandscheduler.png" alt="Workflow of CommandScheduler" />
+<figure style="width: 50%;"><a href="commandscheduler.png"><img style="width: 100%" src="commandscheduler.png" alt="Workflow of CommandScheduler" /></a>
 <figcaption>This shows the workflow of the CommandScheduler in Java.  The C++ implemention has almost identical behaviour.  This diagram dooes not show command event methods</figcaption>
 </figure>

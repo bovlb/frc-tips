@@ -1,17 +1,24 @@
-
-<nav class="no-print">
+<!-- <nav class="no-print"> -->
+    <h3> Site Map</h3>
     <ul>
         {% for entry in site.data.nav %}
         <li><a 
             {% if page.url contains entry.url %}class="current"{% endif %}
             href="{{ entry.url | relative_url }}"
-            title="{{ entry.description }}">{{ entry.title }}</a></li>
+            title="{{ entry.description }}">{{ entry.title }}</a>
+            {% if entry.children %}
+            <ul>
+                {% for child in entry.children %}
+                <li><a 
+                    {% if page.url contains child.url %}class="current"{% endif %}
+                    page_url="{{ page.url }}" child_url="{{ child.url }}"
+                    href="{{ entry.url | relative_url }}{{ child.url }}"
+                    title="{{ child.description }}">{{ child.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
         {% endfor %}
     </ul>
     <!-- https://stackoverflow.com/a/42926071 -->
-    <form action="https://www.google.com/search" class="searchform" method="get" name="searchform" target="_blank">
-        <input name="sitesearch" type="hidden" value="bovlb.github.io">
-        <input autocomplete="on" class="form-control search" name="q" placeholder="Search in BoVLB's FRC Tips" required="required"  type="text">
-        <button class="button" type="submit">Search</button>
-    </form>
-</nav>
+<!-- </nav> -->

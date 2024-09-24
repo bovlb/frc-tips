@@ -30,7 +30,8 @@ There are some specific types of anonymous function that have special uses: supp
 
 ## Suppliers
 
-A supplier is a class that supplies values of some specific type when you call the appropriate `getAsX` method.  It can be created from an anonymous function that takes no argument and returns a value of that type.
+A supplier is a class that supplies values of some specific type when you call the appropriate `getAsX` or `get` method.
+It can be created from an anonymous function that takes no argument and returns a value of that type.
 
 ```java
 () -> subsystem.getLimitSwitch() // BooleanSupplier
@@ -60,8 +61,20 @@ class ArcadeDrive extends Command {
 }
 ```
 
+Unboxed types like `boolean` and `double` have special supplier types like`BooleanSupplier` and `DoubleSupplier` with methods like `getAsBoolean()` and `getAsDouble()`.
+Boxed types are treated differently:
+For example, a supplier for `Pose2d` objects would be `Supplier<Pose2d>`, and the accessor is simply `get()`.
+
 Suppliers are a good way to isolate dependencies.  In the code above, `speed` and `turn` probably come from a joystick, but this code doesn't need to know anything about joysticks.  This means that you can change to a different type of joystick or even bring in semi-autonomous "driver assist".
 
 ## Runnables
 
-A `Runnable` is a class that has a `void run()` method.  It can be created from an anonymous function that takes no arguments (and any return value is ignored).  In WPILIB, it can be used to create commands on-the-fly using `InstantCommand`, `RunCommand`, `StartEndCommand`, or `FunctionalCommand`.  It can also be passed to many trigger methods (along with a required subsystem).
+A `Runnable` is a class that has a `void run()` method.
+It can be created from an anonymous function that takes no arguments (and any return value is ignored).
+In WPILIB, it can be used to create commands on-the-fly using `InstantCommand`, `RunCommand`, `StartEndCommand`, or `FunctionalCommand`.
+It can also be passed to many trigger methods (along with a required subsystem).
+
+```java
+// This expression can be used as a Runnable
+() -> { /* do stuff here */ }
+```
