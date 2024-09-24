@@ -7,7 +7,8 @@ It is sometimes useful to have a function that can be called without an object o
 The most common way to create such anonymous functions is using a lambda expression.  This takes an argument list and a value expression, separated by a `->` arrow.  (Compare with the `lambda` keyword in languages like Python.)
 
 ```java
-// Lambda expression for a function that takes three arguments and calculates their sum
+// Lambda expression for a function that takes three arguments 
+// and calculates their sum
 (x,y,z) -> x + y + z
 ```
 
@@ -18,12 +19,13 @@ It is also possible to turn any method into a function using the `::` method ref
 ```java
 class MySubsystem ... {
     ...
-    boolean getLimitSwitch() { ... }
+    boolean hasGamePiece() { ... }
 }
 
-// Get an anonoymous function reference with the same arguments and return type.
-// Use this as a boolean supplier without having to know about the subsystem.
-subsystem::getLimitSwitch
+// Get an anonoymous function reference with the same arguments 
+// and return type.  Use this as a boolean supplier without 
+// having to know about the subsystem.
+subsystem::hasGamePiece
 ```
 
 There are some specific types of anonymous function that have special uses: suppliers, consumers, runnables, and callables.  These are actually all classes, but the clever part is that Java will automatically convert anonymous functions into instances of those classes if you use them in the right context.  Suppliers and runnables are often encountered with WPILIB, whereas consumers and callables are not.
@@ -34,7 +36,7 @@ A supplier is a class that supplies values of some specific type when you call t
 It can be created from an anonymous function that takes no argument and returns a value of that type.
 
 ```java
-() -> subsystem.getLimitSwitch() // BooleanSupplier
+() -> subsystem.hasGamePiece() // BooleanSupplier
 () -> joystick.getX() // DoubleSupplier
 () -> joystick.getX() > 0.0 // BooleanSupplier
 ```
@@ -46,7 +48,8 @@ class ArcadeDrive extends Command {
     DoubleSupplier m_turn;
     DriveSubsystem m_subsystem;
 
-    ArcadeDrive(DriveSubsystem subsystem, DoubleSupplier speed, DoubleSupplier turn) {
+    ArcadeDrive(DriveSubsystem subsystem, 
+        DoubleSupplier speed, DoubleSupplier turn) {
         m_speed = speed;
         m_turn = turn;
         m_subsystem = subsystem;
@@ -90,11 +93,13 @@ An example of this might be camera frames, or information derived from that such
 
 ```java
 // Define a type to consume
-public record VisionMeasurement(Pose2d pose, double timestamp, Matrix<N3,​N1> stddevs) {}
+public record VisionMeasurement(Pose2d pose, 
+    double timestamp, Matrix<N3,​N1> stddevs) {}
 
 // Expose a consumer that processes the records
 public final Consumer<VisionMeasurement> visionMeasurementConsumer = (vm) -> { 
-    m_poseEstimator.addVisionMeasurement(vm.pose(), vm.timestamp(), vm.stddevs()); 
+    m_poseEstimator.addVisionMeasurement(vm.pose(), 
+        vm.timestamp(), vm.stddevs()); 
 };
 
 // ...

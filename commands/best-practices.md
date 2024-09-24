@@ -53,12 +53,12 @@ Ideally these commands should express their purpose in terms of the problem doma
 private Command setState(ShooterMode mode) {
     return Commands.runOnce(() -> {
         m_mode = mode
-    }, this);
+    }, this).withName(mode.toString());
 }
 
 // Public command factory
 public Command startShooting() {
-    return setState(ShooterMode.SHOOTING).withName("Start Shooting");
+    return setState(ShooterMode.SHOOTING);
 }
 ```
 
@@ -328,10 +328,12 @@ you're alredy doing that with driver buttons, but you need to move the decision 
 
 Separately from the discussion of these best practices, there has been some discussion about moving away from using `Subsystem.periodic` methods.
 There are a number of reasons for this:
-* If you follow these best practices, you'll naturally end up with less for `periodic` to do as decision-making and state maintenance are done using triggers.
+* If you follow these best practices, your decision-making and state maintenance will happen using triggers, so you'll naturally end up with less for `periodic` to do.
 * Having a single `periodic` method per subsystem encourages programmers to throw everything together into a big mess.  If you instead call `addPeriodic` to add periodic tasks when required, then it forces you to think about what the separate tasks are and how often they need to run.  
 * The `periodic` method runs at the start of the iteration.  This is a good time to do pre-command actions like caching per-iteration values and updating odometry.  Unfortunately, this a bad time to do post-command actions like servicing control loops.  This could instead be done in commands, if you can guarantee that there is always one command running.
 * Dashboard updates can be done more elegantly through `initSendable`.
+
+In summary, the `Subsystem.periodic` method is probably a good place to update input caches, maybe to update odometry, and possibly for logging, but other uses should be fading away.
 
 ## References
 
