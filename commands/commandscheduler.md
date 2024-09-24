@@ -10,7 +10,7 @@ There are a number of ways to invoke the `CommandScheduler`:
 * Most commands will not run while the robot is disabled, so will be automatically cancelled.
 
 ## `Trigger` methods
-* When you set up a `Trigger` with a `Command`, then the `CommandScheduler` will automatically test the trigger.  When the trigger activates, it will call `schedule` on the command.
+* After you have bound a `Command` to a `Trigger`, the `CommandScheduler` will then test the trigger automatically every iteration.  When the trigger activates, it will call `schedule` on the command.
 * You're probably already using `Trigger`s in the form of joystick buttons.
 
 ## `Command.schedule()`

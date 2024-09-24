@@ -307,18 +307,12 @@ you're alredy doing that with driver buttons, but you need to move the decision 
 
 ## Subsystem Periodic Methods
 
-This is not an essential part of these best practices, but some people also recommend doing away with the `periodic` method on the subsystem.  Here is a list of some of the things you might have in your `periodic` method, and where else they might live.
-* Decision making and state maintenance: This should all be disappearing with the use of triggers.
-* Caching values to be used in this iteration: This is generally a good idea for perforance and consistency.  Ideally this would be run at the start of the iteration, so it should be in a method that is invoked at the start of `robotPeriodic`.
-* Servicing controllers and updating odometry: This is still a reasonable use of a periodic method, but see below.
-* Logging and dashboard: Most dashboard code can move into `initSendable`.  
-
-Some people like to split subsystem periodic methods into three methods that are called at specific points in the event loop:
-* Read inputs: Any that needs to be done at the start of the iteration.  This is primarily the caching of values referred to above.
-* Run tasks: Do any work that changes things, such as controllers and motors.  Needs to happen near the end.
-* Write outputs: Logging and dashboard.  Should happen last.
-
-See [Team 4237's 2024 Summer Robot](https://github.com/SirLanceABot/2024-Summer-Robot/tree/main) for a well-thought out application of this idea.
+Separately from the discussion of these best practices, there has been some discussion about moving away from using `Subsystem.periodic` methods.
+There are a number of reasons for this:
+* If you follow these best practices, you'll naturally end up with less for `periodic` to do as decision-making and state maintenance are done using triggers.
+* Having a single `periodic` method per subsystem encourages programmers to throw everything together into a big mess.  If you instead call `addPeriodic` to add periodic tasks when required, then it forces you to think about what the separate tasks are and how often they need to run.  
+* The `periodic` method runs at the start of the iteration.  This is a good time to do pre-command actions like caching per-iteration values and updating odometry.  Unfortunately, this a bad time to do post-command actions like servicing control loops.  This could instead be done in commands, if you can guarantee that there is always one command running.
+* Dashboard updates can be done more elegantly through `initSendable`.
 
 ## References
 
