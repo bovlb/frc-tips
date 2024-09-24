@@ -61,7 +61,7 @@ class ArcadeDrive extends Command {
 }
 ```
 
-Unboxed types like `boolean` and `double` have special supplier types like`BooleanSupplier` and `DoubleSupplier` with methods like `getAsBoolean()` and `getAsDouble()`.
+Unboxed types like `boolean` and `double` have special supplier types like `BooleanSupplier` and `DoubleSupplier` with methods like `getAsBoolean()` and `getAsDouble()` to get the value.
 Boxed types are treated differently:
 For example, a supplier for `Pose2d` objects would be `Supplier<Pose2d>`, and the accessor is simply `get()`.
 
@@ -86,14 +86,22 @@ With a `Supplier`, the receiver gets to decide when and how often it is called.
 With a `Consumer`, the sender makes those decisions. Instead of having a `get` or `getAs<TYPE>` method, a `Consumer` has an `accept` method.
 
 `Consumer`s are not much used in FRC programmer, but they might be useful in a case where it's important that each value be processed exactly once.
-An example of this might be camera frames, or information derived from that such as robot location, or game piece location.
+An example of this might be camera frames, or information derived from that such as robot location, or game piece locations.
 
 ```java
+// Define a type to consume
 public record VisionMeasurement(Pose2d pose, double timestamp, Matrix<N3,​N1> stddevs) {}
 
+// Expose a consumer that processes the records
 public final Consumer<VisionMeasurement> visionMeasurementConsumer = (vm) -> { 
     m_poseEstimator.addVisionMeasurement(vm.pose(), vm.timestamp(), vm.stddevs()); 
 };
+
+// ...
+
+// Somewhere else, pass new records to the consumer
+m_visionMeasurementConsumer.accept(
+    new VisionMeasurement(pose, timestamp, stddevs));
 ```
 
 ## Callables

@@ -63,7 +63,7 @@ public Command startShooting() {
 }
 ```
 
-{% include tip.html content="If you don't understand why we're using `() -> { ... }` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html)." %}
+{% include tip.html content="If you don't understand why we're using `() -> { ... }` here as a `Runnable`, you might want to read up on [Lambda functions](lambda.html#runnables)." %}
 
 If a command needs configuration or other information from elsewhere, then the factory should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
 This supplier should be providing outside information, not implementation specifics.
@@ -85,7 +85,7 @@ public Command setAiming(DoubleSupplier distance) {
 }
 ```
 
-{% include tip.html content="In the code above, we're using `() -> { ... return angle; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html)." %}
+{% include tip.html content="In the code above, we're using `() -> { ... return angle; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html#suppliers)." %}
 
 Internally, commands can be created in a number of ways, but the `Commands` class provides useful methods like `run` and `runOnce`.  Use `run` for commands that need to keep running continuously, either because they don't do exactly the same thing on each iterations, or becase they need to block out a default command.  (Triggers provide some useful alternatives to default commands.)  Use `runOnce` for a command that runs and then immediately ends; this is useful for changing a setpoint or setting a mode.
 
@@ -134,7 +134,7 @@ public final Trigger isReady = new Trigger(this::isReady)
     .debounce(k_isReadyDelay, Debouncer.DebounceType.kFalling);
 ```
 
-{% include tip.html content="When you see `() -> <boolean expression>`, we're creating a `BooleanSupplier` using a [Lambda function](lambda.html)." %}
+{% include tip.html content="When you see `() -> <boolean expression>`, we're creating a `BooleanSupplier` using a [Lambda function](lambda.html#supplier)." %}
 
 
 Apart from the `Trigger`s, a subsystem should not expose any other information.
