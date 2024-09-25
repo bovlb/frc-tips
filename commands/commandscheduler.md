@@ -46,19 +46,21 @@ This is a rough outline of how everything gets run.
 `TimedRobot.startCompetition` has an endless loop which polls its time-based priority queue for callbacks that are ready to run.
 `Runnable`s are added to that priority queue using `TimedRobot.addPeriodic`.
 By default, the only thing on that queue is `IterativeRobotBase.loopFunc`.
-You could use `addPeriodic` yourself to add other tasks with a different period, but you could also use `Notifier`s if you're happy dealing with thread-safety.
+
+
 
 `IterativeRobotBase.loopFunc` does:
 1. Calls `<oldMode>Exit` and `<newMode>Init` if the mode is changing
 2. Calls `<mode>Periodic` (e.g. `autoPeriodic` and `telopPeriodic`)
 3. Calls `robotPeriodic`
-4. Does loop overrun reporting
+4. Updates `SmartDashbaord` and `LiveWindow` properties
+5. Does loop overrun reporting
 
 By default, the only thing `robotPeriodic` does is to call `CommandScheduler.run`.
 
 `CommandScheduler.run` does the following:
-1. Runs subsystem periodic methods
-2. Polls its EventLoop
+1. Calls subsystem `periodic` methods
+2. Polls its `EventLoop`
 3. For all scheduled commands, call `execute`, `isFinished` and/or possibly `end`.
 4. Enact pending calls to `schedule` and `cancel`
 5. Schedule default commands
@@ -67,6 +69,11 @@ By default, the only thing `robotPeriodic` does is to call `CommandScheduler.run
 When `EventLoop.poll` is called, it runs every registered Runnable.
 Runnables are registered using `EventLoop.bind`.
 By default, the only way `Runnable`s are added to the `CommandScheduler`'s `EventLoop` is by calling one of the binding methods on a `Trigger`.
+
+{% include note.html content="You can call `Robot.addPeriodic`  to add your own periodic tasks, possibly with a different period.  Don't rely on being able to use periods shorter than the main loop period of 20ms, because it's all running in the same thread.  Periodic methods registered with `addPeriodic` are not subject to overrun reporting, so you may not notice if they're causing performance problems.  
+
+If you are confident about thread-safe programming,
+you could also use [`Notifier`s](https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj/Notifier.html)." %}
 
 ## See also
 * [The Command Scheduler](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-scheduler.html)

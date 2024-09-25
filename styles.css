@@ -137,6 +137,13 @@ body {
     padding: 15px;
 }
 
+.note {
+    background-color: #000040;
+    border: thin solid #404088;
+    /* color: #3c763d; */
+    padding: 15px;
+}
+
 /* General & 'Reset' Stuff */
 .container {
     width: 90%;
