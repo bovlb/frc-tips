@@ -2,9 +2,9 @@
 
 In May 2024, [Oblarg posted an article on Chief Delphi](https://www.chiefdelphi.com/t/command-based-best-practices-for-2025-community-feedback/465602?u=bovlb) that laid down some principles for best practices to follow when doing command-based programming.
 Read the original post for the details, but it can be summarised in three key points:
-* Add command factories to subsystems; allow no other control access 
-* Expose subsystem state as triggers; allow no other read acceess
-* Co-ordinate by binding commands to triggers; allow no other interaction between subsystems
+* Control subsystems using command factories 
+* Get information from subsystems using triggers
+* Co-ordinate between subsystems by binding commands to triggers
 
 The idea is to reduce dependencies between subsystems and gather all cross-subsystem behaviour in one place.
 This makes your code easier to write, easier to maintain, less likely to have bugs, and more reusable.
@@ -82,13 +82,14 @@ private Command setAngle(DoubleSupplier angle) {
 ```
 
 If a command needs configuration or other information from elsewhere, then either the factory or the Subsystem constructor should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
+Pass it to the constructor if it's a universal piece of information; pass it to the command factory if it's a detail of command construction.
 This supplier should be providing outside information, not implementation specifics.
 We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
 We prefer to pass a `Supplier` rather than injecting a `Subsystem` because we don't want to tie the implementations together; we should assume the minimum possible about where the information comes from.
 
 For example, an aiming system needs to pivot the shooter to a specific angle in order to launch a game piece into a target.
 The correct angle to use is determined empirically as a function of the distance from the target.
-In this case, the command should not receive a specific pivot angle, but instead should be given a distance to target.
+In this case, we should not supply a specific pivot angle, but instead a distance to target.
 The relationship between distance and angle is an internal implementation detail of the aiming system.
 The distance to the target is an appropriate problem-space concept for communication.
 
