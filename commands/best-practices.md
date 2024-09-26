@@ -82,8 +82,9 @@ private Command setAngle(DoubleSupplier angle) {
 ```
 
 If a command needs configuration or other information from elsewhere, then either the factory or the Subsystem constructor should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
-Pass it to the constructor if it's a universal piece of information; pass it to the command factory if it's a detail of command construction.
-This supplier should be providing outside information, not implementation specifics.
+Pass it to the constructor if it's a universal piece of information; pass it to the command factory if it's a detail of the specific command being constructed.
+
+This supplier should be providing outside information from the problem space, not implementation specifics.
 We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
 We prefer to pass a `Supplier` rather than injecting a `Subsystem` because we don't want to tie the implementations together; we should assume the minimum possible about where the information comes from.
 
@@ -107,14 +108,21 @@ public Command setAiming(DoubleSupplier distance) {
 
 {% include tip.html content="In the code above, we're using `() -> { ... return angle; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html#suppliers)." %}
 
-Internally, commands can be created in a number of ways, but the `Commands` class provides useful methods like `run` and `runOnce`.  Use `run` for commands that need to keep running continuously, either because they don't do exactly the same thing on each iterations, or becase they need to block out a default command.  (Triggers provide some useful alternatives to default commands.)  Use `runOnce` for a command that runs and then immediately ends; this is useful for changing a setpoint or setting a mode.
+Internally, commands can be created in a number of ways, but the `Commands` class provides useful methods like `run` and `runOnce`.
+Use `run` for commands that need to keep running continually, either because they don't do exactly the same thing on each iteration, or becase they need to block out a default command.
+(Triggers provide some useful alternatives to default commands.)
+Use `runOnce` for a command that runs and then immediately ends; this is useful for changing a setpoint or setting a mode when the command doesn't need to enact it continually.
+
+These building-block commands will generally have a single method (`initialize` or `execute`) and will generally not have either an `end` or an `isFinished` implementation.
+Instead of adding an `isFinished` method, provide a `Trigger` that can be combined using `until`.
+Instead of adding an `end` method, rely on some other command being run, such as a `stop` command, possibly as a default command or using `andThen`, but quite likely because a different `Trigger` has become active.
 
 Outside of the command factories, a subsystem should provide no other way for another class to change its behaviour.
 All motors, controllers, and state must be private.
 It should be impossible to write a command that requires a subsystem other than by using a command factory on that subsystem.
 The flip side of this is that the commands produced by the command factories should require only the subsystem that created them.
 Further, they shouldn't even know about any other subsystem.
-Subsystems constructors and other methods should not accept other subsystems as arguments.
+Subsystems constructors and other methods should never accept other subsystems as arguments.
 
 ## Add triggers
 
@@ -127,13 +135,10 @@ Explain their meaning in terms of the problem domain
 (e.g.
 there's a game piece in a particular place,
 the shooter is ready to shoot,
-the subsystem is in some mode
-)
+the subsystem is in some mode)
 instead of their implementation
-(
-front beam break is broken,
-wheels are at target speed
-).
+(front beam break is broken,
+wheels are at target speed).
 Publish them as Triggers. 
 
 ```java
@@ -154,7 +159,7 @@ public final Trigger isReady = new Trigger(this::isReady)
     .debounce(k_isReadyDelay, Debouncer.DebounceType.kFalling);
 ```
 
-{% include tip.html content="When you see `() -> <boolean expression>`, we're creating a `BooleanSupplier` using a [Lambda function](lambda.html#supplier)." %}
+{% include tip.html content="When you see `() -> <boolean expression>`, we're creating a `BooleanSupplier` using a [Lambda function](lambda.html#supplier).  `this::methodName` is using the [method reference operator](lambda.html#method-reference-operator)" %}
 
 
 Apart from the `Trigger`s, a subsystem should not expose any other information.
@@ -175,7 +180,7 @@ Now that you have a good collection of Triggers, think about how they should be 
 For example, when deciding whether to to shoot, you might think about various things:
 * Is the driver pressing the "shoot" button?  All drive buttons are already `Trigger`s.
 * Is there a game piece in the right location?  This might be determine by beam-break sensors, but the subsystem will package this in a `Trigger`.
-* Is the robot within shooting range of the target?  This may be based on a distance calculation, in turn using the location of the robot (and of the target).
+* Is the robot within shooting range of the target?  This may be based on a distance calculation, which in turn uses the location of the robot (and of the target).
 * Are the shooter wheels ready?  This may be a `Trigger` that compares the setpoint with the current speed.
 * Are we aimed at the target?  This may be a `Trigger` that compares the pivot mechanism's angle to the current setpoint.
 
@@ -307,9 +312,10 @@ My current recommendation is to put the `PoseEstimator` inside the drive subsyst
 
 ## Performance
 
-A potential issue with pervasive use of triggers is that you may end up asking the same question repeatedly.  There are two problems with this:
+A potential issue with pervasive use of triggers is that you may end up asking the same question multiple times per iteration.
+There are two problems with this:
 * The first is that, if answering the question requires hardware access or expensive calculation, then you can end up paying that cost repeatedly.
-* The second is that if you’re setting up multiple triggers on the same condition, then they could get different answers within one iteration and therefore schedule inconsistent commands.
+* The second is that, if you’re using the same underlying trigger for multiple bindings, then they could get different answers within one iteration and therefore schedule inconsistent commands.
 
 The solution to this is to make sure that selected triggers are using a cached value that is calculated once per iteration, perhaps in a periodic method.
 
@@ -323,14 +329,14 @@ Each of three key points can be pursued separately, maybe even one subsystem at 
 * You might start by introducing command factories and try to wean yourself off controlling subsystems directly.
 * You could then start adding triggers (and other suppliers) and use them to decouple subsystems from each other.
 * Strictly speaking, neither command factories not subsystem triggers are required for `RobotContainer` to bind commands to triggers;
-you're alredy doing that with driver buttons, but you need to move the decision complexity out of commands and into additional triggers.
+you're alredy doing that with driver buttons, but you need to move the decision complexity out of commands by breaking them into simpler commands and triggers.
 
 ## Subsystem Periodic Methods
 
 Separately from the discussion of these best practices, there has been some discussion about moving away from using `Subsystem.periodic` methods.
 There are a number of reasons for this:
-* If you follow these best practices, your decision-making and state maintenance will happen using triggers, so you'll naturally end up with less for `periodic` to do.
-* Having a single `periodic` method per subsystem encourages programmers to throw everything together into a big mess.  If you instead call `addPeriodic` to add periodic tasks when required, then it forces you to think about what the separate tasks are and how often they need to run.  
+* If you follow these best practices, your decision-making and will happen using triggers, and your control loops will end up in commands, so you'll naturally end up with less for `periodic` to do.
+* Having a single `periodic` method per subsystem encourages programmers to throw everything together into a big mess.  If you instead call `addPeriodic` to add periodic tasks when required, then it forces you to think about what the separate tasks are and how often they need to run. See [Putting it all together](commandscheduler.html#putting-it-all-together) for more advice about calling `addPeriodic`.
 * The `periodic` method runs at the start of the iteration.  This is a good time to do pre-command actions like caching per-iteration values and updating odometry.  Unfortunately, this a bad time to do post-command actions like servicing control loops.  This could instead be done in commands, if you can guarantee that there is always one command running.
 * Dashboard updates can be done more elegantly through `initSendable`.
 

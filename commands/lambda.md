@@ -14,7 +14,7 @@ They supply information;
 they consume information;
 or they do something.
 
-Strictly speaking, a function used as an argument is a "function reference".
+For a function to be used as an argument, it has to be a "function reference".
 In WPILIB, many methods related to triggers and commands will accept function references.
 There are two ways to create function references: lambda functions (`->`) and the method reference operator (`::`).
 
@@ -58,7 +58,7 @@ Your lambda function can do anything that you can do, but it is packaged up as s
 
 ### Method Reference Operator
 
-It is also possible to turn any method into a function using the `::` method reference operator.
+It is also possible to turn any method into a function reference using the `::` method reference operator.
 
 ```java
 class MySubsystem ... {
@@ -101,7 +101,7 @@ These are all "functional interfaces" which means you can just use a function re
 | `Consumer` | thing consumed, eg. Pose2d | None | `accept`| Accepts inputs of some type
 | `Callable` | None | result of some type | `call` | Also supplies things, but has special uses
 
-Suppliers and runnables are often encountered with WPILIB, whereas consumers and callables are not.
+Suppliers (especially `BooleanSupplier`s) and runnables are often encountered with WPILIB, whereas consumers and callables are not.
 
 ### Suppliers
 
@@ -111,38 +111,51 @@ Suppliers that return objects are not required to return a fresh object every ti
 
 ```java
 () -> subsystem.hasGamePiece() // BooleanSupplier
-() -> joystick.getX() // DoubleSupplier
-() -> joystick.getX() > 0.0 // BooleanSupplier
+() -> joystick.getX()          // DoubleSupplier
+() -> joystick.getX() > 0.0    // BooleanSupplier
 ```
 
 These suppliers can then be used later to fetch the value:
 ```java
 class ArcadeDrive extends Command {
-    DoubleSupplier m_speed;
-    DoubleSupplier m_turn;
-    DriveSubsystem m_subsystem;
+    private DriveSubsystem m_subsystem;
+    // Keep suppliers in instance variables
+    private DoubleSupplier m_speed;
+    private DoubleSupplier m_turn;
 
-    ArcadeDrive(DriveSubsystem subsystem, 
+    public ArcadeDrive(DriveSubsystem subsystem, 
         DoubleSupplier speed, DoubleSupplier turn) {
+        m_subsystem = subsystem;
+        // Store these suppliers for later use
         m_speed = speed;
         m_turn = turn;
-        m_subsystem = subsystem;
+
+        addRequirements(subsystem);
     }
 
     @Override
     void execute() {
+        // Get values from the suppliers
         double drive = m_drive.getAsDouble();
-        double turn = m_drive.getAsDouble();
+        double turn = m_turn.getAsDouble();
         m_subsystem.drive(drive+turn, drive-turn);
     }
 }
+
+...
+
+// In RobotContainer we connect the suppliers to the joystick axes
+m_drive.setDefaultCommand(new ArcadeDrive(m_drive),
+    () -> adjustJoystick(-m_joystick.getY()),
+    () -> adjustJoystick(-m_joystick.getX()));
 ```
+See also the similar but different example at [Default Commands](best-practices.html#default-commands).
 
 Unboxed types (non-objects) like `boolean` and `double` have special supplier types like `BooleanSupplier` and `DoubleSupplier` with methods like `getAsBoolean()` and `getAsDouble()` to get the value.
 Boxed types (objects) are treated differently:
 For example, a supplier for `Pose2d` objects would be `Supplier<Pose2d>`, and the accessor is simply `get()`.
 
-Suppliers are a good way to isolate dependencies.  In the code above, `speed` and `turn` probably come from a joystick, but this code doesn't need to know anything about joysticks.  This means that you can change to a different type of joystick or even bring in semi-autonomous "driver assist".
+Suppliers are a good way to isolate dependencies.  In the code above, `speed` and `turn` come from a joystick, but this code doesn't need to know anything about joysticks.  This means that you can change to a different type of joystick or even bring in semi-autonomous "driver assist".
 
 In WPILIB, `Trigger`s implement the `BooleanSupplier` interface and often accept it.
 
