@@ -345,9 +345,9 @@ In summary, the `Subsystem.periodic` method is probably a good place to update i
 ## References
 
 Examples of following these best practices can be seen in:
-* [Command-based best practices for 2025: community feedback](https://www.chiefdelphi.com/t/command-based-best-practices-for-2025-community-feedback/465602)
-* [Command Based Best Practices example](https://www.chiefdelphi.com/t/command-based-best-practices-example/471176)
-* [Some ideas for our Crescendo shooter](https://gist.github.com/bovlb/23b719e6ee63aad3f7c55d3e5eac417e)
+* [Command-based best practices for 2025: community feedback](https://www.chiefdelphi.com/t/command-based-best-practices-for-2025-community-feedback/465602) — The Chief Delphi thread that started it all.
+* [Command Based Best Practices example](https://www.chiefdelphi.com/t/command-based-best-practices-example/471176) — A Chief Delphi thread where people try to work through some examples of following best practices.
+* [Some ideas for our Crescendo shooter](https://gist.github.com/bovlb/23b719e6ee63aad3f7c55d3e5eac417e) — Many of the examples in this article are based on this code.
 
 TODO: more
 
