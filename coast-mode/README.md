@@ -38,22 +38,26 @@ The exact command required will vary depending on your drivetrain and the motor 
  *
  * @param brake If true, sets brake mode, otherwise sets coast mode
  */
-public void setBrakeMode(boolean brake) {
+public Command setBrakeMode(boolean brake) {
     IdleMode mode = brake ? IdleMode.kBrake : IdleMode.kCoast;
-    m_leftLeader.setIdleMode(mode);
-    m_leftFollower.setIdleMode(mode);
-    m_rightLeader.setIdleMode(mode);
-    m_rightFollower.setIdleMode(mode);
+    return Commands.runOnce(() -> { // Instant command will execute our "initialize" method and finish immediately
+        m_leftLeader.setIdleMode(mode);
+        m_leftFollower.setIdleMode(mode);
+        m_rightLeader.setIdleMode(mode);
+        m_rightFollower.setIdleMode(mode);
+    }).ignoringDisable(true); // This command can run when the robot is disabled
 }
 ```
 #### Talon FX/SRX (including Falcon 500)
 ```java
-public void setBrakeMode(boolean brake) {
+public Command setBrakeMode(boolean brake) {
     NeutralMode mode = brake ? NeutralMode.Brake : NeutralMode.Coast;
-    m_leftLeader.setNeutralMode(mode);
-    m_leftFollower.setNeutralMode(mode);
-    m_rightLeader.setNeutralMode(mode);
-    m_rightFollower.setNeutralMode(mode);
+    return Commands.runOnce(() -> {
+        m_leftLeader.setNeutralMode(mode);
+        m_leftFollower.setNeutralMode(mode);
+        m_rightLeader.setNeutralMode(mode);
+        m_rightFollower.setNeutralMode(mode);
+    }).ignoringDisable(true);
 }
 ```
 
@@ -61,7 +65,7 @@ public void setBrakeMode(boolean brake) {
 
 In `Robot.java`, in both `autonomousInit` and `teleopInit`, add the following line:
 ```java
-m_robotContainer.m_driveSubsystem.setBrakeMode(true); // Enable brake mode
+m_robotContainer.m_driveSubsystem.setBrakeMode(true).schedule(); // Enable brake mode
 ```
 
 You may need to change this code, depending on where your drive subsystem is created and stored.  You may also need to change `RobotContainer.m_driveSubsystem` to be `public`.
@@ -74,13 +78,10 @@ In `Robot.java`, at the end of `robotInit`, add the following code:
 // Turn brake mode off shortly after the robot is disabled
 
 new Trigger(this::isEnabled) // Create a trigger that is active when the robot is enabled
-    .negate() // Negate the trigger, so it is active when the robot is disabled
-    .debounce(3) // Delay action until robot has been disabled for a certain time
-    .onTrue( // Finally take action
-        new InstantCommand( // Instant command will execute our "initialize" method and finish immediately
-            () -> m_robotContainer.m_driveSubsystem.setBrakeMode(false), // Enable coast mode in drive train
-            m_robotContainer.m_driveSubsystem) // command requires subsystem
-            .ignoringDisable(true)); // This command can run when the robot is disabled
+        .negate() // Negate the trigger, so it is active when the robot is disabled
+        .debounce(3) // Delay action until robot has been disabled for a certain time
+        .onTrue( // Finally take action
+                m_robotContainer.m_driveSubsystem.setBrakeMode(false)); // Enable coast mode in drive train
 ```
 
 Notes:
