@@ -208,3 +208,7 @@ It has a `call()` method that returns a value of some type.
 
 `Callable`s are used when expecting a new result each time (like an anonymous factory), when the work involves things that might throw (like file or network input/output), or when passing function references between threads.
 These are not much used in FRC programming.
+
+## See also
+
+* [Functions as Data](https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html)
