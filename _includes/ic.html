@@ -1,0 +1,1 @@
+{% assign rules = include.rules | split: "," %}{% if include.sub %}>* ✅{% else %}> ✅{% endif %} **{{ include.title }}** — {{ include.content }} {% for rule in rules %}{% if forloop.first != true %}, {% endif %}{% include rule.html rule=rule year=include.year %}{% endfor %}{% if include.extra %} & {{ include.extra }}{% endif %} 

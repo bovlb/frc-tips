@@ -1,0 +1,1 @@
+{% assign ruleparts = include.rule | split: "-" %}{% assign rulex = ruleparts[0] %}{% assign subrule = ruleparts[1] %}<span class="rule">[{{ include.rule }}](https://frctools.com/{{ include.year }}/rule/{{ rulex }})</span>

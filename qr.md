@@ -7,36 +7,36 @@
 <figure><img style="width: 100%;" src="qr/qr-commands-best-practices-html.png" /><figcaption>Best Practices for Command-Based Programming</figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-commands-commandscheduler-html.png" /><figcaption>CommandScheduler</figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-commands.png" /><figcaption>Commands</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/qr-commands-lambda-html.png" /><figcaption>Lambda Functions</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/qr-commands-lambda-html.png" /><figcaption>Function References, Lambda Functions, and more</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/qr-inspection-2024-html.png" /><figcaption>The Annotated Inspection Checklist (2024)</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/qr-inspection.png" /><figcaption></figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-links.png" /><figcaption>Some useful FRC links</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-firstinspires-org-resource-library-frc-competition-manual-qa-system.png" /><figcaption>Season Materials</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-firstfrc-blob-core-windows-net-frc2023-manual-2023frcgamemanual-pdf.png" /><figcaption>Charged Up Game Manual</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-forums-firstinspires-org-forum-general-discussions-first-programs-first-robotics-competition.png" /><figcaption>Discussion Fora</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-youtube-com-firstroboticscompetition-playlists.png" /><figcaption>YouTube playlists</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-pavesuite-com-first-publicportal-homepage.png" /><figcaption>Portal for Incident Reporting</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-docs-wpilib-org-en-stable-index-html.png" /><figcaption>FIRST Robotics Competition Control System</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-docs-wpilib-org-en-stable-docs-zero-to-robot-step-2-wpilib-setup-html.png" /><figcaption>WPILib Installation Guide</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-docs-wpilib-org-en-stable-docs-hardware-hardware-basics-status-lights-ref-html.png" /><figcaption>Status Lights</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-github-wpilib-org-allwpilib-docs-release-java-index-html.png" /><figcaption>Java docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-github-wpilib-org-allwpilib-docs-release-cpp-index-html.png" /><figcaption>C++ docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-robotpy-readthedocs-io-projects-wpilib-en-stable-api-html.png" /><figcaption>Python docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-github-com-wpilibsuite-allwpilib.png" /><figcaption>Github</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-api-ctr-electronics-com-phoenix-release-java.png" /><figcaption>Java docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-api-ctr-electronics-com-phoenix-release-cpp.png" /><figcaption>C++ docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-maven-ctr-electronics-com-release-com-ctre-phoenix-phoenix5-frc2023-latest-json.png" /><figcaption>2023 Phoenix Vendor Library JSON</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-store-ctr-electronics-com-software.png" /><figcaption>Software & Downloads</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-codedocs-revrobotics-com-java-com-revrobotics-package-summary-html.png" /><figcaption>Java docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-docs-revrobotics-com-sparkmax-software-resources-spark-max-api-information-c-api.png" /><figcaption>C++ docs</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-docs-revrobotics-com-rev-hardware-client.png" /><figcaption>REV Hardware Client</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-revrobotics-com-software.png" /><figcaption>REV Software Resources</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-software-metadata-revrobotics-com-revlib-2023-json.png" /><figcaption>2023 REVLib Vendor Library JSON</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-chiefdelphi-com.png" /><figcaption>Chief Delphi</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-reddit-com-r-frc.png" /><figcaption>Reddit FRC</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-thebluealliance-com-team-2102.png" /><figcaption>TBA</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-www-team2102-org.png" /><figcaption>website</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-github-com-paradox2102.png" /><figcaption>Github</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/http-programming-team2102-org.png" /><figcaption>programming tutorials</figcaption></figure>
-<figure><img style="width: 100%;" src="qr/https-github-com-paradox2102-pid-demo2.png" /><figcaption>PID demo</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwfirstinspiresorgresource-libraryfrccompetition-manual-qa-system.png" /><figcaption>Season Materials</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsfirstfrcblobcorewindowsnetfrc2024manual2024gamemanualpdf.png" /><figcaption>Crescendo Game Manual</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsforumsfirstinspiresorgforumgeneral-discussionsfirst-programsfirst-robotics-competition.png" /><figcaption>Discussion Fora</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwyoutubecomfirstroboticscompetitionplaylists.png" /><figcaption>YouTube playlists</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwpavesuitecomfirstpublicportalhomepage.png" /><figcaption>Portal for Incident Reporting</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsdocswpiliborgenstableindexhtml.png" /><figcaption>FIRST Robotics Competition Control System</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsdocswpiliborgenstabledocszero-to-robotstep-2wpilib-setuphtml.png" /><figcaption>WPILib Installation Guide</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsdocswpiliborgenstabledocshardwarehardware-basicsstatus-lights-refhtml.png" /><figcaption>Status Lights</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsgithubwpiliborgallwpilibdocsreleasejavaindexhtml.png" /><figcaption>Java docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsgithubwpiliborgallwpilibdocsreleasecppindexhtml.png" /><figcaption>C++ docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsrobotpyreadthedocsioprojectswpilibenstableapihtml.png" /><figcaption>Python docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsgithubcomwpilibsuiteallwpilib.png" /><figcaption>Github</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsapictr-electronicscomphoenixreleasejava.png" /><figcaption>Java docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsapictr-electronicscomphoenixreleasecpp.png" /><figcaption>C++ docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsstorectr-electronicscomsoftware.png" /><figcaption>Software & Downloads</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpscodedocsrevroboticscomjavacomrevroboticspackage-summaryhtml.png" /><figcaption>Java docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsdocsrevroboticscomsparkmaxsoftware-resourcesspark-max-api-informationc-api.png" /><figcaption>C++ docs</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsdocsrevroboticscomrev-hardware-client.png" /><figcaption>REV Hardware Client</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwrevroboticscomsoftware.png" /><figcaption>REV Software Resources</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwchiefdelphicom.png" /><figcaption>Chief Delphi</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwredditcomrfrc.png" /><figcaption>Reddit FRC</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwthebluealliancecomteam2102.png" /><figcaption>TBA</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpswwwteam2102org.png" /><figcaption>website</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsgithubcomparadox2102.png" /><figcaption>Github</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpprogrammingteam2102org.png" /><figcaption>programming tutorials</figcaption></figure>
+<figure><img style="width: 100%;" src="qr/httpsgithubcomparadox2102pid_demo2.png" /><figcaption>PID demo</figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-links-qr-html.png" /><figcaption>QR Links</figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-ramps.png" /><figcaption>Ramps</figcaption></figure>
 <figure><img style="width: 100%;" src="qr/qr-safety.png" /><figcaption>Suggestions for FRC Safety Captains</figcaption></figure>

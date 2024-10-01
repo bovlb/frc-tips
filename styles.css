@@ -144,6 +144,20 @@ body {
     padding: 15px;
 }
 
+.ic {
+    background-color: #000040;
+    border: thin solid #404088;
+    /* color: #3c763d; */
+    padding: 15px;
+}
+
+.rule A { 
+    border-bottom: 1px dashed #b5e853;
+    margin: 0 0 20px 0;
+    text-decoration: none;
+    color: #b5e853;
+}
+
 /* General & 'Reset' Stuff */
 .container {
     width: 90%;
