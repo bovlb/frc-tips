@@ -1,5 +1,5 @@
 In an effort to help teams to get through the inspection process as quickly as possible, I have prepared an unofficial annotated inspection checklist.
-These include all the items on the official checklist, not necessarily in the same order.
+These include all the items on the official checklist, not necessarily in the same order.  Official checklist items are clearly distinguished from my additional text.
 
 * [2004](2024.html)
 
