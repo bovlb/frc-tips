@@ -209,17 +209,13 @@ m_shooter.isShooting
 
 ### Binding Triggers to Commands
 
-<a href="triggers.png"><img alt="How button triggers work" src="triggers.png" style="width: 30%; float: right;"/></a>
+<a href="command-bindings.png"><img alt="How trigger bindings work" src="command-bindings.png" style="width: 50%; float: right;"/></a>
 
 To bind a command to a trigger, simply use a method like `onTrue`, `whileTrue` or `toggleOnTrue`.
 `onTrue` is good for instant commands that do something and immediately stop.
 `whileTrue` is good for commands that should keep executing so long as the condition is true.
 `toggleOnTrue` is usually only used with driver buttons, so they can enable and disable some mode.
 
-
-This diagram shows the six binding methods and when the command is triggered.
-In this diagram, "Press" means that the trigger goes from false to true (a rising edge) as if the user had pressed a button;
-"Release" means that the trigger goes from true to false (a falling edge) as if the user had released a button.
 
 <div style="clear:both" />
 
