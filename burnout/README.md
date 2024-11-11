@@ -142,3 +142,7 @@ public void periodic() {
 ### TalonSRX and TalonFX (including Falcon 500)
 
 The Talon motor controller also has a `getTemperature()` method, but the documention says that it returns the temperature of the controller, not the motor.  This might be useful with integrated controllers like the Falcon 500, but I have not tested it.
+
+## See also
+
+* [Dalton's CD reply](https://www.chiefdelphi.com/t/current-limiting-on-swerve/454392/2?u=bovlb)
