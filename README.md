@@ -12,7 +12,7 @@ This project is a small collection of tips I've gathered to save redoing the sam
 * [Commands](commands/): Short guide to WPILIB commands, including [lambda functions](commands/lambda.md), and [CommandScheduler](commands/commandscheduler.md)
 * [Links](links/): What are some useful resources for FRC?
 
-I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.
+I decided to put this together as a Github repository, partly so I could incorporate code files if I needed to, but mostly to make it easier for others to correct my inevitable mistakes.  You can download the entire website as [frc-tips.pdf](frc-tips.pdf)
 
 Suggestions I have received for future notes:
 * How to reset and persist motor controllers
