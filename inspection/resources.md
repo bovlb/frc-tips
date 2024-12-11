@@ -8,7 +8,8 @@ Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and p
 * **Robot Inspector Cheat Sheets**: [2024 Chief Delphi post](https://www.chiefdelphi.com/t/robot-inspector-cheat-sheets-2024/455444?u=bovlb) (PDFs attached)
 <img alt="little black button" src="readthedocs_button.png" style="float: right;"/>
 * **WPILIB Documentation**: Go to [docs.wpilib.org](https://docs.wpilib.org/en/stable/index.html), find the little black button in the bottom right, click it, and then under "Downloads", click on "PDF".
-* **FRC Control System Diagrams**: [Github repo](https://github.com/stefacep/2025-FRC-Control-System-Diagrams), [combo PDF](https://github.com/stefacep/2025-FRC-Control-System-Diagrams/blob/main/PDF/FRCCSD-COMBINED-ALL.pdf)
+<img alt="Downloaf raw file button" src="github_download.png" style="float: right;"/>
+* **FRC Control System Diagrams**: [Github repo](https://github.com/stefacep/2025-FRC-Control-System-Diagrams), [combo PDF](https://github.com/stefacep/2025-FRC-Control-System-Diagrams/blob/main/PDF/FRCCSD-COMBINED-ALL.pdf) (Click the "Download raw file" button) 
 * **BoVLB's FRC Tips**: [Website](https://bovlb.github.io/frc-tips/), [PDF](frc-tips.pdf)
 * **Safety Manual**: [Website](https://www.firstinspires.org/robotics/frc/safety), [PDF](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/safety/ftc-frc-safety-manual.pdf)
 * **Bumpers**: [Bumpers Guide](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc_bumperguide.pdf)
