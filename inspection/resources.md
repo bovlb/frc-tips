@@ -21,3 +21,5 @@ Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and p
 * **April Tags**: [2024](https://firstfrc.blob.core.windows.net/frc2024/FieldAssets/Apriltag_Images_and_User_Guide.pdf)
 * **Radio**: [Website](https://frc-radio.vivid-hosting.net/) (no PDF available)
 * **Field Management System Manual**: Go to [fms-manual.readthedocs.io](https://fms-manual.readthedocs.io/en/latest/index.html), and follow the same directions as for WPILIB
+
+If you want to share a URL with a team, remember that Google Chrome includes QR code generation under the "Share" menu.
