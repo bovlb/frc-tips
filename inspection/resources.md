@@ -5,6 +5,7 @@ Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and p
 
 * **Game Manual:** [2024 Crescendo](https://firstfrc.blob.core.windows.net/frc2024/Manual/2024GameManual.pdf)
 * **Inspection Checklist**: [2024](https://firstfrc.blob.core.windows.net/frc2024/Manual/2024FRCInspectionChecklist.pdf)
+* **Robot Inspector Cheat Sheets**: [2024 Chief Delphi post](https://www.chiefdelphi.com/t/robot-inspector-cheat-sheets-2024/455444?u=bovlb) (PDFs attached)
 <img alt="little black button" src="readthedocs_button.png" style="float: right;"/>
 * **WPILIB Documentation**: Go to [docs.wpilib.org](https://docs.wpilib.org/en/stable/index.html), find the little black button in the bottom right, click it, and then under "Downloads", click on "PDF".
 * **FRC Control System Diagrams**: [Github repo](https://github.com/stefacep/2025-FRC-Control-System-Diagrams), [combo PDF](https://github.com/stefacep/2025-FRC-Control-System-Diagrams/blob/main/PDF/FRCCSD-COMBINED-ALL.pdf)
@@ -16,4 +17,5 @@ Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and p
   * VIDEO: [How to Adjust the Pressure Relief Valve](https://www.youtube.com/watch?v=foQlAigAd5c)
   * VIDEO: [How to Adjust the Pressure Relief Valve (REV PH with Analog)](https://www.youtube.com/watch?v=GrrNMVV_Jr0)
 * **April Tags**: [2024](https://firstfrc.blob.core.windows.net/frc2024/FieldAssets/Apriltag_Images_and_User_Guide.pdf)
+* **Radio**: [Website](https://frc-radio.vivid-hosting.net/) (no PDF available)
 * **Field Management System Manual**: Go to [fms-manual.readthedocs.io](https://fms-manual.readthedocs.io/en/latest/index.html), and follow the same directions as for WPILIB
