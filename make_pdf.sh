@@ -8,6 +8,8 @@ echo $URLS
 wkhtmltopdf \
     --header-left "[title]" \
     --header-right "[sitepage] of [sitepages]" \
+    --footer-left "[isodate]" \
+    --footer-right "[page]" \
     --print-media-type \
     --no-background \
     pdf-title-page.html \
