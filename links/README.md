@@ -3,7 +3,7 @@
 ## FIRST
 
 * [Season Materials](https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system)
-* [Reefscape 2025 Game Manual](https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf)
+* [Reefscape 2025 Game Manual](https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf), [FRCManual](https://www.frcmanual.com/)
 * [Discussion Fora](https://forums.firstinspires.org/forum/general-discussions/first-programs/first-robotics-competition)
 * [YouTube playlists](https://www.youtube.com/@FIRSTRoboticsCompetition/playlists)
 * [Portal for Incident Reporting](https://www.pavesuite.com/FIRST/PublicPortal/HomePage)
