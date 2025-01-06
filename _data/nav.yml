@@ -26,6 +26,16 @@
   - title: Best Practices
     description: Best practices for using commands
     url: best-practices.html
+- title: Inspection
+  description: How to pass inspection
+  url: inspection/
+  children:
+  - title: 2024
+    description: Annotated 2024 Inspection Checklist
+    url: 2024.html
+  - title: Resources
+    description: Documents for RIs and CSAs
+    url: resources.html
 - title: Links
   description: Various useful web pages
   url: links/
