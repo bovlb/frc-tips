@@ -108,7 +108,7 @@ public Command setAiming(DoubleSupplier distance) {
 
 {% include tip.html content="In the code above, we're using `() -> { ... return angle; }` to create a `DoubleSupplier` using a [Lambda function](lambda.html#suppliers)." %}
 
-Internally, commands can be created in a number of ways, but the `Commands` class provides useful methods like `run` and `runOnce`.
+Internally, commands can be created in a number of ways, but the `Subsystem` class provides [useful methods](./#subsystem-wrapper-methods) like `run` and `runOnce`.
 Use `run` for commands that need to keep running continually, either because they don't do exactly the same thing on each iteration, or becase they need to block out a default command.
 (Triggers provide some useful alternatives to default commands.)
 Use `runOnce` for a command that runs and then immediately ends; this is useful for changing a setpoint or setting a mode when the command doesn't need to enact it continually.

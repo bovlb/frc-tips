@@ -109,7 +109,7 @@ The `Subsystem` class provides some useful methods that provide more or less the
 | `startEnd` | arg 1 | | arg 2 | `false` | `StartEndCommand` |
 | `startRun` | arg1 | arg 2 | | `false` |
 
-`Subsystem` also provides a method `defer` which is used to create `DeferedCommand`.  This take a `Command` supplier, so the underlying command is not determined until `initialize`.
+`Subsystem` also provides a method `defer` which is used to create `DeferredCommand`.  This take a `Command` supplier, so the underlying command is not determined until `initialize`.
 
 ## Command decorators
 
@@ -197,7 +197,6 @@ TODO
 These commands are used only in very specific circumstances.
 
 * `NotifierCommand`
-* `PIDCommand`/`ProfiledPIDCommand`
 * `RamseteCommand`
 * `ScheduleCommand`
 * `ProxyScheduleCommand`
