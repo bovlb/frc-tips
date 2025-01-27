@@ -51,9 +51,9 @@ Ideally these commands should express their purpose in terms of the problem doma
 ```java
 // Shared internal implementation
 private Command setState(ShooterMode mode) {
-    return Commands.runOnce(() -> {
+    return runOnce(() -> {
         m_mode = mode
-    }, this).withName(mode.toString());
+    }).withName(mode.toString());
 }
 
 // Public command factory
@@ -70,14 +70,14 @@ In this way, all the commands that control a setpoint can also run the control l
 ```java
 // Internal command factory used by all the public command factories
 private Command setAngle(DoubleSupplier angle) {
-    return Commands.run(() -> {
+    return run(() -> {
         m_setpoint = angle.getAsDouble();
         // Use m_setpoint to control the pivot angle here
         m_feedback = m_feedbackController.calculate(m_position, m_setpoint);
         m_feedforward = m_feedforwardController.calculate(m_position, m_setpoint);
         m_power = MathUtil.clamp(feedforward + feedback, -1.0, 1.0);
         m_motor.setPower(m_power);
-    }, this);
+    });
 }
 ```
 
