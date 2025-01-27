@@ -7,7 +7,7 @@ You must learn how to break your code up into small pieces that execute quickly 
 
 The `CommandScheduler` will manage commands, calling their four lifecycle methods (`initialize`, `execute`, `isFinished`, `end`).
 It will also call the `periodic` methods of your subsystems and test any triggers you may have (mostly this will be joystick buttons).
-It is also responsible for managing the requirements of two commands, so two commands with overlapping requirements are never scheduled at the same time.
+It is also responsible for managing the requirements of commands, so two commands with overlapping requirements are never scheduled at the same time.
 
 There are a number of ways to invoke the `CommandScheduler`:
 

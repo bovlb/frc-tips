@@ -42,7 +42,7 @@ The implementation of these commands is entirely within the subsystem module, so
 
 Take care in choosing which commands to implement and what to name them.
 Remember that the core idea here is to isolate client code from knowing anything about subsystem implementation, including any specific values for position or speed.
-If a subsystem has a number of positions, modes, or speeds then you will want to create a separate command for each one.
+If a subsystem has a number of positions, modes, or speeds then you could expose an `enum`, but it is probably better to create a separate command factory for each one.
 Internally, you may want to use `enum` to name and configure the different setpoints.
 This allows you to use `setName` to give each one an appropriate label for debugging.  
 
@@ -82,7 +82,7 @@ private Command setAngle(DoubleSupplier angle) {
 ```
 
 If a command needs configuration or other information from elsewhere, then either the factory or the Subsystem constructor should take a `Supplier`, e.g. a `BooleanSupplier` or a `DoubleSupplier`.
-Pass it to the constructor if it's a universal piece of information; pass it to the command factory if it's a detail of the specific command being constructed.
+Pass it to the constructor if it's a universal piece of information that might be used by multiple commands; pass it to the command factory if it's a detail of the specific command being constructed.
 
 This supplier should be providing outside information from the problem space, not implementation specifics.
 We prefer to pass a `Supplier` rather than a specific value because we want to be able to support dynamic configuration where the value changes.
@@ -178,8 +178,8 @@ anything that requires co-ordination between multiple subsystems.
 
 Now that you have a good collection of Triggers, think about how they should be combined to make useful decisions about robot behaviour.
 For example, when deciding whether to to shoot, you might think about various things:
-* Is the driver pressing the "shoot" button?  All drive buttons are already `Trigger`s.
-* Is there a game piece in the right location?  This might be determine by beam-break sensors, but the subsystem will package this in a `Trigger`.
+* Is the driver pressing the "shoot" button?  All driver buttons are already `Trigger`s.
+* Is there a game piece in the right location?  This might be determined by beam-break sensors, but the subsystem will package this in a `Trigger`.
 * Is the robot within shooting range of the target?  This may be based on a distance calculation, which in turn uses the location of the robot (and of the target).
 * Are the shooter wheels ready?  This may be a `Trigger` that compares the setpoint with the current speed.
 * Are we aimed at the target?  This may be a `Trigger` that compares the pivot mechanism's angle to the current setpoint.
@@ -213,8 +213,15 @@ m_shooter.isShooting
 
 To bind a command to a trigger, simply use a method like `onTrue`, `whileTrue` or `toggleOnTrue`.
 `onTrue` is good for instant commands that do something and immediately stop.
-`whileTrue` is good for commands that should keep executing so long as the condition is true.
+`whileTrue` is good for commands that should keep executing so long as the condition is true, or which have an `end` action (perhaps added using the `finallyDo` method).
 `toggleOnTrue` is usually only used with driver buttons, so they can enable and disable some mode.
+
+```java
+// Deploy the intake while the button is held down
+JoystockButton(m_driverJoystick, 3)
+    .whileTrue(m_intake.deploy()
+        .finallyDo(m_intake.stop()));
+```
 
 
 <div style="clear:both" />
