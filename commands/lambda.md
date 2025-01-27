@@ -68,7 +68,7 @@ class MySubsystem ... {
 
 ...
 
-private final MySubsystem subsystem = new Subsystem();
+private final MySubsystem subsystem = new MySubsystem();
 
 // Get an anonoymous function reference with the same arguments 
 // and return type.  Use this as a boolean supplier without 
@@ -163,7 +163,7 @@ In WPILIB, `Trigger`s implement the `BooleanSupplier` interface and often accept
 
 A `Runnable` is a class that has a `void run()` method.
 It can be created from an anonymous function that takes no arguments (and any return value is ignored).
-In WPILIB, it can be used to create commands on-the-fly using `InstantCommand`, `RunCommand`, `StartEndCommand`, or `FunctionalCommand`.
+In WPILIB, it can be used to create commands on-the-fly using the classes`InstantCommand`, `RunCommand`, `StartEndCommand`, or `FunctionalCommand` or certain `Subsystem` methods `.
 It can also be passed to many trigger methods (along with a required subsystem).
 
 ```java

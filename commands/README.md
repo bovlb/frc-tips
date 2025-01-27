@@ -83,19 +83,33 @@ The following commands are useful to build command groups.  Some of them take co
 
 ## Runnable wrappers
 
-Here are some wrappers that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly.
+Here are some wrapper classes that turn runnables (e.g. [lambda expressions](lambda.md)) into commands.  These can be used in command groups, but they are also used in `RobotContainer` to create command on-the-fly.  When using these methods, please remember to add the subsystem(s) as the last parameter(s) to make subsystem requirements work correctly.
 
 * `InstantCommand`: The given runnable is used as the `initialize` method, there is no `execute` or `end`, and `isFinished` returns `true`.  You will also sometimes inherit from `InstantCommand` instead of `BaseCommand`.
 * `RunCommand`: The given runnable is used as the `execute` method, there is no `initialize` or `end`, and `isFinished` returns `false`.  Often used with a decorator that adds an `isFinished` condition.
 * `StartEndCommand`: The given runnables are used as the `initialize` and `end` methods, there is no `execute`, and `isFinished` returns `false`.  Commonly used for commands that start and stop motors.
 * `FunctionalCommand`: Allows you you set all four life-cycle methods.  Not used if one of the above will suffice.
 
-| Wrapper | `initialize` | `execute` | `end` | `isFinished`  |
+| Class | `initialize` | `execute` | `end` | `isFinished`  |
 | --- | --- | --- | --- | --- |
-| `InstantCommand` | arg 1 | empty | empty | `true` |
-| `RunCommand` | empty | arg 1 | empty | `false` |
-| `StartEndCommand` | arg 1 | empty | arg 2 | `false` |
+| `InstantCommand` | arg 1 |  |  | `true` |
+| `RunCommand` |  | arg 1 |  | `false` |
+| `StartEndCommand` | arg 1 |  | arg 2 | `false` |
 | `FunctionalCommand` | arg 1 | arg 2 | arg 3 | arg 4 |
+
+## Subsystem wrapper methods
+
+The `Subsystem` class provides some useful methods that provide more or less the same functionality as the classes above, with the feature that they automatically get the subsystem as a requirement.
+
+| Method | `initialize` | `execute` | `end` | `isFinished` | Equivalent to |
+| --- | --- | --- | --- | --- | --- |
+| `run` |  | arg 1 |  | `false` | `RunCommand ` |
+| `runEnd` |  | arg 1 | arg 2 | `false` |
+| `runOnce` | arg 1 |  | | `true` | `InstantCommand` |
+| `startEnd` | arg 1 | | arg 2 | `false` | `StartEndCommand` |
+| `startRun` | arg1 | arg 2 | | `false` |
+
+`Subsystem` also provides a method `defer` which is used to create `DeferedCommand`.  This take a `Command` supplier, so the underlying command is not determined until `initialize`.
 
 ## Command decorators
 
