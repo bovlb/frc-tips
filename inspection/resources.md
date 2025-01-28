@@ -11,7 +11,7 @@ Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and p
 * **Javadocs**: [WPILIB](https://github.wpilib.org/allwpilib/docs/release/java/index.html), CTRE [Phoenix 5](https://api.ctr-electronics.com/phoenix/release/java/) & [Phoenix 6](https://api.ctr-electronics.com/phoenix6/release/java/), [Rev](https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html) (no PDF provided)
 <img alt="Downloaf raw file button" src="github_download.png" style="float: right;"/>
 * **FRC Control System Diagrams**: [Github repo](https://github.com/stefacep/2025-FRC-Control-System-Diagrams), [combo PDF](https://github.com/stefacep/2025-FRC-Control-System-Diagrams/blob/main/PDF/FRCCSD-COMBINED-ALL.pdf) (Click the "Download raw file" button) 
-* **BoVLB's FRC Tips**: [Website](https://bovlb.github.io/frc-tips/), [PDF](frc-tips.pdf)
+* **BoVLB's FRC Tips**: [Website](https://bovlb.github.io/frc-tips/), [PDF](../frc-tips.pdf)
 * **Safety Manual**: [Website](https://www.firstinspires.org/robotics/frc/safety), [PDF](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/safety/ftc-frc-safety-manual.pdf)
 * **Bumpers**: [Bumpers Guide](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc_bumperguide.pdf)
 * **Pneumatics**: 
