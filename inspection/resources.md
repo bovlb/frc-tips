@@ -3,7 +3,7 @@
 These are resources that I would formerly have printed and carried around as part of my RI/CSA toolkit.
 Nowadays I'm trying to go paperless, so these are (mostly) PDFs I download and put on my tablet.
 
-* **Game Manual:** [2024 Crescendo](https://firstfrc.blob.core.windows.net/frc2024/Manual/2024GameManual.pdf)
+* **Game Manual:** [2025 Reefscape](https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf)
 * **Inspection Checklist**: [2024](https://firstfrc.blob.core.windows.net/frc2024/Manual/2024FRCInspectionChecklist.pdf)
 * **Robot Inspector Cheat Sheets**: [2024 Chief Delphi post](https://www.chiefdelphi.com/t/robot-inspector-cheat-sheets-2024/455444?u=bovlb) (PDFs attached)
 <img alt="little black button" src="readthedocs_button.png" style="float: right;"/>
