@@ -1,7 +1,10 @@
+See [Resources](resources.html) for some useful resources for RIs and CSAs.
+
 In an effort to help teams to get through the inspection process as quickly as possible, I have prepared an unofficial annotated inspection checklist.
 These include all the items on the official checklist, not necessarily in the same order.  Official checklist items are clearly distinguished from my additional text.
 
-* [2004](2024.html)
+* [2025](2025.html)
+* [2024](2024.html)
 
 These are not official FRC documents, but an attempt to address some of the common questions and confusions about robot rules and explain common inspection procedures.
 The goal is to assist both robot inspectors and teams in getting through inspection as quickly and consistently as possible.
