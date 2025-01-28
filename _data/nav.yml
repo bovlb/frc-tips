@@ -30,12 +30,15 @@
   description: How to pass inspection
   url: inspection/
   children:
-  - title: 2024
-    description: Annotated 2024 Inspection Checklist
-    url: 2024.html
   - title: Resources
     description: Documents for RIs and CSAs
     url: resources.html
+  - title: 2025
+    description: Annotated 2025 Inspection Checklist
+    url: 2025.html
+  - title: 2024
+    description: Annotated 2024 Inspection Checklist
+    url: 2024.html
 - title: Links
   description: Various useful web pages
   url: links/
