@@ -36,6 +36,7 @@ Generally commands exist in order to do something with a subsystem, like run mot
 * [Command groups](#command-groups): Classes that take one or more commands and execute them all.
 * [Commands for use in groups](#commands-used-in-groups): Commands that are useful when using command groups.
 * [Runnable wrappers](#runnable-wrappers): Classes that turn runnables into commands
+* [Subsystem wrapper method](#subsystem-wrapper-methods): Methods on `Subsystem` that turn runnables into commands
 * [Command decorators](#command-decorators): Methods provided by all commands to connect or change them.
 * [Running commands](#running-commands): How to run a command
 * [Esoteric commands](#esoteric-commands): Commands that are used only in specialized circumstances
@@ -107,9 +108,11 @@ The `Subsystem` class provides some useful methods that provide more or less the
 | `runEnd` |  | arg 1 | arg 2 | `false` |
 | `runOnce` | arg 1 |  | | `true` | `InstantCommand` |
 | `startEnd` | arg 1 | | arg 2 | `false` | `StartEndCommand` |
-| `startRun` | arg1 | arg 2 | | `false` |
+| `startRun` | arg 1 | arg 2 | | `false` |
 
 `Subsystem` also provides a method `defer` which is used to create `DeferredCommand`.  This take a `Command` supplier, so the underlying command is not determined until `initialize`.
+
+These methods are also available on `Commands`, but the `Subsystem` version is preferred because it makes it hard to forget the subsystem requirement.
 
 ## Command decorators
 
