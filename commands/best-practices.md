@@ -285,10 +285,12 @@ The best way to do this is attach a trigger using the `until` decorator (also `u
 
 ```java
 NamedCommands.registerCommand("Shoot",
-    m_shooter.startShooting()
+    m_shooter.startShooting().asProxy()
         .until(m_shooter.isIdle)
         .withName("Shoot"));
 ```
+
+Note the use of `asProxy` here. This insulates the registered command from being interrupted by other commands for the same subsystem (e.g. attached to triggers).
 
 ## Exceptions
 
