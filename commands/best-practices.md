@@ -148,6 +148,7 @@ public final Trigger isShooting =
 
 // Is the arm at target position and zero speed?
 private boolean isReady() {
+    // Never compare doubles for quality. Use MathUtil.isNear
     return MathUtil.isNear(m_encoder.getPosition(), 
             m_setpoint, k_angleTolerance) 
         && MathUtil.isNear(m_encoder.getVelocity(), 
@@ -156,6 +157,8 @@ private boolean isReady() {
 
 // Don't expose position and speed directly
 public final Trigger isReady = new Trigger(this::isReady)
+    // Continue to say ready for a short time after
+    // Prevents flapping under disturbance
     .debounce(k_isReadyDelay, Debouncer.DebounceType.kFalling);
 ```
 
