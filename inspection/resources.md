@@ -17,7 +17,7 @@ These resources are PDFs, or can readily be converted.
 * **BoVLB's FRC Tips**: [Website](https://bovlb.github.io/frc-tips/), [PDF](../frc-tips.pdf)
 * **Safety Manual**: [Website](https://www.firstinspires.org/robotics/frc/safety), [PDF](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/team-resources/safety/ftc-frc-safety-manual.pdf)
 * **Bumpers**: [Bumpers Guide](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc_bumperguide.pdf)
-* **Pneumatics**: [Pneumatics Manual](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/)
+* **Pneumatics**: [Pneumatics Manual](https://www.firstinspires.org/sites/default/files/uploads/resource_library/frc/technical-resources/frc_pneumatics_manual.pdf)
 * **April Tags**: [2025](https://firstfrc.blob.core.windows.net/frc2025/FieldAssets/Apriltag_Images_and_User_Guide.pdf)
 * **Field Management System Manual**: Go to [fms-manual.readthedocs.io](https://fms-manual.readthedocs.io/en/latest/index.html), and follow the same directions as for WPILIB
 
