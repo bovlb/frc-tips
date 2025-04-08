@@ -42,7 +42,11 @@ There are a number of ways to invoke the `CommandScheduler`:
 ## Putting it all together
 
 <figure style="width: 50%; float:right;"><a href="everything_that_runs.png"><img style="width: 100%" src="everything_that_runs.png" alt="Everything that runs" /></a>
-<figcaption>This shows everything that is running in the robot's main event loop.</figcaption>
+<figcaption>
+This shows everything that is running in the robot's main event loop.
+Green arrows show potential interventions that may result in an additional task.
+Broken green lines show conditional intervention.
+</figcaption>
 </figure>
 
 This is a rough outline of how everything gets run.
