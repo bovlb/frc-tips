@@ -15,7 +15,7 @@ It is also responsible for managing the requirements of commands, so two command
 
 There are a number of ways to invoke the `CommandScheduler`:
 
-## `CommandScheduler.getInstance().run()`
+## `CommandScheduler`<wbr/>`.getInstance()`<wbr/>`.run()`
 * This makes the `CommandScheduler` perform its main loop for subsystems, triggers, and commands.
 * This should be called from `Robot.robotPeriodic` and nowhere else.
 * Most commands will not run while the robot is disabled, so will be automatically cancelled.
