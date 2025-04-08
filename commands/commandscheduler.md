@@ -41,11 +41,11 @@ There are a number of ways to invoke the `CommandScheduler`:
 
 ## Putting it all together
 
-<figure style="width: 50%; float:right;"><a href="everything_that_runs.png"><img style="width: 100%" src="everything_that_runs.png" alt="Everything that runs" /></a>
+<figure style="width: 50%; float:right;"><a href="main_event_loop.png"><img style="width: 100%" src="main_event_loop.png" alt="Everything that runs" /></a>
 <figcaption>
 This shows everything that is running in the robot's main event loop.
-Green arrows show potential interventions that may result in an additional task.
-Broken green lines show conditional intervention.
+Solid green lines show potential interventions you can make.
+Broken green lines show conditional interventions that may result.
 </figcaption>
 </figure>
 
