@@ -14,29 +14,26 @@
 </head>
 
 <body>
+  <div id="sidebar-toggles" class="no-print">
+    <button id="toggle-toc" class="sidebar-toggle left">☰ TOC</button>
+    <button id="toggle-sitemap" class="sidebar-toggle right">☰ Sitemap</button>
+  </div>
+
   <header class="no-print">
     <div class="container" id="banner">
-      <section id="title">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-      </section>
-      <section id="tagline">
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-      </section>
-      <section id="search">
+      <div id="header-left">
+        <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+        <h2>{{ site.description }}</h2>
+      </div>
+  
+      <div id="header-right">
         {% include search.html %}
-      </section>
-      <section id="downloads">
-        {% if site.show_downloads %}
-          <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
-          <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
-        {% endif %}
-      </section>
+      </div>
     </div>
   </header>
 
   <div class="container">
+  
     <section id="toc" class="side-nav no-print">
       <h3>On This Page</h3>
       {% include toc.html html=content class=toc id=toc h_min=2 %}
@@ -57,7 +54,21 @@
   <footer class="no-print">
     <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
   </footer>
+  <script>
+window.addEventListener('DOMContentLoaded', () => {
+  const toc = document.getElementById('toc');
+  const sitemap = document.getElementById('sitemap');
 
+  const toggle = (target, other) => {
+    const isOpen = target.classList.toggle('visible');
+    other.classList.remove('visible');
+    document.body.classList.toggle('dimmed', isOpen);
+  };
+
+  document.getElementById('toggle-toc')?.addEventListener('click', () => toggle(toc, sitemap));
+  document.getElementById('toggle-sitemap')?.addEventListener('click', () => toggle(sitemap, toc));
+});
+  </script>
 </body>
 
 </html>
