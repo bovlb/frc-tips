@@ -260,3 +260,42 @@ body {
   h6:hover .jumplink {
     display: inline;
   }
+
+  .wrap-right {
+    float: right;
+    width: 50%;
+    margin: 1em;
+  }
+  
+  .wrap-right img {
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  }
+  
+  .wrap-right figcaption {
+    font-size: 0.9em;
+    color: #aaa;
+  }
+
+  @media print {
+    figure.wrap-left,
+    figure.wrap-right {
+      float: none !important;
+      width: 70% !important;
+      margin: 1em auto !important;
+      page-break-inside: avoid;
+    }
+  
+    figure img {
+      width: 100% !important;
+      height: auto !important;
+    }
+  
+    figure figcaption {
+      font-size: 0.85em;
+      color: black;
+    }
+  }

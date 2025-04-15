@@ -11,8 +11,11 @@ This makes your code easier to write, easier to maintain, less likely to have bu
 
 ## Summary
 
-<img class="print-only" style="width:50%; float:right;"  src="main-diagram-light.png" alt="Architecture diagram showing Command Factories and Triggers" />
-<a href="main-diagram-dark.png"><img style="width:50%; float:right;" class="no-print" src="main-diagram-dark.png" alt="Architecture diagram showing Command Factories and Triggers" /></a>
+<figure class="wrap-right">
+<img class="print-only"  src="main-diagram-light.png" alt="Architecture diagram showing Command Factories and Triggers" />
+<a href="main-diagram-dark.png"><img class="no-print" src="main-diagram-dark.png" alt="Architecture diagram showing Command Factories and Triggers" /></a>
+<figcaption>Architecture diagram showing how the subsystem exposes only triggers and command factories, and these can be bound together</figcaption>
+</figure>
 
 This diagram summarises the architecture.  Starting at the bottom:
 
@@ -212,7 +215,10 @@ m_shooter.isShooting
 
 ### Binding Triggers to Commands
 
-<a href="command-bindings.png"><img alt="How trigger bindings work" src="command-bindings.png" style="width: 50%; float: right;"/></a>
+<figure class="wrap-right">
+<a href="command-bindings.png"><img alt="How trigger bindings work" src="command-bindings.png"/></a>
+<figcaption>The six trigger binding methods and when they call schedule and cancel as the input switches between true and false</figcaption>
+</figure>
 
 To bind a command to a trigger, simply use a method like `onTrue`, `whileTrue` or `toggleOnTrue`.
 `onTrue` is good for instant commands that do something and immediately stop.
@@ -221,7 +227,7 @@ To bind a command to a trigger, simply use a method like `onTrue`, `whileTrue` o
 
 ```java
 // Deploy the intake while the button is held down
-JoystockButton(m_driverJoystick, 3)
+JoystickButton(m_driverJoystick, 3)
     .whileTrue(m_intake.deploy()
         .finallyDo(m_intake.stop()));
 ```

@@ -4,7 +4,7 @@ Although you can avoid it in some simple cases, doing anything complex with your
 
 In addition to the usual constructor, commands have four lifecycle methods: [`initialize`](#void-initialize), [`execute`](#void-execute), [`isFinished`](#boolean-isfinished), and [`end`](#void-endboolean-interrupted).  These methods are called by the [command scheduler](commandscheduler.md) (and never by you).  By overriding the implementation of these methods, you can change the behaviour of the command.
 
-<figure style="float: right; width: 50%;"><img style="width: 100%" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
+<figure class="wrap-right"><img style="width: 100%" src="lifecycle.png" alt="Lifecycle methods of a command: initialize, execute, isFinished, and end" />
 <figcaption>The scheduler calls the four lifecycle methods of a command.  This starts with <tt>initialize</tt> when the command is first scheduled, then <tt>execute</tt> and <tt>isFinished</tt> are called in alternation.  Finally <tt>end</tt> is called either when <tt>isFinished</tt> returns trure, or when the command is interrupted.</figcaption>
 </figure>
 
@@ -45,7 +45,7 @@ These might seem a little complex and daunting, but the good news is that if you
 
 ## Command groups
 
-<figure  style="float: right; width: 50%;" >
+<figure  class="wrap-right" >
 <img style="width: 100%;" src="commandgroups.png" alt="Diagram showing SequentialCommandGroup, ParallelCommandGroup, ParallelRaceGroup and ParallelDeadlineGroup" />
 <figcaption><tt>SequentialCommandGroup</tt> runs each command in turn until the last finishes.  <tt>ParallelCommandGroup</tt> runs the commands in parallel, until they all finish.  <tt>ParallelRaceGroup</tt> runs until the fastest command finishes.  <tt>ParallelDeadlineGroup</tt> runs until the first command finishes.</figcaption>
 </figure>
@@ -154,7 +154,7 @@ It is also possible to create triggers from any Boolean supplier:
 new Trigger(() -> subsystem.getLimitSwitch()).whileTrue(...)
 ```
 
-<figure style="float: right; width: 50%;">
+<figure class="wrap-right">
 <img  style="width: 100%" src="triggers.png" alt="Comparison of onFalse, onTrue, toggleOnFalse, toggleOnTrue, whilefalse, and whileTrue" />
 <figcaption><tt>onTrue</tt> starts when a button is pressed and usually ends on its own.  <tt>whileTrue</tt> starts when the button is pressed and runs until it is released.  <tt>toggleOnTrue</tt> turns on or off in alternation every time the button is pressed.  <tt>onFalse</tt>, <tt>whileFalse</tt>, and <tt>toggleOnFalse</tt> do the same, but when the button is released.</figcaption>
 </figure>

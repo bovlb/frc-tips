@@ -5,7 +5,7 @@ That means that you are in control of what happens when.
 In a command-based robot, you have to use an "event-driven" style.
 You must learn how to break your code up into small pieces that execute quickly and rely on the `CommandScheduler` to call them at the right time.  
 
-<figure style="width: 50%; float:right;"><a href="commandscheduler.png"><img style="width: 100%" src="commandscheduler.png" alt="Workflow of CommandScheduler" /></a>
+<figure class="wrap-right"><a href="commandscheduler.png"><img style="width: 100%" src="commandscheduler.png" alt="Workflow of CommandScheduler" /></a>
 <figcaption>This shows the workflow of the CommandScheduler in Java.  The C++ implemention has almost identical behaviour.  This diagram dooes not show command event methods</figcaption>
 </figure>
 
@@ -41,7 +41,7 @@ There are a number of ways to invoke the `CommandScheduler`:
 
 ## Putting it all together
 
-<figure style="width: 50%; float:right;"><a href="main_event_loop.png"><img style="width: 100%" src="main_event_loop.png" alt="Everything that runs" /></a>
+<figure class="wrap-right"><a href="main_event_loop.png"><img style="width: 100%" src="main_event_loop.png" alt="Everything that runs" /></a>
 <figcaption>
 This shows everything that is running in the robot's main event loop.
 Solid green lines show potential interventions you can make.
