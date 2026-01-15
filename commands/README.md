@@ -165,7 +165,7 @@ Some trigger methods should be passed a command to run:
 * `toggleOnFalse`: Starts or stops the command when the trigger becomes false.  Seldom used.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 * `toggleOnTrue`: Starts or stops the command when the trigger becomes true.  For example, press a button and the intake starts running; it keeps running until the button is pressed a second time.  Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 * `whileFalse`: Starts the command when the trigger becomes false, and stops it when the trigger becomes true.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
-* `whileTrue`: Starts the command when the trigger becomes true, and stops it when the trigger becomes true.  For example, the robot feeds balls into the shooter while the button is pressed, and stops when it is released.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
+* `whileTrue`: Starts the command when the trigger becomes true, and stops it when the trigger becomes false.  For example, the robot feeds balls into the shooter while the button is pressed, and stops when it is released.   Usually this command will otherwise run indefinitly (`isFinished` returns `false`).
 
 Some trigger methods create new triggers:
 * `and`: Combines the trigger with the parameter (often another trigger) to make a trigger than only activates when both triggers are true.
