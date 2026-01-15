@@ -136,9 +136,9 @@ class ArcadeDrive extends Command {
     @Override
     void execute() {
         // Get values from the suppliers
-        double drive = m_drive.getAsDouble();
+        double speed = m_speed.getAsDouble();
         double turn = m_turn.getAsDouble();
-        m_subsystem.drive(drive+turn, drive-turn);
+        m_subsystem.drive(speed+turn, speed-turn);
     }
 }
 
